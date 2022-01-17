@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Res247/.vs/Res247
+/Res247/packages
+/Res247/Res247.Data/bin/Debug
+/Res247/Res247.Data/obj/Debug
+/Res247/Res247.Models/bin/Debug
+/Res247/Res247.Models/obj/Debug
+/Res247/Res247.Services/bin/Debug
+/Res247/Res247.Services/obj/Debug
+/Res247/Res247.Web/bin
+/Res247/Res247.Web/obj/Debug

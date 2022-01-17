@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Food>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@foreach (var item in Model)
+{
+    @item.Name @item.Price <br />
+
+}
