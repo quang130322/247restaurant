@@ -14,11 +14,5 @@ namespace Res247.Models.BaseEntities
 
         [Display(Name = "Is Deleted")]
         public bool IsDeleted { get; set; }
-
-        [Display(Name = "Created At")]
-        public DateTime CreatedAt { get; set; }
-
-        [Display(Name = "Updated At")]
-        public DateTime UpdatedAt { get; set; }
     }
 }

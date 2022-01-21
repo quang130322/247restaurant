@@ -19,6 +19,6 @@ namespace Res247.Models.Common
 
         public virtual CovidInfo CovidInfo { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<OrderShipper> Orders { get; set; }
     }
 }

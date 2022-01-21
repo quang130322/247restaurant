@@ -56,10 +56,6 @@
     <Compile Include="Infrastructure\Repositories\CoreRepository.cs" />
     <Compile Include="Infrastructure\Repositories\ICoreRepository.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\202201162053486_InitialCreate.cs" />
-    <Compile Include="Migrations\202201162053486_InitialCreate.designer.cs">
-      <DependentUpon>202201162053486_InitialCreate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Res247Context.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,11 +69,6 @@
       <Project>{5dc36300-153a-42ca-9c01-87c629ff14c0}</Project>
       <Name>Res247.Models</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202201162053486_InitialCreate.resx">
-      <DependentUpon>202201162053486_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

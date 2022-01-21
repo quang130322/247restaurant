@@ -28,11 +28,8 @@ namespace Res247.Models.Common
 
         public Customer Customer { get; set; }
 
-        [ForeignKey("Shipper")]
-        public int ShipperId { get; set; }
+        public virtual ICollection<OrderShipper> Shippers { get; set; }
 
-        public Shipper Shipper { get; set; }
-        
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

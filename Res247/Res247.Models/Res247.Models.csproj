@@ -59,9 +59,11 @@
     <Compile Include="Common\Food.cs" />
     <Compile Include="Common\Order.cs" />
     <Compile Include="Common\OrderDetail.cs" />
+    <Compile Include="Common\OrderShipper.cs" />
     <Compile Include="Common\Shipper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Account.cs" />
+    <Compile Include="Security\Admin.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
