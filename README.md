@@ -1,1 +1,4 @@
-# 247restaurant
+<p><h1>247Restaurant</h1> A new website that can help users order food remotely. In the midst of the ongoing <b>Covid pandemic</b>, instead of customers having to go directly to restaurants to enjoy, <b>247Restaurant</b> helps buyers order food at home. The website also helps restaurants to manage orders, manage a list of shippers and manage each shipper's shipping history, support epidemiological management and trace if there is a case related to <b>Covid-19</b> . This website supports below types of users:</br></p>
+<p>              <b>Customer:</b> They are registered users who are actual customers or potential customers.</br></p>
+<p>              <b>Shipper:</b> They are the restaurant’s delivery man.</br></p>
+<p>              <b>Administrator:</b> The restaurant leader/manager, acts as the system administrator.</br></p>
