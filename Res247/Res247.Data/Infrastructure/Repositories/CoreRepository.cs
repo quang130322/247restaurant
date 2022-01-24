@@ -101,12 +101,12 @@ namespace Res247.Data.Infrastructure.Repositories
             return orderBy != null ? orderBy(query) : query;
         }
 
-        public async Task<TEntity> GetByIdAsync(Guid id)
+        public async Task<TEntity> GetByIdAsync(int id)
         {
             return await DbSet.FindAsync(id);
         }
 
-        public virtual TEntity GetById(Guid id)
+        public virtual TEntity GetById(int id)
         {
             return DbSet.Find(id);
         }

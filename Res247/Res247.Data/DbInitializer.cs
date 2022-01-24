@@ -75,7 +75,7 @@ namespace Res247.Data
             var food8 = new Food()
             {
                 Id = 8,
-                Name = "Phở Xào Bò/Tim/Bầu Dục/Gà Đùi",
+                Name = "Phở Xào Bò",
                 Description = "",
                 Price = 50000,
                 IsDeleted = false

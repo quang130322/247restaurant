@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Category>
+
+@foreach (var item in Model)
+{
+    <li class="nav-item">
+        <a href="@item.Id" class="nav-link align-middle px-0">
+            @item.Name
+        </a>
+    </li>
+}

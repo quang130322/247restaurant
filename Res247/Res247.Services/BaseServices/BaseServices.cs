@@ -63,7 +63,7 @@ namespace Res247.Services.BaseServices
             return await _unitOfWork.SaveChangesAsync();
         }
 
-        public bool Delete(Guid id)
+        public bool Delete(int id)
         {
             var entity = _unitOfWork.CoreRepository<TEntity>().GetById(id);
             if (entity == null)
@@ -74,7 +74,7 @@ namespace Res247.Services.BaseServices
             return _unitOfWork.SaveChanges() > 0;
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var entity = _unitOfWork.CoreRepository<TEntity>().GetById(id);
             if (entity == null)
@@ -115,12 +115,12 @@ namespace Res247.Services.BaseServices
             return await _unitOfWork.CoreRepository<TEntity>().GetQuery().ToListAsync();
         }
 
-        public virtual TEntity GetById(Guid id)
+        public virtual TEntity GetById(int id)
         {
             return _unitOfWork.CoreRepository<TEntity>().GetById(id);
         }
 
-        public virtual async Task<TEntity> GetByIdAsync(Guid id)
+        public virtual async Task<TEntity> GetByIdAsync(int id)
         {
             return await _unitOfWork.CoreRepository<TEntity>().GetByIdAsync(id);
         }

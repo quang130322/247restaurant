@@ -18,17 +18,17 @@ namespace Res247.Services.BaseServices
 
         Task<bool> UpdateAsync(TEntity entity);
 
-        bool Delete(Guid id);
+        bool Delete(int id);
 
-        Task<bool> DeleteAsync(Guid id);
+        Task<bool> DeleteAsync(int id);
 
         bool Delete(TEntity entity);
 
         Task<bool> DeleteAsync(TEntity entity);
 
-        TEntity GetById(Guid id);
+        TEntity GetById(int id);
 
-        Task<TEntity> GetByIdAsync(Guid id);
+        Task<TEntity> GetByIdAsync(int id);
 
         IEnumerable<TEntity> GetAll(bool isIncludeDelete = false);
 

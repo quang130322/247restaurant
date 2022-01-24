@@ -1,0 +1,36 @@
+﻿.img-home {
+    width: 100%;
+}
+
+.card-style {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 250px;
+    height: 325px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.card-style:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card-title {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.card-price {
+    font-weight: bold;
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+.card-body{
+    padding-left: 10px;
+}
+
+.card-body a{
+    text-align:center;
+}

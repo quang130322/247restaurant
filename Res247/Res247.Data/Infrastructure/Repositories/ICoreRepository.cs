@@ -8,9 +8,9 @@ namespace Res247.Data.Infrastructure.Repositories
 {
     public interface ICoreRepository<TEntity>
     {
-        Task<TEntity> GetByIdAsync(Guid id);
+        Task<TEntity> GetByIdAsync(int id);
 
-        TEntity GetById(Guid id);
+        TEntity GetById(int id);
 
         void Add(TEntity entity);
 
