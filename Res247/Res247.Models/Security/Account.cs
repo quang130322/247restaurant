@@ -1,5 +1,6 @@
 ﻿using Res247.Models.BaseEntities;
 using Res247.Models.Common;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -34,5 +35,7 @@ namespace Res247.Models.Security
         public virtual Customer Customer { get; set; }
 
         public virtual Shipper Shipper { get; set; }
+
+        public virtual ICollection<CovidInfo> CovidInfos { get; set; }
     }
 }

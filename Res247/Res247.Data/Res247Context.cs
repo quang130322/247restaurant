@@ -27,6 +27,7 @@ namespace Res247.Data
         public DbSet<Shipper> Shippers { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<CovidInfo> CovidInfos { get; set; }
+        public DbSet<Admin> Admins { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -43,39 +44,16 @@ namespace Res247.Data
 
             modelBuilder.Entity<Customer>().HasOptional(c=>c.Account).WithRequired(a=>a.Customer);
             modelBuilder.Entity<Shipper>().HasOptional(c=>c.Account).WithRequired(a=>a.Shipper);
-            modelBuilder.Entity<CovidInfo>().HasOptional(c=>c.Shipper).WithRequired(a=>a.CovidInfo);
-            modelBuilder.Entity<CovidInfo>().HasOptional(c=>c.Customer).WithRequired(a=>a.CovidInfo);
         }
 
         public override int SaveChanges()
         {
-            BeforeSaveChanges();
             return base.SaveChanges();
         }
 
         public override async Task<int> SaveChangesAsync()
         {
-            BeforeSaveChanges();
             return await base.SaveChangesAsync();
-        }
-
-        private void BeforeSaveChanges()
-        {
-            var entities = this.ChangeTracker.Entries();
-            foreach (var entry in entities)
-            {
-                if (entry.Entity is IBaseEntity entityBase)
-                {
-                    switch (entry.State)
-                    {
-                        case EntityState.Modified: entityBase.UpdatedAt = DateTime.Now; break;
-                        case EntityState.Added:
-                            entityBase.UpdatedAt = DateTime.Now;
-                            entityBase.CreatedAt = DateTime.Now;
-                            break;
-                    }
-                }
-            }
         }
     }
 }

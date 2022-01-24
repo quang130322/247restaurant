@@ -34,6 +34,8 @@ namespace Res247.Data.Infrastructure
         ICoreRepository<CovidInfo> CovidInfoRepository { get; }
 
         ICoreRepository<Account> AccountRepository { get; }
+        
+        ICoreRepository<Admin> AdminRepository { get; }
 
         #endregion
 

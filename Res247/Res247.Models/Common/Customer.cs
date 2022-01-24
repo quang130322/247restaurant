@@ -10,8 +10,6 @@ namespace Res247.Models.Common
     {
         public virtual Account Account { get; set; }
 
-        public virtual CovidInfo CovidInfo { get; set; }
-
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

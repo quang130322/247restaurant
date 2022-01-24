@@ -40,6 +40,8 @@ namespace Res247.Data.Infrastructure
         private ICoreRepository<Account> _accountRepository;
         public ICoreRepository<Account> AccountRepository => _accountRepository ?? new CoreRepository<Account>(_dbContext);
 
+        private ICoreRepository<Admin> _adminRepository;
+        public ICoreRepository<Admin> AdminRepository => _adminRepository ?? new CoreRepository<Admin>(_dbContext);
         #region Method
 
         public void Dispose()
