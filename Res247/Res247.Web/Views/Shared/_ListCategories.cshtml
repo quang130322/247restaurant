@@ -2,9 +2,7 @@
 
 @foreach (var item in Model)
 {
-    <li class="nav-item">
-        <a href="@item.Id" class="nav-link align-middle px-0">
-            @item.Name
-        </a>
-    </li>
+    <a href="@Url.Action("Details", "Category", new {cateId = item.Id})" class="list-group-item list-group-item-action ripple">
+        <span>@item.Name</span>
+    </a>
 }

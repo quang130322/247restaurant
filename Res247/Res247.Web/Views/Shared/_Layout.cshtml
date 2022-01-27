@@ -3,38 +3,60 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Covid Still Ship</title>
     <link rel="stylesheet" href="~/assets/css/homecss.css" />
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <div class="navbar-header">
-                @Html.ActionLink("247 Restaurant", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <header>
+        <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+            <div class="position-sticky">
+                <div class="list-group list-group-flush mx-3 mt-4">
+                    @Html.Action("GetAllCategory", "Category")
+                </div>
             </div>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-link" })</li>
+        </nav>
+        <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+            <div class="container-fluid">
+
+                <h1>@Html.ActionLink("247 Restaurant", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</h1>
+
+                <ul class="navbar-nav ms-auto d-flex flex-row">
+
+                    <li class="nav-item">
+                        <a class="nav-link me-3 me-lg-0" href="#">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <button class="btn dropdown-toggle d-flex align-items-center" type="button" 
+                                id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Username
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end"
+                            aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">My profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        <div class="row">
+        </nav>
+    </header>
+    <main style="margin-top: 58px;">
+        <div class="container pt-4">
             @RenderBody()
         </div>
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+        @Html.Partial("_Footer")
+    </main>
 
     @Scripts.Render("~/bundles/jquery")
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/assets/js/custom.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

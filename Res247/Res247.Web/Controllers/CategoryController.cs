@@ -1,8 +1,4 @@
 ﻿using Res247.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Res247.Web.Controllers
@@ -24,11 +20,16 @@ namespace Res247.Web.Controllers
             return PartialView("_ListCategories", categories);
         }
 
-        public ActionResult GetFoodsByCategory(int cateId)
+        public ActionResult Details(int cateId)
         {
             var cate = _categoryServices.GetById(cateId);
+            if(cate == null)
+            {
+                return HttpNotFound();
+            }
             var foods = _foodServices.GetFoodsByCate(cate.Id);
-            return PartialView("_ListFoods", foods);
+            ViewBag.Name = cate.Name;
+            return View("_ListFoods", foods);
         }
     }
 }

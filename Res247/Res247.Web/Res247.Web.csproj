@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\homecss.css" />
+    <Content Include="assets\js\custom.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -228,13 +229,16 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_ListFoods.cshtml" />
+    <Content Include="Views\Shared\_FoodOverview.cshtml" />
     <Content Include="Views\Shared\_ListCategories.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_ListFoods.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\image\" />
     <Folder Include="Models\" />
+    <Folder Include="ViewModels\" />
     <Folder Include="Views\Category\" />
   </ItemGroup>
   <ItemGroup>
