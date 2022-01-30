@@ -1,0 +1,15 @@
+﻿@model Food
+
+@{
+    ViewBag.Title = ViewBag.FoodName;
+}
+<div class="row">
+    <div class="col-md-6"><img src="~/assets/image/Ga-Chien-Sot-Ngot-Phomai.jpg" class="img-home" alt="..."></div>
+    <div class="col-md-6">
+        <h2>@Model.Name</h2>
+        <h2>@Model.Price</h2>
+    </div>
+</div>
+<div class="row">
+    @Html.Partial("_SimilarFood")
+</div>
