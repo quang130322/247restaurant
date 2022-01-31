@@ -26,7 +26,7 @@ namespace Res247.Web.Controllers
 
         public ActionResult SimilarFood(int foodId)
         {
-            var foods = _foodServices.GetFoodsByCate(foodId);
+            var foods = _foodServices.GetSimilarFood(foodId);
             return PartialView("_SimilarFood", foods);
         }
     }

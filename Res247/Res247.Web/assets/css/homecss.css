@@ -13,9 +13,16 @@
     width: 100%;
 }
 
-.img-similar {
-    width:200px;
-    height:200px;
+.img-food-details {
+    width: 400px;
+    border-radius: 8px;
+    transform-origin: 65% 75%;
+    transition: transform 1s, filter .5s ease-out;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.img-food-details:hover {
+    transform: scale(1.5);
 }
 
 .card-style {
@@ -28,8 +35,23 @@
     border-radius: 8px;
 }
 
+.card-style-1 {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 200px;
+    height: 300px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.similar-header {
+    padding-top: 50px;
+    font-weight: bold;
+}
+
 .card-style:hover {
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 .card-title {
@@ -38,9 +60,9 @@
     color: black;
 }
 
-.card-title:hover{
-    color:indianred;
-}
+    .card-title:hover {
+        color: indianred;
+    }
 
 .card-price {
     font-weight: bold;
@@ -48,13 +70,13 @@
     font-size: 14px;
 }
 
-.card-body{
+.card-body {
     padding-left: 10px;
 }
 
-.card-body a{
-    text-decoration:none;
-}
+    .card-body a {
+        text-decoration: none;
+    }
 
 .sidebar {
     position: fixed;
@@ -80,6 +102,19 @@
     border-color: lightpink !important;
 }
 
+.list-group-item-action:hover {
+    background-color: lightpink !important;
+    box-shadow: 3px 3px 5px 0 lightpink;
+}
+
+.list-group-item {
+    border-radius: 5px;
+}
+
+    .list-group-item:hover {
+        color: white !important;
+    }
+
 .sidebar-sticky {
     position: relative;
     top: 0;
@@ -90,5 +125,14 @@
 }
 
 .dropdown-toggle::after {
-    content: none !important; 
+    content: none !important;
 }
+
+footer {
+    margin-top: 120px;
+    background-color: lightpink;
+}
+
+    footer a {
+        text-decoration: none;
+    }

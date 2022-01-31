@@ -21,7 +21,9 @@ namespace Res247.Services
         public IEnumerable<Food> GetSimilarFood(int foodId)
         {
             var cate = _unitOfWork.CategoryRepository.GetQuery().FirstOrDefault(c => c.Foods.Any(f => f.Id == foodId));
-            return _unitOfWork.FoodRepository.GetQuery().Where(x => x.Categories.Any(c => c.Id == cate.Id)).ToList().Take(10);
+            return _unitOfWork.FoodRepository.GetQuery().Where(x => 
+                                                               x.Categories.Any(c => c.Id == cate.Id) 
+                                                               && x.Id != foodId).ToList().Take(10);
         }
     }
 }

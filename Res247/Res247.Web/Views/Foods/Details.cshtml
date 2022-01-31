@@ -4,12 +4,13 @@
     ViewBag.Title = ViewBag.FoodName;
 }
 <div class="row">
-    <div class="col-md-6"><img src="~/assets/image/Ga-Chien-Sot-Ngot-Phomai.jpg" class="img-home" alt="..."></div>
+    <div class="col-md-6"><img src="~/assets/image/Ga-Chien-Sot-Ngot-Phomai.jpg" class="img-food-details" alt="..."></div>
     <div class="col-md-6">
-        <h2>@Model.Name</h2>
-        <h2>@Model.Price</h2>
+        <h3 style="font-weight:bold;color:deeppink">@Model.Name</h3>
+        <h4>@Model.Price</h4>
+        <a href="#" class="btn btn-danger" style="margin-top:20px">MUA NGAY</a>
     </div>
 </div>
 <div class="row">
-    @Html.Partial("_SimilarFood")
+    @Html.Action("SimilarFood", "Foods")
 </div>
