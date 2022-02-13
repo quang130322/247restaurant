@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/assets/css/homecss.css" />
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     @*@Scripts.Render("~/bundles/modernizr")*@
 </head>
 <body>
@@ -14,7 +15,12 @@
         <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
             <div class="position-sticky">
                 <div class="list-group list-group-flush mx-3 mt-4">
-                    @Html.Action("GetAllCategory", "Category")
+                    <a href="@Url.Action("Index", "FoodManagement", new {area = "admin"})" class="list-group-item list-group-item-action ripple">
+                        <span>Menu Management</span>
+                    </a>
+                    <a href="@Url.Action("Index", "CategoryManagement", new {area = "admin"})" class="list-group-item list-group-item-action ripple">
+                        <span>Category Management</span>
+                    </a>
                 </div>
             </div>
         </nav>
@@ -24,13 +30,6 @@
                 <h1>@Html.ActionLink("247 Restaurant", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</h1>
 
                 <ul class="navbar-nav ms-auto d-flex flex-row">
-
-                    <li class="nav-item">
-                        <a class="nav-link me-3 me-lg-0" href="#">
-                            <i class="fas fa-shopping-cart"></i>
-                        </a>
-                    </li>
-
                     <li class="nav-item dropdown">
                         <button class="btn dropdown-toggle d-flex align-items-center" type="button"
                                 id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,9 +37,6 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end"
                             aria-labelledby="navbarDropdownMenuLink">
-                            <li>
-                                @Html.ActionLink("Admin Dashboard", "Index", "CategoryManagement", new { area = "admin" }, new { @class = "dropdown-item" })
-                            </li>
                             <li><a class="dropdown-item" href="#">My profile</a></li>
                             <li><a class="dropdown-item" href="#">Settings</a></li>
                             <li><a class="dropdown-item" href="#">Logout</a></li>
