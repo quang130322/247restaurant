@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="BaseEntities\BaseEntity.cs" />
     <Compile Include="BaseEntities\IBaseEntity.cs" />
+    <Compile Include="Common\CartItem.cs" />
     <Compile Include="Common\Category.cs" />
     <Compile Include="Common\CovidInfo.cs" />
     <Compile Include="Common\Customer.cs" />

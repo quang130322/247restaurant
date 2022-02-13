@@ -8,7 +8,7 @@
         <div class="card-body">
             <a href="@Url.Action("Details", "Foods", new {foodId = Model.Id})"><h4 class="card-title">@Model.Name</h4></a>
             <p class="card-price">@Model.Price.ToString("F0")đ</p>
-            <a href="#" class="btn btn-outline-danger">ĐẶT HÀNG</a>
+            <a href="@Url.Action("AddToCart", "Cart", new {foodId = Model.Id})" class="btn btn-outline-danger">ĐẶT HÀNG</a>
         </div>
     </div>
 </div>
