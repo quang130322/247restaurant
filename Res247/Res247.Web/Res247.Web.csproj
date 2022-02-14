@@ -152,6 +152,7 @@
     <Compile Include="Areas\Admin\Controllers\FoodManagementController.cs" />
     <Compile Include="Areas\Admin\ViewModels\CategoryViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\FoodViewModel.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\FoodsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -159,6 +160,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CartItemViewModel.cs" />
+    <Compile Include="ViewModels\FoodViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\homecss.css" />
@@ -250,12 +253,12 @@
     <Content Include="Views\Shared\_ListFoods.cshtml" />
     <Content Include="Views\Foods\Details.cshtml" />
     <Content Include="Views\Foods\_SimilarFood.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="assets\image\" />
-    <Folder Include="ViewModels\" />
     <Folder Include="Views\Category\" />
   </ItemGroup>
   <ItemGroup>
