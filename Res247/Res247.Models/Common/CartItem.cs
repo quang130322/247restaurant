@@ -8,8 +8,8 @@ namespace Res247.Models.Common
 {
     public class CartItem
     {
-        public Food food { get; set; }
+        public Food Food { get; set; }
 
-        public int quantity { get; set; }
+        public int Quantity { get; set; }
     }
 }

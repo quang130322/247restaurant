@@ -42,9 +42,9 @@ namespace Res247.Web.Controllers
             }
             foreach(var cartItem in cart)
             {
-                if(cartItem.food.Id == foodId)
+                if(cartItem.Food.Id == foodId)
                 {
-                    cartItem.quantity++;
+                    cartItem.Quantity++;
                     Session["cart"] = cart;
                     return RedirectToAction("Index");
                 }
@@ -59,8 +59,8 @@ namespace Res247.Web.Controllers
             };
             CartItemViewModel item = new CartItemViewModel()
             {
-                food = foodViewModel,
-                quantity = 1
+                Food = foodViewModel,
+                Quantity = 1
             };
             cart.Add(item);
             Session["cart"] = cart;

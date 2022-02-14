@@ -7,8 +7,8 @@ namespace Res247.Web.ViewModels
 {
     public class CartItemViewModel
     {
-        public FoodViewModel food { get; set; }
+        public FoodViewModel Food { get; set; }
 
-        public int quantity { get; set; }
+        public int Quantity { get; set; }
     }
 }
