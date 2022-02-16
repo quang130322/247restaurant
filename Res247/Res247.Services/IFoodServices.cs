@@ -9,5 +9,7 @@ namespace Res247.Services
         IEnumerable<Food> GetFoodsByCate(int cateId, bool isIncludeDelete = false);
 
         IEnumerable<Food> GetSimilarFood(int foodId, bool isIncludeDelete = false);
+
+        void RemoveCategoriesFromFood(int foodId);
     }
 }
