@@ -146,6 +146,7 @@ namespace Res247.Web.Areas.Admin.Controllers
             }
 
             var food = _foodServices.GetById((int)id);
+            var categories = _categoryService.GetCategoriesIdByFood(food.Id);
 
             if(food == null)
             {
@@ -159,7 +160,7 @@ namespace Res247.Web.Areas.Admin.Controllers
                 Description = food.Description,
                 Image = food.Image,
                 Price = food.Price,
-                SelectedCategoryIds = food.Categories.Select(x => x.Id)
+                SelectedCategoryIds = categories
             };
 
             foodViewModel.Categories = _categoryService.GetAll().Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name });
@@ -206,11 +207,7 @@ namespace Res247.Web.Areas.Admin.Controllers
 
         private void UpdateSelectedCategoriesFromIds(IEnumerable<int> selectedCategoryIds, Food food)
         {
-            var cate = food.Categories;
-            foreach (var item in cate.ToList())
-            {
-                food.Categories.Remove(item);
-            }
+            _foodServices.RemoveCategoriesFromFood(food.Id);
             food.Categories = GetSelectedCategoryFromIds(selectedCategoryIds);
         }
 
