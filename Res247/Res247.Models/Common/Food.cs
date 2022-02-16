@@ -20,8 +20,11 @@ namespace Res247.Models.Common
         [Required(ErrorMessage = "The {0} is required")]
         public decimal Price { get; set; }
 
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
 
-        public virtual ICollection<Category> Categories { get; set; }
+        public Category Category { get; set; }
+
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

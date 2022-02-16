@@ -6,6 +6,5 @@ namespace Res247.Services
 {
     public interface ICategoryService: IBaseService<Category>
     {
-        List<int> GetCategoriesIdByFood(int id, bool isIncludeDelete = false);
     }
 }
