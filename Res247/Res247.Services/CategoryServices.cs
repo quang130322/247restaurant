@@ -27,7 +27,7 @@ namespace Res247.Services
                 }
                 return categoriesId;
             }
-            var list = _unitOfWork.CategoryRepository.GetQuery(x => x.Foods.Any(f => f.Id == id)).ToList();
+            var list = _unitOfWork.CategoryRepository.GetQuery(x=>x.Foods.Any(f=>f.Id == id)).ToList();
             foreach (var item in list)
             {
                 categoriesId.Add(item.Id);

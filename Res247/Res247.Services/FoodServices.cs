@@ -35,5 +35,13 @@ namespace Res247.Services
                                                                x.Categories.Any(c => c.Id == cate.Id) 
                                                                && x.Id != foodId).ToList().Take(10);
         }
+
+        public void RemoveCategoriesFromFood(int foodId)
+        {
+            var food = _unitOfWork.FoodRepository.GetById(foodId);
+            List<Category> categories = new List<Category>();
+            food.Categories = categories;
+            _unitOfWork.FoodRepository.Update(food);
+        }
     }
 }
