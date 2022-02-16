@@ -13,27 +13,18 @@ namespace Res247.Services
         {
         }
 
-        public IEnumerable<Food> GetFoodsByCate(int cateId, bool isIncludeDelete = false)
+        public IEnumerable<Food> GetFoodByCategory(int cateId, bool canLoadDelete = false)
         {
-            if (!isIncludeDelete)
-            {
-                return _unitOfWork.FoodRepository.GetQuery().Where(x => x.Categories.Any(c => c.Id == cateId) && x.IsDeleted == isIncludeDelete).ToList();
-            }
-            return _unitOfWork.FoodRepository.GetQuery().Where(x=>x.Categories.Any(c=>c.Id == cateId)).ToList();
+            return _unitOfWork.FoodRepository.GetQuery().Where(x => x.CategoryId == cateId 
+                                                            && x.IsDeleted == canLoadDelete).ToList();
         }
 
-        public IEnumerable<Food> GetSimilarFood(int foodId, bool isIncludeDelete = false)
+        public IEnumerable<Food> GetSimilarFood(int foodId, bool canLoadDelete = false)
         {
-            var cate = _unitOfWork.CategoryRepository.GetQuery().FirstOrDefault(c => c.Foods.Any(f => f.Id == foodId));
-            if (!isIncludeDelete)
-            {
-                return _unitOfWork.FoodRepository.GetQuery().Where(x =>
-                                                               x.Categories.Any(c => c.Id == cate.Id)
-                                                               && x.Id != foodId && x.IsDeleted == isIncludeDelete).ToList().Take(10);
-            }
-            return _unitOfWork.FoodRepository.GetQuery().Where(x => 
-                                                               x.Categories.Any(c => c.Id == cate.Id) 
-                                                               && x.Id != foodId).ToList().Take(10);
+            var cate = _unitOfWork.CategoryRepository.GetQuery().FirstOrDefault(x=>x.Foods.Any(f=>f.Id == foodId));
+            return _unitOfWork.FoodRepository.GetQuery().Where(x=>x.CategoryId == cate.Id 
+                                                            && x.IsDeleted == canLoadDelete 
+                                                            && x.Id != foodId).Take(10).ToList();
         }
     }
 }

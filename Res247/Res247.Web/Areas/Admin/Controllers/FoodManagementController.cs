@@ -75,8 +75,8 @@ namespace Res247.Web.Areas.Admin.Controllers
         // GET: Admin/FoodManagement/Create
         public ActionResult Create()
         {
+            ViewBag.CategoryId = new SelectList(_categoryService.GetAll(), "Id", "Name");
             var foodViewModel = new FoodViewModel();
-            foodViewModel.Categories = _categoryService.GetAll().Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name });
             return View(foodViewModel);
         }
 
@@ -96,7 +96,7 @@ namespace Res247.Web.Areas.Admin.Controllers
                     Description = foodViewModel.Description,
                     Image = foodViewModel.Image,
                     Price = foodViewModel.Price,
-                    Categories = GetSelectedCategoryFromIds(foodViewModel.SelectedCategoryIds)
+                    CategoryId = foodViewModel.CategoryId
                 };
 
                 var result = _foodServices.Add(food);
@@ -111,30 +111,8 @@ namespace Res247.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            foodViewModel.Categories = _categoryService.GetAll().Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name });
+            ViewBag.CategoryId = new SelectList(_categoryService.GetAll(), "Id", "Name", foodViewModel.CategoryId);
             return View(foodViewModel);
-        }
-
-        private ICollection<Category> GetSelectedCategoryFromIds(IEnumerable<int> selectedCategoryIds)
-        {
-            var categories = new List<Category>();
-
-            if (selectedCategoryIds == null)
-            {
-                return categories;
-            }
-
-            var cateEntities = _categoryService.GetAll();
-
-            foreach (var item in cateEntities)
-            {
-                if (selectedCategoryIds.Any(x => x == item.Id))
-                {
-                    categories.Add(item);
-                }
-            }
-
-            return categories;
         }
 
         // GET: Admin/FoodManagement/Edit/5
@@ -147,7 +125,7 @@ namespace Res247.Web.Areas.Admin.Controllers
 
             var food = _foodServices.GetById((int)id);
 
-            if(food == null)
+            if (food == null)
             {
                 return HttpNotFound();
             }
@@ -159,11 +137,10 @@ namespace Res247.Web.Areas.Admin.Controllers
                 Description = food.Description,
                 Image = food.Image,
                 Price = food.Price,
-                SelectedCategoryIds = food.Categories.Select(x => x.Id)
+                CategoryId = food.CategoryId
             };
 
-            foodViewModel.Categories = _categoryService.GetAll().Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name });
-            ViewBag.Categories = _categoryService.GetAll();
+            ViewBag.CategoryId = new SelectList(_categoryService.GetAll(), "Id", "Name", foodViewModel.CategoryId);
             return View(foodViewModel);
         }
 
@@ -182,11 +159,13 @@ namespace Res247.Web.Areas.Admin.Controllers
                 {
                     return HttpNotFound();
                 }
+
                 food.Name = foodViewModel.Name;
                 food.Description = foodViewModel.Description;
                 food.Image = foodViewModel.Image;
                 food.Price = foodViewModel.Price;
-                UpdateSelectedCategoriesFromIds(foodViewModel.SelectedCategoryIds, food);
+                food.CategoryId = foodViewModel.CategoryId;
+
                 var result = _foodServices.Update(food);
                 if (result)
                 {
@@ -199,19 +178,8 @@ namespace Res247.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            foodViewModel.Categories = _categoryService.GetAll().Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name });
-            ViewBag.Categories = _categoryService.GetAll();
+            ViewBag.CategoryId = new SelectList(_categoryService.GetAll(), "Id", "Name", foodViewModel.CategoryId);
             return View(foodViewModel);
-        }
-
-        private void UpdateSelectedCategoriesFromIds(IEnumerable<int> selectedCategoryIds, Food food)
-        {
-            var cate = food.Categories;
-            foreach (var item in cate.ToList())
-            {
-                food.Categories.Remove(item);
-            }
-            food.Categories = GetSelectedCategoryFromIds(selectedCategoryIds);
         }
 
         // POST: Admin/FoodManagement/Delete/5

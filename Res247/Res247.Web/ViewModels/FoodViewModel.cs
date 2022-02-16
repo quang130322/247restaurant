@@ -19,9 +19,5 @@ namespace Res247.Web.ViewModels
 
         [Required(ErrorMessage = "The {0} is required")]
         public decimal Price { get; set; }
-
-        public IEnumerable<int> SelectedCategoryIds { get; set; }
-
-        public IEnumerable<SelectListItem> Categories { get; set; }
     }
 }
