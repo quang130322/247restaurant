@@ -13,7 +13,7 @@ namespace Res247.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202202110411424_InitialCreate"; }
+            get { return "202202160653433_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

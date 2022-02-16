@@ -92,9 +92,12 @@
                         Description = c.String(maxLength: 500),
                         Image = c.String(),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        CategoryId = c.Int(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("common.Categories", t => t.CategoryId, cascadeDelete: true)
+                .Index(t => t.CategoryId);
             
             CreateTable(
                 "common.Categories",
@@ -135,19 +138,6 @@
                     })
                 .PrimaryKey(t => t.Id);
             
-            CreateTable(
-                "common.FoodCategories",
-                c => new
-                    {
-                        FoodId = c.Int(nullable: false),
-                        CateId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.FoodId, t.CateId })
-                .ForeignKey("common.Foods", t => t.FoodId, cascadeDelete: true)
-                .ForeignKey("common.Categories", t => t.CateId, cascadeDelete: true)
-                .Index(t => t.FoodId)
-                .Index(t => t.CateId);
-            
         }
         
         public override void Down()
@@ -157,21 +147,18 @@
             DropForeignKey("common.ShipperOrders", "OrderId", "common.Orders");
             DropForeignKey("common.OrderDetails", "OrderId", "common.Orders");
             DropForeignKey("common.OrderDetails", "FoodId", "common.Foods");
-            DropForeignKey("common.FoodCategories", "CateId", "common.Categories");
-            DropForeignKey("common.FoodCategories", "FoodId", "common.Foods");
+            DropForeignKey("common.Foods", "CategoryId", "common.Categories");
             DropForeignKey("common.Orders", "CustomerId", "common.Customers");
             DropForeignKey("security.Accounts", "Id", "common.Customers");
             DropForeignKey("common.CovidInfo", "AccountId", "security.Accounts");
-            DropIndex("common.FoodCategories", new[] { "CateId" });
-            DropIndex("common.FoodCategories", new[] { "FoodId" });
             DropIndex("common.ShipperOrders", new[] { "ShipperId" });
             DropIndex("common.ShipperOrders", new[] { "OrderId" });
+            DropIndex("common.Foods", new[] { "CategoryId" });
             DropIndex("common.OrderDetails", new[] { "OrderId" });
             DropIndex("common.OrderDetails", new[] { "FoodId" });
             DropIndex("common.Orders", new[] { "CustomerId" });
             DropIndex("common.CovidInfo", new[] { "AccountId" });
             DropIndex("security.Accounts", new[] { "Id" });
-            DropTable("common.FoodCategories");
             DropTable("common.Shippers");
             DropTable("common.ShipperOrders");
             DropTable("common.Categories");

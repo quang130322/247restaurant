@@ -20,8 +20,6 @@ namespace Res247.Web.Areas.Admin.ViewModels
         [Required(ErrorMessage = "The {0} is required")]
         public decimal Price { get; set; }
 
-        public IEnumerable<int> SelectedCategoryIds { get; set; }
-
-        public IEnumerable<SelectListItem> Categories { get; set; }
+        public int CategoryId { get; set; }
     }
 }

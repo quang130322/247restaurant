@@ -31,16 +31,6 @@ namespace Res247.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Food>()
-                .HasMany(f => f.Categories)
-                .WithMany(c => c.Foods)
-                .Map(m =>
-                {
-                    m.MapLeftKey("FoodId");
-                    m.MapRightKey("CateId");
-                    m.ToTable("FoodCategories", "common");
-                });
 
             modelBuilder.Entity<Customer>().HasOptional(c=>c.Account).WithRequired(a=>a.Customer);
             modelBuilder.Entity<Shipper>().HasOptional(c=>c.Account).WithRequired(a=>a.Shipper);

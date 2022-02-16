@@ -47,9 +47,10 @@
         </div>
 
         <div class="form-group col-md-6">
-            <label class="control-label" for="Category">Categories</label>
-            <div class="">
-                @Html.ListBoxFor(model => model.SelectedCategoryIds, Model.Categories, new { @class = "select-multiple", style = "width:100%" })
+            @Html.LabelFor(model => model.CategoryId, "CategoryId", htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "select-single", style = "width: 100%" })
+                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
             </div>
         </div>
 

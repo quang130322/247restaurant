@@ -27,7 +27,7 @@ namespace Res247.Web.Controllers
             {
                 return HttpNotFound();
             }
-            var foods = _foodServices.GetFoodsByCate(cate.Id);
+            var foods = _foodServices.GetFoodByCategory(cate.Id);
             ViewBag.Name = cate.Name;
             return View("_ListFoods", foods);
         }
