@@ -27,7 +27,7 @@ namespace Res247.Data
         public DbSet<Shipper> Shippers { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<CovidInfo> CovidInfos { get; set; }
-        public DbSet<Admin> Admins { get; set; }
+        public DbSet<ShipperOrder> ShipperOrders { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

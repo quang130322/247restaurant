@@ -35,7 +35,7 @@ namespace Res247.Data.Infrastructure
 
         ICoreRepository<Account> AccountRepository { get; }
         
-        ICoreRepository<Admin> AdminRepository { get; }
+        ICoreRepository<ShipperOrder> ShipperOrderRepository { get; }
 
         #endregion
 

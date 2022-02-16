@@ -6,8 +6,8 @@ namespace Res247.Services
 {
     public interface IFoodServices : IBaseService<Food>
     {
-        IEnumerable<Food> GetFoodsByCate(int cateId);
+        IEnumerable<Food> GetFoodsByCate(int cateId, bool isIncludeDelete = false);
 
-        IEnumerable<Food> GetSimilarFood(int foodId);
+        IEnumerable<Food> GetSimilarFood(int foodId, bool isIncludeDelete = false);
     }
 }
