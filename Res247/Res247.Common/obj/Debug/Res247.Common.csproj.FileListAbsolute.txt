@@ -1,0 +1,12 @@
+C:\Users\win\Desktop\FPT University\SWP391\Project\247restaurant\Res247\Res247.Common\bin\Debug\Res247.Common.dll.config
+C:\Users\win\Desktop\FPT University\SWP391\Project\247restaurant\Res247\Res247.Common\bin\Debug\Res247.Common.dll
+C:\Users\win\Desktop\FPT University\SWP391\Project\247restaurant\Res247\Res247.Common\bin\Debug\Res247.Common.pdb
+C:\Users\win\Desktop\FPT University\SWP391\Project\247restaurant\Res247\Res247.Common\bin\Debug\EntityFramework.dll
+C:\Users\win\Desktop\FPT University\SWP391\Project\247restaurant\Res247\Res247.Common\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\win\Desktop\FPT University\SWP391\Project\247restaurant\Res247\Res247.Common\bin\Debug\EntityFramework.xml
+C:\Users\win\Desktop\FPT University\SWP391\Project\247restaurant\Res247\Res247.Common\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\win\Desktop\FPT University\SWP391\Project\247restaurant\Res247\Res247.Common\obj\Debug\Res247.Common.csproj.AssemblyReference.cache
+C:\Users\win\Desktop\FPT University\SWP391\Project\247restaurant\Res247\Res247.Common\obj\Debug\Res247.Common.csproj.CoreCompileInputs.cache
+C:\Users\win\Desktop\FPT University\SWP391\Project\247restaurant\Res247\Res247.Common\obj\Debug\Res247.Common.csproj.CopyComplete
+C:\Users\win\Desktop\FPT University\SWP391\Project\247restaurant\Res247\Res247.Common\obj\Debug\Res247.Common.dll
+C:\Users\win\Desktop\FPT University\SWP391\Project\247restaurant\Res247\Res247.Common\obj\Debug\Res247.Common.pdb
