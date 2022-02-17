@@ -1,9 +1,11 @@
-﻿using Res247.Data.Infrastructure;
+﻿using Res247.Common;
+using Res247.Data.Infrastructure;
 using Res247.Models.BaseEntities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Res247.Services.BaseServices
@@ -113,6 +115,21 @@ namespace Res247.Services.BaseServices
                 return await _unitOfWork.CoreRepository<TEntity>().GetQuery(x => x.IsDeleted == isIncludeDelete).ToListAsync();
             }
             return await _unitOfWork.CoreRepository<TEntity>().GetQuery().ToListAsync();
+        }
+
+        public virtual async Task<Paginated<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            string includeProperties = "", int pageIndex = 1, int pageSize = 10)
+        {
+            var query = _unitOfWork.CoreRepository<TEntity>().Get(filter: filter, orderBy: orderBy,
+                includeProperties: includeProperties);
+
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+
+            return await Paginated<TEntity>.CreateAsync(query.AsNoTracking(), pageIndex, pageSize);
         }
 
         public virtual TEntity GetById(int id)

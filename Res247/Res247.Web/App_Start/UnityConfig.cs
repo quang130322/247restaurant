@@ -58,7 +58,7 @@ namespace Res247.Web
             container.RegisterType<ICoreRepository<Order>, CoreRepository<Order>>();
             container.RegisterType<ICoreRepository<OrderDetail>, CoreRepository<OrderDetail>>();
             container.RegisterType<ICoreRepository<Account>, CoreRepository<Account>>();
-            container.RegisterType<ICoreRepository<Admin>, CoreRepository<Admin>>();
+            container.RegisterType<ICoreRepository<ShipperOrder>, CoreRepository<ShipperOrder>>();
             container.RegisterType<ICategoryService, CategoryServices>();
             container.RegisterType<IFoodServices, FoodServices>();
             container.RegisterType<ICustomerServices, CustomerServices>();
@@ -66,7 +66,6 @@ namespace Res247.Web
             container.RegisterType<IOrderServices, OrderServices>();
             container.RegisterType<IOrderDetailServices, OrderDetailServices>();
             container.RegisterType<IAccountServices, AccountServices>();
-            container.RegisterType<IAdminServices, AdminServices>();
             container.RegisterType<ICovidInfoServices, CovidInfoServices>();
         }
     }

@@ -1,5 +1,11 @@
 ﻿@model List<CartItemViewModel>
+<<<<<<< HEAD
 @{ ViewBag.Title = "Index"; }
+=======
+@{
+    ViewBag.Title = "Index";
+}
+>>>>>>> d56a301ef03e1f4789bbbbae208cefd9bba6909e
 
 <h2>Giỏ Hàng</h2>
 
@@ -14,9 +20,18 @@
     @for (int i = 0; i < Model.Count(); i++)
     {
 <tr>
+<<<<<<< HEAD
     <td>@Model.ElementAt(i).food.Name</td>
     <td>@Model.ElementAt(i).food.Price</td>
     <td>@Model.ElementAt(i).quantity</td>
     <td><a href="@Url.Action("RemoveItem", "Cart", new {itemIndex = i})" class="btn btn-outline-danger">Xóa</a></td>
 </tr>}
+=======
+    <td>@Model.ElementAt(i).Food.Name</td>
+    <td>@Model.ElementAt(i).Food.Price</td>
+    <td>@Model.ElementAt(i).Quantity</td>
+    <td><a href="@Url.Action("RemoveItem", "Cart", new {itemIndex = i})" class="btn btn-outline-danger">Xóa</a></td>
+</tr>
+    }
+>>>>>>> d56a301ef03e1f4789bbbbae208cefd9bba6909e
 </table>

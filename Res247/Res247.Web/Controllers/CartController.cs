@@ -1,7 +1,18 @@
+<<<<<<< HEAD
 ﻿using Res247.Services;
 using Res247.Web.ViewModel;
 using System.Collections.Generic;
 using System.Web.Mvc;
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Res247.Web.ViewModels;
+using Res247.Services;
+using Res247.Models.Common;
+>>>>>>> d56a301ef03e1f4789bbbbae208cefd9bba6909e
 
 namespace Res247.Web.Controllers
 {
@@ -13,7 +24,10 @@ namespace Res247.Web.Controllers
         {
             _foodServices = foodServices;
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> d56a301ef03e1f4789bbbbae208cefd9bba6909e
         // GET: Cart/Index
         public ActionResult Index()
         {
@@ -24,7 +38,10 @@ namespace Res247.Web.Controllers
             }
             return View(cart);
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> d56a301ef03e1f4789bbbbae208cefd9bba6909e
         //GET: Cart/AddToCart/id
         public ActionResult AddToCart(int foodId)
         {
@@ -38,9 +55,15 @@ namespace Res247.Web.Controllers
             {
                 cart = new List<CartItemViewModel>();
             }
+<<<<<<< HEAD
             foreach (var cartItem in cart)
             {
                 if (cartItem.Food.Id == foodId)
+=======
+            foreach(var cartItem in cart)
+            {
+                if(cartItem.Food.Id == foodId)
+>>>>>>> d56a301ef03e1f4789bbbbae208cefd9bba6909e
                 {
                     cartItem.Quantity++;
                     Session["cart"] = cart;

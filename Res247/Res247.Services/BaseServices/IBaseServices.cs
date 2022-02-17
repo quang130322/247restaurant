@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Res247.Common;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Res247.Services.BaseServices
@@ -33,5 +36,9 @@ namespace Res247.Services.BaseServices
         IEnumerable<TEntity> GetAll(bool isIncludeDelete = false);
 
         Task<IEnumerable<TEntity>> GetAllAsync(bool isIncludeDelete = false);
+
+        Task<Paginated<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            string includeProperties = "", int pageIndex = 1, int pageSize = 10);
     }
 }

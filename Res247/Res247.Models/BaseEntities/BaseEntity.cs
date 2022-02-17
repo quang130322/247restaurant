@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Res247.Models.BaseEntities
 {
@@ -10,6 +11,7 @@ namespace Res247.Models.BaseEntities
             IsDeleted = false;
         }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Display(Name = "Is Deleted")]

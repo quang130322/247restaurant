@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Res247.Models.Common
 {
+<<<<<<< HEAD
     class CartItem
     {
         public Food Food { get; set; }
@@ -18,5 +19,12 @@ namespace Res247.Models.Common
                 return Quantity * DonGia;
             }
         }
+=======
+    public class CartItem
+    {
+        public Food Food { get; set; }
+
+        public int Quantity { get; set; }
+>>>>>>> d56a301ef03e1f4789bbbbae208cefd9bba6909e
     }
 }

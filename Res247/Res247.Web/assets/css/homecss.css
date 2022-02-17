@@ -136,3 +136,12 @@ footer {
     footer a {
         text-decoration: none;
     }
+
+    .center-title{
+        text-align:center;
+    }
+
+ .form-control{
+    display: inline-block !important;
+    width: 80% !important;
+}

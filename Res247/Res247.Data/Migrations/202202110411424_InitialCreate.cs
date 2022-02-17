@@ -11,7 +11,7 @@
                 "security.Accounts",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         Username = c.String(nullable: false, maxLength: 32),
                         Password = c.String(nullable: false, maxLength: 32),
                         Phone = c.String(nullable: false, maxLength: 10),
@@ -60,14 +60,11 @@
                         Status = c.Int(nullable: false),
                         IsPaid = c.Boolean(nullable: false),
                         CustomerId = c.Int(nullable: false),
-                        ShipperId = c.Int(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("common.Customers", t => t.CustomerId, cascadeDelete: true)
-                .ForeignKey("common.Shippers", t => t.ShipperId, cascadeDelete: true)
-                .Index(t => t.CustomerId)
-                .Index(t => t.ShipperId);
+                .Index(t => t.CustomerId);
             
             CreateTable(
                 "common.OrderDetails",
@@ -111,23 +108,29 @@
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "common.ShipperOrders",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Status = c.Int(nullable: false),
+                        OrderTimeReceived = c.DateTime(nullable: false),
+                        OrderId = c.Int(nullable: false),
+                        ShipperId = c.Int(nullable: false),
+                        IsDeleted = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("common.Orders", t => t.OrderId, cascadeDelete: true)
+                .ForeignKey("common.Shippers", t => t.ShipperId, cascadeDelete: true)
+                .Index(t => t.OrderId)
+                .Index(t => t.ShipperId);
+            
+            CreateTable(
                 "common.Shippers",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Status = c.Int(nullable: false),
                         IsActive = c.Boolean(nullable: false),
-                        IsDeleted = c.Boolean(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Admins",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Username = c.String(),
-                        Password = c.String(),
                         IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
@@ -149,8 +152,9 @@
         
         public override void Down()
         {
-            DropForeignKey("common.Orders", "ShipperId", "common.Shippers");
+            DropForeignKey("common.ShipperOrders", "ShipperId", "common.Shippers");
             DropForeignKey("security.Accounts", "Id", "common.Shippers");
+            DropForeignKey("common.ShipperOrders", "OrderId", "common.Orders");
             DropForeignKey("common.OrderDetails", "OrderId", "common.Orders");
             DropForeignKey("common.OrderDetails", "FoodId", "common.Foods");
             DropForeignKey("common.FoodCategories", "CateId", "common.Categories");
@@ -160,15 +164,16 @@
             DropForeignKey("common.CovidInfo", "AccountId", "security.Accounts");
             DropIndex("common.FoodCategories", new[] { "CateId" });
             DropIndex("common.FoodCategories", new[] { "FoodId" });
+            DropIndex("common.ShipperOrders", new[] { "ShipperId" });
+            DropIndex("common.ShipperOrders", new[] { "OrderId" });
             DropIndex("common.OrderDetails", new[] { "OrderId" });
             DropIndex("common.OrderDetails", new[] { "FoodId" });
-            DropIndex("common.Orders", new[] { "ShipperId" });
             DropIndex("common.Orders", new[] { "CustomerId" });
             DropIndex("common.CovidInfo", new[] { "AccountId" });
             DropIndex("security.Accounts", new[] { "Id" });
             DropTable("common.FoodCategories");
-            DropTable("dbo.Admins");
             DropTable("common.Shippers");
+            DropTable("common.ShipperOrders");
             DropTable("common.Categories");
             DropTable("common.Foods");
             DropTable("common.OrderDetails");
