@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Res247.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class FoodManagementController : Controller
     {
         private readonly IFoodServices _foodServices;

@@ -1,0 +1,55 @@
+﻿@model RegisterViewModel
+@{
+    ViewBag.Title = "Đăng Ký";
+}
+
+<h2>Đăng Ký</h2>
+
+<section class="signup">
+    <div class="container">
+        <div class="signup-content">
+            <div class="signup-form">
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "register-form row", role = "form", id = "register-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-user"></i></label>
+                        @Html.TextBoxFor(m => m.Name, new { @placeholder = "Tên Của Bạn", @id = "name" })
+                    </div>
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i></label>
+                        @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email", @id = "email" })
+                    </div>
+                    <div class="form-group">
+                        <label for="pass"><i class="fas fa-lock"></i></label>
+                        @Html.PasswordFor(m => m.Password, new { @placeholder = "Mật Khẩu", @id = "pass" })
+                    </div>
+                    <div class="form-group">
+                        <label for="re-pass"><i class="fas fa-lock"></i></label>
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "Nhập Lại Mật Khẩu", @id = "re_pass" })
+                    </div>
+                    <div class="form-group">
+                        <label for="address"><i class="fas fa-map-marked"></i></label>
+                        @Html.TextBoxFor(m => m.Address, new { @placeholder = "Địa Chỉ" })
+                    </div>
+                    <div class="form-group">
+                        <label for="phone"><i class="fas fa-phone-square"></i></label>
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @placeholder = "Số Điện Thoại" })
+                    </div>
+                    <div class="form-group form-button">
+                        <input type="submit" name="signup" id="signup" class="form-submit" value="Đăng Ký" />
+                    </div>
+                }
+            </div>
+            <div class="signup-image">
+                <figure><img src="~/assets/images/signup-image.jpg" alt="sing up image"></figure>
+                @Html.ActionLink("Tôi đã có tài khoản", "Login", null, new { @class = "signup-image-link" })
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<IdentityRole>
+
+@{
+    ViewBag.Title = "Quản Lý Role";
+}
+
+<h2 class="text-center">Quản Lý Role</h2>
+<h4>@TempData["Message"]</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <a href="@Url.Action("Create", "RolesAdmin")" class="btn btn-primary float-left"><span class="fas fa-plus-square"></span></a>
+    </div>
+</div>
+<table class="table table-condensed table-bordered">
+    <tr class="d-flex center-title">
+        <th class="col-md-6">
+            Tên
+        </th>
+        <th class="col-md-6">Quản Lý</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="d-flex center-title">
+            <td class="col-md-6">
+                <a href="@Url.Action("Edit", new { id = item.Id})">
+                    @item.Name
+                </a>
+            </td>
+            <td class="col-md-6">
+                <form action="@Url.Action("Delete", "RolesAdmin", new { id = item.Id })" method="post">
+                    <a href="@Url.Action("Edit", "RolesAdmin", new { id = item.Id })" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                    <button type="submit" onclick="return confirm('Bạn có muốn xóa Role @item.Name này?');" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,32 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <form id="logoutForm" class="navbar-right" action="@Url.Action("LogOff", "Account", new { area = "" })" , method="post">
+        @Html.AntiForgeryToken()
+        <li class="nav-item dropdown">
+            <button class="btn dropdown-toggle d-flex align-items-center" type="button"
+                    id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @User.Identity.GetUserName()
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdownMenuLink">
+                @if (User.IsInRole("Administrator"))
+                {
+                <li>
+                    @Html.ActionLink("Quản Lý Admin", "Index", "FoodManagement", new { area = "admin" }, new { @class = "dropdown-item" })
+                </li>
+                }
+                <li>@Html.ActionLink("Trang Cá Nhân", "Index", "Manage", new {area=""}, new {@class="dropdown-item"})</li>
+                <li><a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Đăng Xuất</a></li>
+            </ul>
+        </li>
+    </form>
+}
+else
+{
+    <li class="nav-item">
+        @Html.ActionLink("Đăng Ký", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })
+    </li>
+    <li class="nav-item">
+        @Html.ActionLink("Đăng Nhập", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })
+    </li>
+}

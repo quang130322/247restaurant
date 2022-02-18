@@ -1,4 +1,5 @@
 ﻿using Res247.Models.BaseEntities;
+using Res247.Models.Security;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -23,12 +24,12 @@ namespace Res247.Models.Common
 
         public bool IsPaid { get; set; }
 
-        [ForeignKey("Customer")]
-        public int CustomerId { get; set; }
+        public DateTime? OrderArrivedAt { get; set; }
 
-        public Customer Customer { get; set; }
+        [ForeignKey("Account")]
+        public string AccountId { get; set; }
 
-        public virtual ICollection<ShipperOrder> ShipperOrders { get; set; }
+        public Account Account { get; set; }
 
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }

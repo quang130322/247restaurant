@@ -1,7 +1,6 @@
 ﻿using Res247.Data.Infrastructure.Repositories;
 using Res247.Models.BaseEntities;
 using Res247.Models.Common;
-using Res247.Models.Security;
 using System;
 using System.Threading.Tasks;
 
@@ -27,15 +26,7 @@ namespace Res247.Data.Infrastructure
 
         ICoreRepository<Order> OrderRepository { get; }
 
-        ICoreRepository<Customer> CustomerRepository { get; }
-
-        ICoreRepository<Shipper> ShipperRepository { get; }
-
         ICoreRepository<CovidInfo> CovidInfoRepository { get; }
-
-        ICoreRepository<Account> AccountRepository { get; }
-        
-        ICoreRepository<ShipperOrder> ShipperOrderRepository { get; }
 
         #endregion
 

@@ -15,6 +15,7 @@ using Res247.Web.Areas.Admin.ViewModels;
 
 namespace Res247.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class CategoryManagementController : Controller
     {
         private readonly ICategoryService _categoryService;
