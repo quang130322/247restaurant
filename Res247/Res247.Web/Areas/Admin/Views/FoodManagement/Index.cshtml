@@ -1,10 +1,10 @@
 ﻿@model Paginated<Food>
 
 @{
-    ViewBag.Title = "Menu Management";
+    ViewBag.Title = "Quản Lý Menu";
 }
 
-<h2 class="text-center">Menu Management</h2>
+<h2 class="text-center">Quản Lý Menu</h2>
 <h4>@TempData["Message"]</h4>
 <hr />
 <div class="row">
@@ -28,19 +28,19 @@
 
 @if (!Model.Any())
 {
-    <h3 class="text-center">Don't have any food yet.</h3>
+    <h3 class="text-center">Không tìm thấy thực thẩm nào.</h3>
 }
 else
 {
     <table class="table table-condensed table-bordered">
         <tr class="d-flex center-title">
             <th class="col-md-4">
-                <a href="@Url.Action("Index", "FoodManagement", new { sortOrder = ViewData["NameSortParm"], currentFilter = ViewData["CurrentFilter"] })">Name</a>
+                <a href="@Url.Action("Index", "FoodManagement", new { sortOrder = ViewData["NameSortParm"], currentFilter = ViewData["CurrentFilter"] })">Tên</a>
             </th>
             <th class="col-md-4">
-                <a href="@Url.Action("Index", "FoodManagement", new { sortOrder = ViewData["PriceSortParm"], currentFilter = ViewData["CurrentFilter"] })">Price</a>
+                <a href="@Url.Action("Index", "FoodManagement", new { sortOrder = ViewData["PriceSortParm"], currentFilter = ViewData["CurrentFilter"] })">Giá</a>
             </th>
-            <th class="col-md-4">Manage</th>
+            <th class="col-md-4">Quản Lý</th>
         </tr>
 
         @foreach (var food in Model)
@@ -57,7 +57,7 @@ else
                 <td class="col-md-4">
                     <form action="@Url.Action("Delete", "FoodManagement", new { id = food.Id })" method="post">
                         <a href="@Url.Action("Edit", "FoodManagement", new { id = food.Id })" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                        <button type="submit" onclick="return confirm('Are you sure to delete this food?');" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                        <button type="submit" onclick="return confirm('Bạn có muốn xóa Thực phẩm @food.Name này?');" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                     </form>
                 </td>
             </tr>

@@ -1,0 +1,42 @@
+﻿@model LoginViewModel
+
+@{
+    ViewBag.Title = "Đăng Nhập";
+}
+
+<section class="sign-in">
+    <div class="container">
+        <div class="signin-content">
+            <div class="signin-image">
+                <figure><img src="~/assets/images/signin-image.jpg" alt="sing up image"></figure>
+                @Html.ActionLink("Tạo tài khoản", "Register", null, new { @class = "signup-image-link" })
+                @Html.ActionLink("Quên mật khẩu?", "ForgotPassword", null, new { @class = "signup-image-link" })
+            </div>
+
+            <div class="signin-form">
+                <h2 class="form-title">Đăng Nhập</h2>
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "register-form", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i></label>
+                        @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email", @id = "email" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="pass"><i class="fas fa-lock"></i></label>
+                        @Html.PasswordFor(m => m.Password, new { @placeholder = "Mật Khẩu", @id = "pass" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group form-button">
+                        <input type="submit" name="signin" id="signin" class="form-submit" value="Đăng Nhập" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,4 +1,5 @@
-﻿using Res247.Models.BaseEntities;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using Res247.Models.BaseEntities;
 using Res247.Models.Common;
 using Res247.Models.Security;
 using System;
@@ -10,40 +11,35 @@ using System.Threading.Tasks;
 
 namespace Res247.Data
 {
-    public class Res247Context : DbContext
+    public class Res247Context : IdentityDbContext<Account>
     {
         public Res247Context() : base("Res247Cnn")
         {
-            Database.SetInitializer<Res247Context>(new DbInitializer());
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;
+        }
+
+        static Res247Context()
+        {
+            Database.SetInitializer<Res247Context>(new DbInitializer());
+        }
+
+        public static Res247Context Create()
+        {
+            return new Res247Context();
         }
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Food> Foods { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Shipper> Shippers { get; set; }
-        public DbSet<Account> Accounts { get; set; }
         public DbSet<CovidInfo> CovidInfos { get; set; }
-        public DbSet<ShipperOrder> ShipperOrders { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-
-            modelBuilder.Entity<Customer>().HasOptional(c=>c.Account).WithRequired(a=>a.Customer);
-            modelBuilder.Entity<Shipper>().HasOptional(c=>c.Account).WithRequired(a=>a.Shipper);
-        }
-
-        public override int SaveChanges()
-        {
-            return base.SaveChanges();
-        }
-
-        public override async Task<int> SaveChangesAsync()
-        {
-            return await base.SaveChangesAsync();
+            modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(i=>i.UserId);
+            modelBuilder.Entity<IdentityRole>().HasKey<string>(i=>i.Id);
+            modelBuilder.Entity<IdentityUserRole>().HasKey(i=> new {i.RoleId, i.UserId});
         }
     }
 }

@@ -133,6 +133,10 @@ footer {
     background-color: lightpink;
 }
 
+footer .container{
+    background:none;
+}
+
     footer a {
         text-decoration: none;
     }
@@ -145,3 +149,8 @@ footer {
     display: inline-block !important;
     width: 80% !important;
 }
+
+ main .container{
+     padding-left: 100px;
+     padding-bottom: 20px;
+ }
