@@ -223,7 +223,7 @@ namespace Res247.Data
             var user = userManager.FindByName(name);
             if (user == null)
             {
-                user = new Account { UserName = name, Email = name, Name = "Admin", Address="Tay Ho", };
+                user = new Account { UserName = name, Email = name, Name = "Admin", Address="Tay Ho", PhoneNumber="0123456789"};
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }

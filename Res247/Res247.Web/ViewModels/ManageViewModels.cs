@@ -9,9 +9,22 @@ namespace Res247.Web.ViewModels
     {
         public bool HasPassword { get; set; }
         //public IList<UserLoginInfo> Logins { get; set; }
+
+        [Required(ErrorMessage = "The {0} is required")]
+        [StringLength(10, ErrorMessage = "The {0} must be {1} characters")]
         public string PhoneNumber { get; set; }
         //public bool TwoFactor { get; set; }
         //public bool BrowserRemembered { get; set; }
+
+        [Required(ErrorMessage = "The {0} is required")]
+        [StringLength(255, ErrorMessage = "The {0} must between {2} and {1} characters", MinimumLength = 3)]
+        public string Address { get; set; }
+
+        [Required(ErrorMessage = "The {0} is required")]
+        [StringLength(255, ErrorMessage = "The {0} must between {2} and {1} characters", MinimumLength = 3)]
+        public string Name { get; set; }
+
+        public string Email { get; set; }
     }
 
     //public class ManageLoginsViewModel
@@ -59,13 +72,13 @@ namespace Res247.Web.ViewModels
     }
 
 
-    //public class AddPhoneNumberViewModel
-    //{
-    //    [Required]
-    //    [Phone]
-    //    [Display(Name = "Phone Number")]
-    //    public string Number { get; set; }
-    //}
+    public class ChangePhoneNumberViewModel
+    {
+        [Required]
+        [Phone]
+        [Display(Name = "Phone Number")]
+        public string Number { get; set; }
+    }
 
     //public class VerifyPhoneNumberViewModel
     //{

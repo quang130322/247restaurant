@@ -1,29 +1,38 @@
 ﻿@model IndexViewModel
 @{
-    ViewBag.Title = "Manage your account";
+    ViewBag.Title = "Trang Cá Nhân";
 }
-
-<h2>@ViewBag.Title.</h2>
+@Html.Partial("_HeaderProfile")
 <p class="text-success">@ViewBag.StatusMessage</p>
-<div class="row">
-    <div class="col-md-8">
-        <p>
-            @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword") 
-                : Html.ActionLink("Pick a password", "SetPassword"))
-        </p>
-        <p>
-            Phone Number: @(Model.PhoneNumber ?? "None") [
-            @if (Model.PhoneNumber != null)
+<h4>@TempData["Message"]</h4>
+<section class="signup">
+    <div class="signup-content">
+        <div class="signup-form">
+            <h2>Thông Tin Cá Nhân</h2>
+            @using (Html.BeginForm("ChangeInformation", "Manage", FormMethod.Post, new { @class = "register-form row", role = "form", id = "register-form" }))
             {
-                @Html.ActionLink("Change", "AddPhoneNumber")
-                @: &nbsp;|&nbsp;
-                @Html.ActionLink("Remove", "RemovePhoneNumber")
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i></label>
+                    @Html.TextBoxFor(m => m.Name, new { @placeholder = "Tên Của Bạn", @id = "name" })
+                </div>
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i></label>
+                    @Html.TextBoxFor(m => m.Email, new { @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    <label for="phone"><i class="fas fa-phone-square"></i></label>
+                    @Html.TextBoxFor(m => m.PhoneNumber, new { @placeholder = "Số Điện Thoại" })
+                </div>
+                <div class="form-group">
+                    <label for="address"><i class="fas fa-map-marked"></i></label>
+                    @Html.TextBoxFor(m => m.Address, new { @placeholder = "Địa Chỉ" })
+                </div>
+                <div class="form-group form-button">
+                    <input type="submit" name="signup" id="signup" class="form-submit" value="Thay Đổi" />
+                </div>
             }
-            else
-            {
-                @Html.ActionLink("Add", "AddPhoneNumber")
-            }
-            ]
-        </p>
+        </div>
     </div>
-</div>
+</section>

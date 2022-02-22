@@ -23,6 +23,8 @@ namespace Res247.Web.Controllers
             _covidInfoServices = covidInfoServices;
         }
 
+
+
         // GET: CovidInfoes/Create
         public ActionResult Create()
         {
@@ -47,7 +49,7 @@ namespace Res247.Web.Controllers
                         HealthStatus = covidInfoViewModel.HealthStatus,
                         Vaccination = covidInfoViewModel.Vaccination,
                         AccountId = userId
-                };
+                    };
 
                     var result = _covidInfoServices.Add(covidInfo);
                     if (result > 0)
@@ -58,6 +60,45 @@ namespace Res247.Web.Controllers
             }
 
             return View(covidInfoViewModel);
+        }
+
+        public ActionResult GetCovidInfo()
+        {
+            var userId = User.Identity.GetUserId();
+            var covidInfo = _covidInfoServices.GetCovidInfoByAccountId(userId);
+            var model = new CovidInfoViewModel
+            {
+                HealthStatus = covidInfo.HealthStatus,
+                Vaccination = covidInfo.Vaccination
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GetCovidInfo(CovidInfoViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var userId = User.Identity.GetUserId();
+
+                var covidInfo = new CovidInfo()
+                {
+                    DateCreated = DateTime.Now,
+                    HealthStatus = model.HealthStatus,
+                    Vaccination = model.Vaccination,
+                    AccountId = userId
+                };
+
+                var result = _covidInfoServices.Add(covidInfo);
+                if (result > 0)
+                {
+                    TempData["Message"] = "Cập nhật thành công.";
+                    return RedirectToAction("Index", "Manage");
+                }
+            }
+            return View(model);
         }
     }
 }

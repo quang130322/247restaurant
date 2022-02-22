@@ -2,6 +2,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Res247.Models.Security;
+using Res247.Services;
 using Res247.Web.ViewModels;
 using System.Linq;
 using System.Threading.Tasks;
@@ -38,10 +39,10 @@ namespace Res247.Web.Controllers
         //
         // GET: /Account/Index
         [HttpGet]
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public ActionResult Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
+                message == ManageMessageId.ChangePasswordSuccess ? "M?t kh?u c?a b?n ?ã thay ??i"
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.SetTwoFactorSuccess ? "Your two factor provider has been set."
                 : message == ManageMessageId.Error ? "An error has occurred."
@@ -50,17 +51,47 @@ namespace Res247.Web.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var user = UserManager.FindById(userId);
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                PhoneNumber = user.PhoneNumber,
                 //TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 //Logins = await UserManager.GetLoginsAsync(userId),
                 //BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                Name = user.Name,
+                Address = user.Address,
+                Email = user.Email
             };
             return View(model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeInformation(IndexViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = User.Identity.GetUserId();
+                var user = UserManager.FindById(userId);
+
+                user.Address = model.Address;
+                user.PhoneNumber = model.PhoneNumber;
+                user.Name = model.Name;
+
+                var result = UserManager.Update(user);
+                if (result.Succeeded)
+                {
+                    TempData["Message"] = "C?p nh?t thành công.";
+                }
+                else
+                {
+                    TempData["Message"] = "C?p nh?t th?t b?i.";
+                }
+            }
+            return View(model);
+
+        }
         //
         // GET: /Account/RemoveLogin
         //[HttpGet]
