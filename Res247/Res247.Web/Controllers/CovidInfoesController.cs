@@ -23,8 +23,6 @@ namespace Res247.Web.Controllers
             _covidInfoServices = covidInfoServices;
         }
 
-
-
         // GET: CovidInfoes/Create
         public ActionResult Create()
         {

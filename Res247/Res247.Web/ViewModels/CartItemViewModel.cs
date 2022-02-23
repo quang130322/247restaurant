@@ -10,5 +10,7 @@ namespace Res247.Web.ViewModels
         public FoodViewModel Food { get; set; }
 
         public int Quantity { get; set; }
+
+        public decimal Price { get; set; }
     }
 }

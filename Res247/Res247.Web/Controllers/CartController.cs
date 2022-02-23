@@ -25,6 +25,16 @@ namespace Res247.Web.Controllers
             {
                 cart = new List<CartItemViewModel>();
             }
+
+            decimal totalPrice = 0;
+
+            foreach (var item in cart)
+            {
+                totalPrice += item.Price * item.Quantity;
+            }
+
+            ViewBag.TotalPrice = totalPrice;
+
             return View(cart);
         }
         //GET: Cart/AddToCart/id
@@ -60,9 +70,11 @@ namespace Res247.Web.Controllers
             CartItemViewModel item = new CartItemViewModel()
             {
                 Food = foodViewModel,
-                Quantity = 1
+                Quantity = 1,
+                Price = foodViewModel.Price
             };
             cart.Add(item);
+
             Session["cart"] = cart;
             return RedirectToAction("Index");
         }
