@@ -222,6 +222,7 @@
     <Content Include="Areas\Admin\Views\CategoryManagement\Create.cshtml" />
     <Content Include="Areas\Admin\Views\CategoryManagement\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CategoryManagement\Index.cshtml" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

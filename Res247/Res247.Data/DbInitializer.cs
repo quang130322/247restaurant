@@ -14,6 +14,7 @@ namespace Res247.Data
                 Id = 1,
                 Name = "Gimbab Chiên",
                 Description = "",
+                Image = "KimBapChien.jpg",
                 Price = 35000,
                 IsDeleted = false
             };
@@ -23,6 +24,7 @@ namespace Res247.Data
                 Id = 2,
                 Name = "Gimbab Cuốn",
                 Description = "",
+                Image = "GimBapCuon.jpg",
                 Price = 30000,
                 IsDeleted = false
             };
@@ -32,6 +34,7 @@ namespace Res247.Data
                 Id = 3,
                 Name = "Mỳ Đen",
                 Description = "",
+                Image = "MyDen.jpg",
                 Price = 55000,
                 IsDeleted = false
             };
@@ -41,6 +44,7 @@ namespace Res247.Data
                 Id = 4,
                 Name = "Gà Chiên Sốt Ngọt Phomai",
                 Description = "",
+                Image = "GaChienSotNgotPhomai.jpg",
                 Price = 75000,
                 IsDeleted = false
             };
@@ -50,6 +54,7 @@ namespace Res247.Data
                 Id = 5,
                 Name = "Mỳ Gà Tok Cay Đặc Biệt",
                 Description = "",
+                Image = "MyGaTokCayDacBiet.jpg",
                 Price = 65000,
                 IsDeleted = false
             };
@@ -59,6 +64,7 @@ namespace Res247.Data
                 Id = 6,
                 Name = "Mỳ Ý Sốt Bò Băm + Phomai",
                 Description = "",
+                Image = "MyYSotBoBamPhomai.jpg",
                 Price = 50000,
                 IsDeleted = false
             };
@@ -68,6 +74,7 @@ namespace Res247.Data
                 Id = 7,
                 Name = "Mỳ Lườn Ngỗng",
                 Description = "",
+                Image = "MyLuonNgong.jpg",
                 Price = 50000,
                 IsDeleted = false
             };
@@ -77,6 +84,7 @@ namespace Res247.Data
                 Id = 8,
                 Name = "Phở Xào Bò",
                 Description = "",
+                Image = "PhoXaoBo.jpg",
                 Price = 50000,
                 IsDeleted = false
             };
@@ -86,6 +94,7 @@ namespace Res247.Data
                 Id = 9,
                 Name = "Thịt Xiên Nướng",
                 Description = "",
+                Image = "ThitXienNuong.jpg",
                 Price = 15000,
                 IsDeleted = false
             };
@@ -95,6 +104,7 @@ namespace Res247.Data
                 Id = 10,
                 Name = "Gà Popcorn Lắc Phomai",
                 Description = "",
+                Image = "GaPopCornLacPhomai.jpg",
                 Price = 50000,
                 IsDeleted = false
             };
@@ -104,6 +114,7 @@ namespace Res247.Data
                 Id = 11,
                 Name = "Chân Gà Rang Muối",
                 Description = "",
+                Image = "ChanGaRangMuoi.jpg",
                 Price = 60000,
                 IsDeleted = false
             };
@@ -113,6 +124,7 @@ namespace Res247.Data
                 Id = 12,
                 Name = "Cánh Gà Bơ Tỏi",
                 Description = "",
+                Image = "CanhGaBoToi.jpg",
                 Price = 40000,
                 IsDeleted = false
             };
@@ -122,6 +134,7 @@ namespace Res247.Data
                 Id = 13,
                 Name = "Trà Thái",
                 Description = "",
+                Image = "TraThai.jpg",
                 Price = 15000,
                 IsDeleted = false
             };
@@ -131,6 +144,7 @@ namespace Res247.Data
                 Id = 14,
                 Name = "Hồng Trà Trân Châu Trắng",
                 Description = "",
+                Image = "HongTraTranChauTrang.jpg",
                 Price = 25000,
                 IsDeleted = false
             };
@@ -140,6 +154,7 @@ namespace Res247.Data
                 Id = 15,
                 Name = "Coca",
                 Description = "",
+                Image = "Coca.jpg",
                 Price = 15000,
                 IsDeleted = false
             };
