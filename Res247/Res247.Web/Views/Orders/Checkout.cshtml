@@ -1,0 +1,41 @@
+﻿@model OrderViewModel
+
+@{
+    ViewBag.Title = "Thanh Toán";
+}
+
+<section class="signup">
+    <div class="container">
+        <div class="signup-content">
+            <div class="signup-form">
+                <h3>Thông tin đặt hàng</h3>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-user"></i></label>
+                        @Html.TextBoxFor(m => m.CusName, new { @id = "name" })
+                    </div>
+                    <div class="form-group">
+                        <label for="phone"><i class="fas fa-phone-square"></i></label>
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @placeholder = "Số Điện Thoại" })
+                    </div>
+                    <div class="form-group">
+                        <label for="address"><i class="fas fa-map-marked"></i></label>
+                        @Html.TextBoxFor(m => m.CusAddress, new { @placeholder = "Địa Chỉ" })
+                    </div>
+                    <div class="form-group">
+                        <span class="input-group-text resize-tb">Ghi Chú</span>
+                        @Html.TextAreaFor(m => m.Comment, new {@class="form-control"})
+                    </div>
+                    <div class="form-group form-button">
+                        <input type="submit" class="btn btn-outline-danger resize-btn" value="Đặt Hàng" />
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-outline-primary">Mua Thêm</a>
+                        <a href="@Url.Action("Index", "Cart")" class="btn btn-outline-warning">Hủy</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

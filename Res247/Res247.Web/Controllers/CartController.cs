@@ -17,16 +17,19 @@ namespace Res247.Web.Controllers
         {
             _foodServices = foodServices;
         }
+
         // GET: Cart/Index
         public ActionResult Index()
         {
-            List<CartItemViewModel> cart = (List<CartItemViewModel>)Session["cart"];
-            if (cart == null)
+            var cart = Session["cart"] as List<CartItemViewModel> ?? new List<CartItemViewModel>();
+
+            if (cart.Count == 0 || Session["cart"] == null)
             {
-                cart = new List<CartItemViewModel>();
+                ViewBag.Message = "Chưa có sản phẩm nào trong giỏ hàng.";
+                return View();
             }
 
-            decimal totalPrice = 0;
+            decimal totalPrice = 0m;
 
             foreach (var item in cart)
             {
@@ -37,6 +40,7 @@ namespace Res247.Web.Controllers
 
             return View(cart);
         }
+
         //GET: Cart/AddToCart/id
         public ActionResult AddToCart(int foodId)
         {
@@ -59,19 +63,11 @@ namespace Res247.Web.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            FoodViewModel foodViewModel = new FoodViewModel()
-            {
-                Id = food.Id,
-                Name = food.Name,
-                Description = food.Description,
-                Image = food.Image,
-                Price = food.Price
-            };
             CartItemViewModel item = new CartItemViewModel()
             {
-                Food = foodViewModel,
+                Food = food,
                 Quantity = 1,
-                Price = foodViewModel.Price
+                Price = food.Price
             };
             cart.Add(item);
 

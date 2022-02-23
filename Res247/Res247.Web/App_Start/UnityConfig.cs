@@ -61,6 +61,7 @@ namespace Res247.Web
             container.RegisterType<ICategoryService, CategoryServices>();
             container.RegisterType<IFoodServices, FoodServices>();
             container.RegisterType<IOrderServices, OrderServices>();
+            container.RegisterType<ICheckoutService, CheckoutService>();
             container.RegisterType<IOrderDetailServices, OrderDetailServices>();
             container.RegisterType<ICovidInfoServices, CovidInfoServices>();
             container.RegisterType<AccountController>(new InjectionConstructor());

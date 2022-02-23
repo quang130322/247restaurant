@@ -8,11 +8,19 @@
     }
 }
 
+.text-center{
+    text-align:center;
+}
+
 .header_section_top {
     background-color: lightpink;
     clip-path: polygon(0 0, 100% 0, 96% 100%, 3% 100%);
     height: auto;
     padding: 10px 0px;
+}
+
+.resize-tb{
+    width:80% !important;
 }
 
 a {
@@ -24,6 +32,10 @@ a {
     -ms-transition: all .3s ease-in-out;
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
+}
+
+.resize-btn {
+    width:20% !important;
 }
 
 .custom_menu {

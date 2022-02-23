@@ -215,6 +215,7 @@
     <Compile Include="Controllers\FoodsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -225,6 +226,7 @@
     <Compile Include="ViewModels\CovidInfoViewModel.cs" />
     <Compile Include="ViewModels\FoodViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
+    <Compile Include="ViewModels\OrderViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\homecss.css" />
@@ -465,6 +467,8 @@
     <Content Include="Views\CovidInfoes\Create.cshtml" />
     <Content Include="Views\CovidInfoes\GetCovidInfo.cshtml" />
     <Content Include="Views\Shared\_HeaderProfile.cshtml" />
+    <Content Include="Views\Orders\Checkout.cshtml" />
+    <Content Include="Views\Orders\CheckoutSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
