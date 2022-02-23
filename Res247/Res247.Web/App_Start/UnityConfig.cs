@@ -4,9 +4,12 @@ using Res247.Data.Infrastructure.Repositories;
 using Res247.Models.Common;
 using Res247.Models.Security;
 using Res247.Services;
+using Res247.Web.Areas.Identity.Controllers;
+using Res247.Web.Controllers;
 using System;
 
 using Unity;
+using Unity.Injection;
 
 namespace Res247.Web
 {
@@ -52,21 +55,18 @@ namespace Res247.Web
             container.RegisterType<IUnitOfWork, UnitOfWork>();
             container.RegisterType<ICoreRepository<Category>, CoreRepository<Category>>();
             container.RegisterType<ICoreRepository<CovidInfo>, CoreRepository<CovidInfo>>();
-            container.RegisterType<ICoreRepository<Customer>, CoreRepository<Customer>>();
-            container.RegisterType<ICoreRepository<Shipper>, CoreRepository<Shipper>>();
             container.RegisterType<ICoreRepository<Food>, CoreRepository<Food>>();
             container.RegisterType<ICoreRepository<Order>, CoreRepository<Order>>();
             container.RegisterType<ICoreRepository<OrderDetail>, CoreRepository<OrderDetail>>();
-            container.RegisterType<ICoreRepository<Account>, CoreRepository<Account>>();
-            container.RegisterType<ICoreRepository<ShipperOrder>, CoreRepository<ShipperOrder>>();
             container.RegisterType<ICategoryService, CategoryServices>();
             container.RegisterType<IFoodServices, FoodServices>();
-            container.RegisterType<ICustomerServices, CustomerServices>();
-            container.RegisterType<IShipperServices, ShipperServices>();
             container.RegisterType<IOrderServices, OrderServices>();
             container.RegisterType<IOrderDetailServices, OrderDetailServices>();
-            container.RegisterType<IAccountServices, AccountServices>();
             container.RegisterType<ICovidInfoServices, CovidInfoServices>();
+            container.RegisterType<AccountController>(new InjectionConstructor());
+            container.RegisterType<ManageController>(new InjectionConstructor());
+            container.RegisterType<RolesAdminController>(new InjectionConstructor());
+            container.RegisterType<UsersAdminController>(new InjectionConstructor());
         }
     }
 }

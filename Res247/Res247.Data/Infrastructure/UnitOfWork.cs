@@ -28,20 +28,8 @@ namespace Res247.Data.Infrastructure
         private ICoreRepository<Order> _orderRepository;
         public ICoreRepository<Order> OrderRepository => _orderRepository ?? new CoreRepository<Order>(_dbContext);
 
-        private ICoreRepository<Customer> _customerRepository;
-        public ICoreRepository<Customer> CustomerRepository => _customerRepository ?? new CoreRepository<Customer>(_dbContext);
-
-        private ICoreRepository<Shipper> _shipperRepository;
-        public ICoreRepository<Shipper> ShipperRepository => _shipperRepository ?? new CoreRepository<Shipper>(_dbContext);
-
         private ICoreRepository<CovidInfo> _covidInfoRepository;
         public ICoreRepository<CovidInfo> CovidInfoRepository => _covidInfoRepository ?? new CoreRepository<CovidInfo>(_dbContext);
-
-        private ICoreRepository<Account> _accountRepository;
-        public ICoreRepository<Account> AccountRepository => _accountRepository ?? new CoreRepository<Account>(_dbContext);
-
-        private ICoreRepository<ShipperOrder> _shipperOrderRepository;
-        public ICoreRepository<ShipperOrder> ShipperOrderRepository => _shipperOrderRepository ?? new CoreRepository<ShipperOrder>(_dbContext);
         #region Method
 
         public void Dispose()

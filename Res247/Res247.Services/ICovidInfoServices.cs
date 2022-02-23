@@ -5,6 +5,6 @@ namespace Res247.Services
 {
     public interface ICovidInfoServices : IBaseService<CovidInfo>
     {
-
+        CovidInfo GetCovidInfoByAccountId(string accountId);
     }
 }

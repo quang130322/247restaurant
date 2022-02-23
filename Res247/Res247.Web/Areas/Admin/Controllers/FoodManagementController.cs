@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Res247.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class FoodManagementController : Controller
     {
         private readonly IFoodServices _foodServices;
@@ -102,11 +103,11 @@ namespace Res247.Web.Areas.Admin.Controllers
                 var result = _foodServices.Add(food);
                 if (result > 0)
                 {
-                    TempData["Message"] = "Created successful!";
+                    TempData["Message"] = "Tạo thành công.";
                 }
                 else
                 {
-                    TempData["Message"] = "Create failed!";
+                    TempData["Message"] = "Tạo thất bại. Thử lại sao nhé!";
                 }
                 return RedirectToAction("Index");
             }
@@ -169,11 +170,11 @@ namespace Res247.Web.Areas.Admin.Controllers
                 var result = _foodServices.Update(food);
                 if (result)
                 {
-                    TempData["Message"] = "Update successful!";
+                    TempData["Message"] = "Cập nhật thành công.";
                 }
                 else
                 {
-                    TempData["Message"] = "Update failed!";
+                    TempData["Message"] = "Cập nhật thất bại.";
                 }
                 return RedirectToAction("Index");
             }
@@ -189,11 +190,11 @@ namespace Res247.Web.Areas.Admin.Controllers
             var result = _foodServices.Delete(id);
             if (result)
             {
-                TempData["Message"] = "Delete successful";
+                TempData["Message"] = "Xóa thành công.";
             }
             else
             {
-                TempData["Message"] = "Delete successful";
+                TempData["Message"] = "Xóa thất bại.";
             }
             return RedirectToAction("Index");
         }

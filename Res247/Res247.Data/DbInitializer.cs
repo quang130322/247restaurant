@@ -1,7 +1,9 @@
-﻿using Res247.Models.Common;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Res247.Models.Common;
+using Res247.Models.Security;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 
 namespace Res247.Data
 {
@@ -9,6 +11,8 @@ namespace Res247.Data
     {
         protected override void Seed(Res247Context context)
         {
+            InitializeIdentity(context);
+
             var food1 = new Food()
             {
                 Id = 1,
@@ -198,5 +202,55 @@ namespace Res247.Data
             context.Categories.AddRange(categories);
             context.SaveChanges();
         }
+
+        public static void InitializeIdentity(Res247Context db)
+        {
+            var userManager = new UserManager<Account>(new UserStore<Account>(db));
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+            const string name = "admin@example.com";
+            const string password = "admin123";
+            const string roleName = "Administrator";
+
+            #region Role
+            //Create Role Admin if it does not exist
+            var role = roleManager.FindByName(roleName);
+            if (role == null)
+            {
+                role = new IdentityRole(roleName);
+                var roleResult = roleManager.Create(role);
+            }
+
+            var shipper = roleManager.FindByName("Shipper");
+            if (shipper == null)
+            {
+                shipper = new IdentityRole("Shipper");
+                var roleResult = roleManager.Create(shipper);
+            }
+
+            var customer = roleManager.FindByName("Customer");
+            if (customer == null)
+            {
+                customer = new IdentityRole("Customer");
+                var roleResult = roleManager.Create(customer);
+            }
+            #endregion
+
+            var user = userManager.FindByName(name);
+            if (user == null)
+            {
+                user = new Account { UserName = name, Email = name, Name = "Admin", Address="Tay Ho", PhoneNumber="0123456789"};
+                var result = userManager.Create(user, password);
+                result = userManager.SetLockoutEnabled(user.Id, false);
+            }
+
+            //Add user admin to Role Admin if not already added
+            var rolesForUser = userManager.GetRoles(user.Id);
+            if (!rolesForUser.Contains(role.Name))
+            {
+                var result = userManager.AddToRole(user.Id, role.Name);
+            }
+        }
     }
+
+
 }
