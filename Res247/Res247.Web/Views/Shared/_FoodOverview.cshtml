@@ -3,7 +3,7 @@
 <div class="col-md-3">
     <div class="card card-style">
         <a href="@Url.Action("Details", "Foods", new {foodId = Model.Id})">
-            <img src="~/assets/images/Ga-Chien-Sot-Ngot-Phomai.jpg" class="img-home" alt="...">
+            <img src="~/assets/image/@Model.Image" class="img-home" alt="...">
         </a>
         <div class="card-body">
             <a href="@Url.Action("Details", "Foods", new {foodId = Model.Id})"><h4 class="card-title">@Model.Name</h4></a>
