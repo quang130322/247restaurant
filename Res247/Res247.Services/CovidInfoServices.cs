@@ -13,7 +13,7 @@ namespace Res247.Services
 
         public CovidInfo GetCovidInfoByAccountId(string accountId)
         {
-            return _unitOfWork.CovidInfoRepository.GetQuery().FirstOrDefault(x=>x.AccountId == accountId);
+            return _unitOfWork.CovidInfoRepository.GetQuery().Where(x=>x.AccountId == accountId).OrderByDescending(c=>c.DateCreated).FirstOrDefault();
         }
     }
 }

@@ -16,16 +16,16 @@
             <div class="position-sticky">
                 <div class="list-group list-group-flush mx-3 mt-4">
                     <a href="@Url.Action("Index", "FoodManagement", new {area = "admin"})" class="list-group-item list-group-item-action ripple">
-                        <span>Quản Lý Menu</span>
+                        <span><i class="fas fa-utensils"></i> Quản Lý Menu</span>
                     </a>
                     <a href="@Url.Action("Index", "CategoryManagement", new {area = "admin"})" class="list-group-item list-group-item-action ripple">
-                        <span>Quản Lý Danh Mục</span>
+                        <span><i class="fas fa-layer-group"></i> Quản Lý Danh Mục</span>
                     </a>
                     <a href="@Url.Action("Index", "UsersAdmin", new {area="identity"})" class="list-group-item list-group-item-action ripple">
-                        <span>Quản Lý Tài Khoản</span>
+                        <span><i class="fas fa-user"></i> Quản Lý Tài Khoản</span>
                     </a>
                     <a href="@Url.Action("Index", "RolesAdmin", new {area="identity"})" class="list-group-item list-group-item-action ripple">
-                        <span>Quản Lý Role</span>
+                        <span><i class="fas fa-user-tag"></i> Quản Lý Role</span>
                     </a>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end"
                                 aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Trang Cá Nhân</a></li>
+                                <li>@Html.ActionLink("Trang Cá Nhân", "Index", "Manage", new { area = "" }, new { @class = "dropdown-item" })</li>
                                 <li><a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Đăng Xuất</a></li>
                             </ul>
                         </form>

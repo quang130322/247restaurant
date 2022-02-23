@@ -62,6 +62,7 @@ namespace Res247.Web.Controllers
             return View(covidInfoViewModel);
         }
 
+        [HttpGet]
         public ActionResult GetCovidInfo()
         {
             var userId = User.Identity.GetUserId();
@@ -79,7 +80,7 @@ namespace Res247.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult GetCovidInfo(CovidInfoViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var userId = User.Identity.GetUserId();
 
@@ -95,7 +96,7 @@ namespace Res247.Web.Controllers
                 if (result > 0)
                 {
                     TempData["Message"] = "Cập nhật thành công.";
-                    return RedirectToAction("Index", "Manage");
+                    return RedirectToAction("GetCovidInfo", "CovidInfoes");
                 }
             }
             return View(model);

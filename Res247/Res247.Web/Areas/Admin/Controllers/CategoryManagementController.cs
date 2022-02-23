@@ -91,12 +91,12 @@ namespace Res247.Web.Areas.Admin.Controllers
                 var result = _categoryService.Add(cate);
                 if (result > 0)
                 {
-                    TempData["Message"] = "Create successful";
+                    TempData["Message"] = "Tạo thành công.";
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    TempData["Message"] = "Create failed! Please try again";
+                    TempData["Message"] = "Tạo thất bại. Thử lại sau nhé!";
                 }
                 return RedirectToAction("Index");
             }
@@ -149,11 +149,11 @@ namespace Res247.Web.Areas.Admin.Controllers
                 var result = _categoryService.Update(cate);
                 if (result)
                 {
-                    TempData["Message"] = "Update successful!";
+                    TempData["Message"] = "Cập nhật thành công.";
                 }
                 else
                 {
-                    TempData["Message"] = "Update failed!";
+                    TempData["Message"] = "Cập nhật thất bại.";
                 }
                 return RedirectToAction("Index");
             }
@@ -169,11 +169,11 @@ namespace Res247.Web.Areas.Admin.Controllers
             var result = _categoryService.Delete(id);
             if (result)
             {
-                TempData["Message"] = "Delete successful";
+                TempData["Message"] = "Xóa thành công.";
             }
             else
             {
-                TempData["Message"] = "Delete successful";
+                TempData["Message"] = "Xóa thất bại!";
             }
             return RedirectToAction("Index");
         }

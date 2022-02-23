@@ -1,4 +1,4 @@
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Res247.Models.Security;
@@ -42,7 +42,7 @@ namespace Res247.Web.Controllers
         public ActionResult Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "M?t kh?u c?a b?n ?� thay ??i"
+                message == ManageMessageId.ChangePasswordSuccess ? "Mật khẩu của bạn thay đổi thành công."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.SetTwoFactorSuccess ? "Your two factor provider has been set."
                 : message == ManageMessageId.Error ? "An error has occurred."
@@ -82,11 +82,12 @@ namespace Res247.Web.Controllers
                 var result = UserManager.Update(user);
                 if (result.Succeeded)
                 {
-                    TempData["Message"] = "C?p nh?t th�nh c�ng.";
+                    TempData["Message"] = "Cập nhật thành công.";
+                    return RedirectToAction("Index", "Manage");
                 }
                 else
                 {
-                    TempData["Message"] = "C?p nh?t th?t b?i.";
+                    TempData["Message"] = "Cập nhật thất bại";
                 }
             }
             return View(model);
