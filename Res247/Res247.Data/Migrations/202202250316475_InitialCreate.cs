@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InititalCreate : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
@@ -63,11 +63,14 @@
                         IsPaid = c.Boolean(nullable: false),
                         OrderArrivedAt = c.DateTime(),
                         AccountId = c.String(maxLength: 128),
+                        ShipperId = c.Int(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Accounts", t => t.AccountId)
-                .Index(t => t.AccountId);
+                .ForeignKey("common.Shippers", t => t.ShipperId, cascadeDelete: true)
+                .Index(t => t.AccountId)
+                .Index(t => t.ShipperId);
             
             CreateTable(
                 "dbo.Accounts",
@@ -148,6 +151,19 @@
                 .Index(t => t.IdentityRole_Id);
             
             CreateTable(
+                "common.Shippers",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Status = c.Boolean(nullable: false),
+                        IsDeleted = c.Boolean(nullable: false),
+                        Account_Id = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Accounts", t => t.Account_Id)
+                .Index(t => t.Account_Id);
+            
+            CreateTable(
                 "dbo.IdentityRoles",
                 c => new
                     {
@@ -162,23 +178,28 @@
         {
             DropForeignKey("dbo.IdentityUserRoles", "IdentityRole_Id", "dbo.IdentityRoles");
             DropForeignKey("common.OrderDetails", "OrderId", "common.Orders");
+            DropForeignKey("common.Orders", "ShipperId", "common.Shippers");
             DropForeignKey("common.Orders", "AccountId", "dbo.Accounts");
+            DropForeignKey("common.Shippers", "Account_Id", "dbo.Accounts");
             DropForeignKey("dbo.IdentityUserRoles", "Account_Id", "dbo.Accounts");
             DropForeignKey("dbo.IdentityUserLogins", "Account_Id", "dbo.Accounts");
             DropForeignKey("common.CovidInfo", "AccountId", "dbo.Accounts");
             DropForeignKey("dbo.IdentityUserClaims", "Account_Id", "dbo.Accounts");
             DropForeignKey("common.OrderDetails", "FoodId", "common.Foods");
             DropForeignKey("common.Foods", "CategoryId", "common.Categories");
+            DropIndex("common.Shippers", new[] { "Account_Id" });
             DropIndex("dbo.IdentityUserRoles", new[] { "IdentityRole_Id" });
             DropIndex("dbo.IdentityUserRoles", new[] { "Account_Id" });
             DropIndex("dbo.IdentityUserLogins", new[] { "Account_Id" });
             DropIndex("common.CovidInfo", new[] { "AccountId" });
             DropIndex("dbo.IdentityUserClaims", new[] { "Account_Id" });
+            DropIndex("common.Orders", new[] { "ShipperId" });
             DropIndex("common.Orders", new[] { "AccountId" });
             DropIndex("common.OrderDetails", new[] { "OrderId" });
             DropIndex("common.OrderDetails", new[] { "FoodId" });
             DropIndex("common.Foods", new[] { "CategoryId" });
             DropTable("dbo.IdentityRoles");
+            DropTable("common.Shippers");
             DropTable("dbo.IdentityUserRoles");
             DropTable("dbo.IdentityUserLogins");
             DropTable("common.CovidInfo");

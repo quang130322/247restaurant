@@ -1,0 +1,67 @@
+﻿@model OrderViewModel
+
+@{
+    ViewBag.Title = "Sửa";
+}
+
+<h2>Sửa</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-horizontal row">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group col-md-6">
+            Ngày Order
+            <br />
+            <br />
+            @Html.EditorFor(model => model.OrderDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+
+        <div class="form-group col-md-6">
+            Ngày Nhận
+            <br />
+            <br />
+            @Html.EditorFor(model => model.OrderArrivedAt, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+        <div class="form-group">
+             @Html.Action("GetOrderDetails", "OrderManagement", new { orderId = Model.Id })
+        </div>
+
+        <div class="form-group col-md-6">
+            <div class="col-md-5">
+                <br />
+                Tổng Giá
+                <br />
+                @Html.EditorFor(model => model.TotalPrice, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <div class="checkbox">
+                <br />
+                Thanh Toán
+                @Html.EditorFor(model => model.IsPaid)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <br />
+            Trạng Thái
+            <br />
+            <br />
+            <div class="row">
+                @Html.RadioButtonFor(m => m.Status, 0, new { @class = "col-md-2" })Mới
+                @Html.RadioButtonFor(m => m.Status, 1, new { @class = "col-md-2" })Đang Giao
+                @Html.RadioButtonFor(m => m.Status, 2, new { @class = "col-md-2" })Hoàn Thành
+            </div>
+        </div>
+
+        <div class="form-group form-button mt-4">
+            <input type="submit" name="signup" id="signup" class="btn btn-success" value="Sửa" />
+            @Html.ActionLink("Trở Về", "Index", null, new { @class = "btn btn-light ml-2" })
+        </div>
+    </div>
+    }

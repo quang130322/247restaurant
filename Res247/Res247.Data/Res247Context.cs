@@ -34,12 +34,15 @@ namespace Res247.Data
         public DbSet<Food> Foods { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<CovidInfo> CovidInfos { get; set; }
+        public DbSet<Shipper> Shippers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(i=>i.UserId);
             modelBuilder.Entity<IdentityRole>().HasKey<string>(i=>i.Id);
             modelBuilder.Entity<IdentityUserRole>().HasKey(i=> new {i.RoleId, i.UserId});
+
+            modelBuilder.Entity<Account>().HasOptional(a => a.Shipper).WithRequired(s => s.Account);
         }
     }
 }

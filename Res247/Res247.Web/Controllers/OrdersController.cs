@@ -93,7 +93,8 @@ namespace Res247.Web.Controllers
                     Comment = orderViewModel.Comment,
                     AccountId = User.Identity.GetUserId(),
                     TotalPrice = TotalPrice,
-                    Status = 0
+                    Status = 0,
+                    ShipperId = 1
                 };
 
                 _checkoutService.Checkout(order, orderDetails);

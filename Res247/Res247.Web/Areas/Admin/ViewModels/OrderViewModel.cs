@@ -1,15 +1,16 @@
-﻿using Res247.Models.BaseEntities;
-using Res247.Models.Security;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
-namespace Res247.Models.Common
+namespace Res247.Web.Areas.Admin.ViewModels
 {
-    [Table("Orders", Schema = "common")]
-    public class Order : BaseEntity
+    public class OrderViewModel
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "The {0} is required")]
         public DateTime OrderDate { get; set; }
 
@@ -25,17 +26,5 @@ namespace Res247.Models.Common
         public bool IsPaid { get; set; }
 
         public DateTime? OrderArrivedAt { get; set; }
-
-        [ForeignKey("Account")]
-        public string AccountId { get; set; }
-
-        public Account Account { get; set; }
-
-        [ForeignKey("Shipper")]
-        public int ShipperId { get; set; }
-
-        public Shipper Shipper { get; set; }
-
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

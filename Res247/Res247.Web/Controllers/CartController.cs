@@ -60,7 +60,7 @@ namespace Res247.Web.Controllers
                 {
                     cartItem.Quantity++;
                     Session["cart"] = cart;
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Home");
                 }
             }
             CartItemViewModel item = new CartItemViewModel()
@@ -72,7 +72,7 @@ namespace Res247.Web.Controllers
             cart.Add(item);
 
             Session["cart"] = cart;
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult RemoveItem(int itemIndex)

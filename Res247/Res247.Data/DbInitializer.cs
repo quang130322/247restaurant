@@ -243,6 +243,12 @@ namespace Res247.Data
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }
 
+            var shipAcc = new Account { UserName = "shipper@example.com", Email = "shipper@example.com", Name = "Shipper", Address = "Tay Ho", PhoneNumber = "123456789" };
+            userManager.Create(shipAcc, "123");
+            var ship = new Shipper { Account = shipAcc, Id = 1, Status = true };
+            db.Shippers.Add(ship);
+
+
             //Add user admin to Role Admin if not already added
             var rolesForUser = userManager.GetRoles(user.Id);
             if (!rolesForUser.Contains(role.Name))

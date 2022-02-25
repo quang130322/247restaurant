@@ -64,9 +64,9 @@
     <Compile Include="Infrastructure\Repositories\CoreRepository.cs" />
     <Compile Include="Infrastructure\Repositories\ICoreRepository.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\202202161434306_InititalCreate.cs" />
-    <Compile Include="Migrations\202202161434306_InititalCreate.designer.cs">
-      <DependentUpon>202202161434306_InititalCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202202250316475_InitialCreate.cs" />
+    <Compile Include="Migrations\202202250316475_InitialCreate.designer.cs">
+      <DependentUpon>202202250316475_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Res247Context.cs" />
@@ -83,8 +83,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202202161434306_InititalCreate.resx">
-      <DependentUpon>202202161434306_InititalCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202202250316475_InitialCreate.resx">
+      <DependentUpon>202202250316475_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
