@@ -66,7 +66,33 @@ namespace Res247.Web.Controllers
             return View(model);
         }
 
-        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeInformation(IndexViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = User.Identity.GetUserId();
+                var user = UserManager.FindById(userId);
+
+                user.Address = model.Address;
+                user.PhoneNumber = model.PhoneNumber;
+                user.Name = model.Name;
+
+                var result = UserManager.Update(user);
+                if (result.Succeeded)
+                {
+                    TempData["Message"] = "Cập nhật thành công.";
+                    return RedirectToAction("Index", "Manage");
+                }
+                else
+                {
+                    TempData["Message"] = "Cập nhật thất bại";
+                }
+            }
+            return View(model);
+
+        }
         //
         // GET: /Account/RemoveLogin
         //[HttpGet]
