@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Res247.Models.Common;
+using Res247.Services;
+using Res247.Web.Areas.Admin.ViewModels;
+using System;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Res247.Data;
-using Res247.Models.Common;
-using Res247.Models.Security;
-using Res247.Services;
-using Res247.Web.Areas.Admin.ViewModels;
 
 namespace Res247.Web.Areas.Admin.Controllers
 {
@@ -80,7 +75,7 @@ namespace Res247.Web.Areas.Admin.Controllers
                     orderBy = n => n.OrderByDescending(c => c.OrderDate);
                     break;
                 default:
-                    orderBy = n => n.OrderBy(p => p.OrderDate);
+                    orderBy = n => n.OrderByDescending(p => p.Id);
                     break;
             }
 
