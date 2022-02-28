@@ -40,8 +40,7 @@ namespace Res247.Web.Controllers
 
             return View(cart);
         }
-
-        //GET: Cart/AddToCart/id
+        //GET: Cart/AddToCart/foodId
         public ActionResult AddToCart(int foodId)
         {
             var food = _foodServices.GetById(foodId);
@@ -74,7 +73,30 @@ namespace Res247.Web.Controllers
             Session["cart"] = cart;
             return RedirectToAction("Index", "Home");
         }
-
+        //GET: Cart/Increment/itemIndex
+        public ActionResult Increment(int itemIndex)
+        {
+            List<CartItemViewModel> cart = (List<CartItemViewModel>)Session["cart"];
+            cart.ElementAt(itemIndex).Quantity++;
+            Session["cart"] = cart;
+            return RedirectToAction("Index");
+        }
+        //GET: Cart/Decrement/itemIndex
+        public ActionResult Decrement(int itemIndex)
+        {
+            List<CartItemViewModel> cart = (List<CartItemViewModel>)Session["cart"];
+            if(cart.ElementAt(itemIndex).Quantity == 1)
+            {
+                return RemoveItem(itemIndex);
+            }
+            else
+            {
+                cart.ElementAt(itemIndex).Quantity--;
+            }
+            Session["cart"] = cart;
+            return RedirectToAction("Index");
+        }
+        //GET: Cart/RemoveItem/itemIndex
         public ActionResult RemoveItem(int itemIndex)
         {
             List<CartItemViewModel> cart = (List<CartItemViewModel>)Session["cart"];
