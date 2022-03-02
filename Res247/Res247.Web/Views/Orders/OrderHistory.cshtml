@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Order>
+@{
+    ViewBag.Title = "Lịch Sử Đơn Hàng";
+}
+
+@Html.Partial("_HeaderProfile")
+@if (!Model.Any())
+{
+    <h3 class="text-center">Bạn chưa đặt đơn hàng nào.</h3>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-outline-info text-center">Đặt Hàng Ngay</a>
+}
+else
+{
+    <h2 class="text-center">Lịch Sử Đơn Hàng</h2>
+    <center>
+        <table class="table table-condensed">
+            <tr class="d-flex center-title">
+                <th class="col-md-2">Ngày Đặt</th>
+                <th class="col-md-4">Địa Chỉ</th>
+                <th class="col-md-2">Tổng Đơn</th>
+                <th class="col-md-2">Trạng Thái</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr class="d-flex center-title">
+                    <td class="col-md-2">@item.OrderDate</td>
+                    <td class="col-md-4">@item.OrderAddress</td>
+                    <td class="col-md-2">@item.TotalPrice</td>
+                    <td class="col-md-2">@(item.Status == 0 ? "Mới" : item.Status == 1 ? "Đang Giao" : item.Status == 2 ? "Hoàn Thành": "Hủy Đơn")</td>
+                    <td class="col-md-2">Chi Tiết</td>
+                </tr>
+            }
+        </table>
+    </center>
+}

@@ -24,6 +24,8 @@ namespace Res247.Models.Common
 
         public bool IsPaid { get; set; }
 
+        public string OrderAddress { get; set; }
+
         public DateTime? OrderArrivedAt { get; set; }
 
         [ForeignKey("Account")]

@@ -47,7 +47,6 @@ namespace Res247.Web.Areas.Admin.Controllers
         {
             ViewData["CurrentPageSize"] = pageSize;
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["OrderDateSortParm"] = sortOrder == "OrderDate" ? "OrderDate_desc" : "OrderDate";
 
             if (searchString != null)
             {
@@ -71,9 +70,6 @@ namespace Res247.Web.Areas.Admin.Controllers
 
             switch (sortOrder)
             {
-                case "OrderDate_desc":
-                    orderBy = n => n.OrderByDescending(c => c.OrderDate);
-                    break;
                 default:
                     orderBy = n => n.OrderByDescending(p => p.Id);
                     break;
@@ -82,12 +78,6 @@ namespace Res247.Web.Areas.Admin.Controllers
             var orders = await _orderServices.GetAsync(filter: filter, orderBy: orderBy, pageIndex: pageIndex ?? 1, pageSize: pageSize);
 
             return View(orders);
-        }
-
-        public string GetAddress(string accId)
-        {
-            var address = UserManager.FindById(accId).Address;
-            return address;
         }
 
         public ActionResult GetOrderDetails(int orderId)
@@ -112,9 +102,11 @@ namespace Res247.Web.Areas.Admin.Controllers
                 Comment = order.Comment,
                 OrderDate = order.OrderDate,
                 OrderArrivedAt = order.OrderArrivedAt,
+                OrderAddress = order.OrderAddress,
                 IsPaid = order.IsPaid,
                 Status = order.Status,
-                TotalPrice = order.TotalPrice
+                TotalPrice = order.TotalPrice,
+                CusName = UserManager.FindById(order.AccountId).Name
             };
 
             return View(orderViewModel);
@@ -136,10 +128,12 @@ namespace Res247.Web.Areas.Admin.Controllers
                 }
 
                 order.Status = model.Status;
-                order.IsPaid = model.IsPaid;
+                order.OrderAddress = model.OrderAddress;
+
                 if(order.Status > 1)
                 {
                     order.OrderArrivedAt = DateTime.Now;
+                    order.IsPaid = true;
                 }
 
                 var result = _orderServices.Update(order);
@@ -155,6 +149,19 @@ namespace Res247.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             return View(model);
+        }
+
+        public ActionResult NewOrder()
+        {
+            var orders = _orderServices.GetNewest();
+
+            return View(orders);
+        }
+
+        public ActionResult GetShippingOrder()
+        {
+            var orders = _orderServices.GetShippingOrder();
+            return View(orders);
         }
     }
 }

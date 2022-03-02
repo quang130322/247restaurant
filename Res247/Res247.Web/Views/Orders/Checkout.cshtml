@@ -23,11 +23,29 @@
                     </div>
                     <div class="form-group">
                         <label for="address"><i class="fas fa-map-marked"></i></label>
-                        @Html.TextBoxFor(m => m.CusAddress, new { @placeholder = "Địa Chỉ" })
+                        @Html.TextBoxFor(m => m.OrderAddress, new { @placeholder = "Địa Chỉ" })
                     </div>
                     <div class="form-group">
                         <span class="input-group-text resize-tb">Ghi Chú</span>
-                        @Html.TextAreaFor(m => m.Comment, new {@class="form-control"})
+                        @Html.TextAreaFor(m => m.Comment, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        Số Mũi Tiêm Covid
+                        <br />
+                        <div class="row">
+                            @Html.RadioButtonFor(m => m.Vaccination, 0, new { @class = "col-md-2" })0
+                            @Html.RadioButtonFor(m => m.Vaccination, 1, new { @class = "col-md-2" })1
+                            @Html.RadioButtonFor(m => m.Vaccination, 2, new { @class = "col-md-2" })2
+                            @Html.RadioButtonFor(m => m.Vaccination, 3, new { @class = "col-md-2" })2+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        Tình Trạng Sức Khỏe
+                        <br />
+                        <div class="row">
+                            @Html.RadioButtonFor(m => m.HealthStatus, true, new { @class = "col-md-2" })Dương Tính
+                            @Html.RadioButtonFor(m => m.HealthStatus, false, new { @class = "col-md-2" })Âm Tính
+                        </div>
                     </div>
                     <div class="form-group form-button">
                         <input type="submit" class="btn btn-outline-danger resize-btn" value="Đặt Hàng" />

@@ -68,6 +68,10 @@
     <Compile Include="Migrations\202202250316475_InitialCreate.designer.cs">
       <DependentUpon>202202250316475_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202203010929324_AddOrderAddressToOrder.cs" />
+    <Compile Include="Migrations\202203010929324_AddOrderAddressToOrder.designer.cs">
+      <DependentUpon>202203010929324_AddOrderAddressToOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Res247Context.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,6 +89,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202202250316475_InitialCreate.resx">
       <DependentUpon>202202250316475_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203010929324_AddOrderAddressToOrder.resx">
+      <DependentUpon>202203010929324_AddOrderAddressToOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

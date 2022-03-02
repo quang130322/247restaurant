@@ -9,7 +9,8 @@
 <hr />
 <div class="row">
     <div class="col-md-6">
-
+        <a href="@Url.Action("NewOrder", "OrderManagement")" class="btn btn-outline-danger">Đơn Hàng Mới</a>
+        <a href="@Url.Action("GetShippingOrder", "OrderManagement")" class="btn btn-outline-success">Đơn Hàng Đang Giao</a>
     </div>
     <div class="col-md-6">
         <form action="@Url.Action("Index", "OrderManagement")" method="get" class="float-right">
@@ -41,7 +42,7 @@ else
                 Địa Chỉ
             </th>
             <th class="col-md-2">
-                <a href="@Url.Action("Index", "OrderManagement", new { sortOrder = ViewData["OrderDateSortParm"], currentFilter = ViewData["CurrentFilter"] })">Ngày Đặt</a>
+                Ngày Đặt
             </th>
             <th class="col-md-2">
                 Trạng Thái
@@ -58,13 +59,13 @@ else
                     </a>
                 </td>
                 <td class="col-md-4">
-                    @Html.Action("GetAddress", "OrderManagement", new { accId = item.AccountId })
+                    @item.OrderAddress
                 </td>
                 <td class="col-md-2">
                     @item.OrderDate
                 </td>
                 <td class="col-md-2">
-                    @(item.Status == 0 ? "Mới" : item.Status == 1 ? "Đang Giao" : "Hoàn Thành")
+                    @(item.Status == 0 ? "Mới" : item.Status == 1 ? "Đang Giao" : item.Status == 2 ? "Hoàn Thành": "Hủy Đơn")
                 </td>
                 <td class="col-md-2">
                     <a href="@Url.Action("Edit", "OrderManagement", new { id = item.Id })" class="btn btn-primary"><i class="fas fa-edit"></i></a>

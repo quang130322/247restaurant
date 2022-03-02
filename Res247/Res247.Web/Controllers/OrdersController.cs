@@ -20,6 +20,7 @@ namespace Res247.Web.Controllers
     {
         private readonly IOrderServices _orderServices;
         private readonly ICheckoutService _checkoutService;
+        private readonly ICovidInfoServices _covidInfoServices;
 
         private AccountManager _userManager;
         public AccountManager UserManager
@@ -34,10 +35,13 @@ namespace Res247.Web.Controllers
             }
         }
 
-        public OrdersController(IOrderServices orderServices, ICheckoutService checkoutService)
+        public OrdersController(IOrderServices orderServices
+            , ICheckoutService checkoutService
+            , ICovidInfoServices covidInfoServices)
         {
             _orderServices = orderServices;
             _checkoutService = checkoutService;
+            _covidInfoServices = covidInfoServices;
         }
 
         public ActionResult Checkout()
@@ -46,12 +50,15 @@ namespace Res247.Web.Controllers
             {
                 var userId = User.Identity.GetUserId();
                 var user = UserManager.FindById(userId);
+                var covid = _covidInfoServices.GetCovidInfoByAccountId(userId);
 
                 var orderViewModel = new OrderViewModel
                 {
                     CusName = user.Name,
-                    CusAddress = user.Address,
-                    PhoneNumber = user.PhoneNumber
+                    OrderAddress = user.Address,
+                    PhoneNumber = user.PhoneNumber,
+                    Vaccination = covid.Vaccination,
+                    HealthStatus = covid.HealthStatus
                 };
 
                 return View(orderViewModel);
@@ -88,11 +95,14 @@ namespace Res247.Web.Controllers
                     orderDetails.Add(orderDetail);
                 }
 
+                UpdateUserInfomation(orderViewModel);
+
                 var order = new Order
                 {
                     Comment = orderViewModel.Comment,
                     AccountId = User.Identity.GetUserId(),
                     TotalPrice = TotalPrice,
+                    OrderAddress = orderViewModel.OrderAddress,
                     Status = 0,
                     ShipperId = 1
                 };
@@ -103,6 +113,33 @@ namespace Res247.Web.Controllers
                 return RedirectToAction("CheckoutSuccess");
             }
             return View(orderViewModel);
+        }
+
+        public void UpdateUserInfomation(OrderViewModel model)
+        {
+            var userId = User.Identity.GetUserId();
+            var user = UserManager.FindById(userId);
+            var covid = _covidInfoServices.GetCovidInfoByAccountId(userId);
+
+            user.Name = model.CusName;
+            user.Address = model.OrderAddress;
+            user.PhoneNumber = model.PhoneNumber;
+            covid.HealthStatus = model.HealthStatus;
+            covid.Vaccination = model.Vaccination;
+
+            UserManager.Update(user);
+            _covidInfoServices.Add(covid);
+        }
+
+        public ActionResult OrderHistory()
+        {
+            var userId = User.Identity.GetUserId();
+            if (string.IsNullOrEmpty(userId))
+            {
+                return HttpNotFound();
+            }
+            var orders = _orderServices.GetOrderHistory(userId);
+            return View(orders);
         }
 
         public ActionResult CheckoutSuccess()

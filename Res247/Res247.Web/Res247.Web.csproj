@@ -422,6 +422,8 @@
     <Content Include="Areas\Admin\Views\OrderManagement\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\OrderManagement\Index.cshtml" />
     <Content Include="Areas\Admin\Views\OrderManagement\GetOrderDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderManagement\NewOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderManagement\GetShippingOrder.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -474,6 +476,7 @@
     <Content Include="Views\Shared\_HeaderProfile.cshtml" />
     <Content Include="Views\Orders\Checkout.cshtml" />
     <Content Include="Views\Orders\CheckoutSuccess.cshtml" />
+    <Content Include="Views\Orders\OrderHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,12 +12,18 @@ namespace Res247.Web.ViewModels
 
         public string PhoneNumber { get; set; }
 
-        public string CusAddress { get; set; }
-
         public decimal TotalPrice { get; set; }
+
+        public string OrderAddress { get; set; }
 
 
         [MaxLength(500, ErrorMessage = "The {0} must less than {1} characters")]
         public string Comment { get; set; }
+
+        [Required(ErrorMessage = "The {0} is required")]
+        public bool HealthStatus { get; set; }
+
+        [Required(ErrorMessage = "The {0} is required")]
+        public int Vaccination { get; set; }
     }
 }
