@@ -79,23 +79,19 @@ namespace Res247.Web.Controllers
 
             decimal TotalPrice = 0;
 
-            if (ModelState.IsValid)
-            {
-                List<OrderDetail> orderDetails = new List<OrderDetail>();
-
+            if (ModelState.IsValid) {
+                var orderDetails = new List<OrderDetail>();
                 foreach (var item in cartItems)
                 {
                     var orderDetail = new OrderDetail
                     {
-                        Food = item.Food,
                         Quantity = item.Quantity,
+                        FoodId = item.Food.Id,
                         Price = item.Price * item.Quantity
                     };
-                    TotalPrice += item.Quantity * item.Price;
+                    TotalPrice += item.Price * item.Quantity;
                     orderDetails.Add(orderDetail);
                 }
-
-                UpdateUserInfomation(orderViewModel);
 
                 var order = new Order
                 {
