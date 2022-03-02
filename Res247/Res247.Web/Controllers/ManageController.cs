@@ -14,6 +14,7 @@ namespace Res247.Web.Controllers
     [Authorize]
     public class ManageController : Controller
     {
+
         public ManageController()
         {
         }
@@ -93,6 +94,7 @@ namespace Res247.Web.Controllers
             return View(model);
 
         }
+
         //
         // GET: /Account/RemoveLogin
         //[HttpGet]
