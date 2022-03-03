@@ -19,6 +19,7 @@ else
             <td>Sản Phẩm</td>
             <td>Đơn Giá</td>
             <td>Số Lượng</td>
+            <td>Giá</td>
             <td>Hành Động</td>
         </tr>
 
@@ -32,15 +33,17 @@ else
                     @Model.ElementAt(i).Quantity
                     <a href="@Url.Action("Increment", "Cart", new {itemIndex = i})" class="btn">+</a>
                 </td>
+                <td>@(Model.ElementAt(i).Quantity * Model.ElementAt(i).Price)</td>
                 <td><a href="@Url.Action("RemoveItem", "Cart", new {itemIndex = i})" class="btn btn-outline-danger">Xóa</a></td>
             </tr>
         }
         @if (ViewBag.TotalPrice > 0)
         {
             <tr>
-                <td>Total Price: @ViewBag.TotalPrice</td>
                 <td></td>
                 <td></td>
+                <td></td>
+                <td>Tổng Giá: @ViewBag.TotalPrice</td>
                 <td><a href="@Url.Action("Checkout", "Orders")" class="btn btn-danger">Thanh Toán</a></td>
             </tr>
         }

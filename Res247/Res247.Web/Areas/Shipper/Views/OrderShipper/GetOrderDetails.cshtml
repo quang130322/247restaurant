@@ -1,0 +1,20 @@
+﻿@model IEnumerable<OrderDetail>
+<br />
+<br />
+<center>
+    <table class="table table-condensed">
+        <tr class="d-flex center-title">
+            <th class="col-md-2">Món Ăn</th>
+            <th class="col-md-2">Số Lượng</th>
+            <th class="col-md-2">Giá</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr class="d-flex center-title">
+                <td class="col-md-2">@Html.Action("GetFoodName", "OrderShipper", new { foodId = item.FoodId })</td>
+                <td class="col-md-2">@item.Quantity</td>
+                <td class="col-md-2">@item.Price</td>
+            </tr>
+        }
+    </table>
+</center>

@@ -11,11 +11,20 @@
                 aria-labelledby="navbarDropdownMenuLink">
                 @if (User.IsInRole("Administrator"))
                 {
-                <li>
-                    @Html.ActionLink("Quản Lý Admin", "Index", "FoodManagement", new { area = "admin" }, new { @class = "dropdown-item" })
-                </li>
+                    <li>
+                        @Html.ActionLink("Quản Lý Admin", "Index", "FoodManagement", new { area = "admin" }, new { @class = "dropdown-item" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Shipper", "Index", "OrderShipper", new { area = "shipper" }, new { @class = "dropdown-item" })
+                    </li>
                 }
-                <li>@Html.ActionLink("Trang Cá Nhân", "Index", "Manage", new {area=""}, new {@class="dropdown-item"})</li>
+                @if (User.IsInRole("Shipper"))
+                {
+                    <li>
+                        @Html.ActionLink("Shipper", "Index", "OrderShipper", new { area = "shipper" }, new { @class = "dropdown-item" })
+                    </li>
+                }
+                <li>@Html.ActionLink("Trang Cá Nhân", "Index", "Manage", new { area = "" }, new { @class = "dropdown-item" })</li>
                 <li><a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Đăng Xuất</a></li>
             </ul>
         </li>

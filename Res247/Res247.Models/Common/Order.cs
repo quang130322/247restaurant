@@ -28,6 +28,8 @@ namespace Res247.Models.Common
 
         public DateTime? OrderArrivedAt { get; set; }
 
+        public string CancelReason { get; set; }
+
         [ForeignKey("Account")]
         public string AccountId { get; set; }
 

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 
-namespace Res247.Web.Areas.Admin.ViewModels
+namespace Res247.Web.Areas.Shipper.ViewModels
 {
     public class OrderViewModel
     {

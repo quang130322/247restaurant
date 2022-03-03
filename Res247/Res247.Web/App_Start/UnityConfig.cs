@@ -60,6 +60,7 @@ namespace Res247.Web
             container.RegisterType<ICoreRepository<OrderDetail>, CoreRepository<OrderDetail>>();
             container.RegisterType<ICategoryService, CategoryServices>();
             container.RegisterType<IFoodServices, FoodServices>();
+            container.RegisterType<IShipperService, ShipperService>();
             container.RegisterType<IOrderServices, OrderServices>();
             container.RegisterType<ICheckoutService, CheckoutService>();
             container.RegisterType<IOrderDetailServices, OrderDetailServices>();

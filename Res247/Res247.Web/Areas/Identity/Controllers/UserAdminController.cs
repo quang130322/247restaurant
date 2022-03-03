@@ -2,6 +2,7 @@ using Microsoft.AspNet.Identity.Owin;
 using PagedList;
 using Res247.Common;
 using Res247.Models.Security;
+using Res247.Services;
 using Res247.Web.Areas.Identity.ViewModels;
 using Res247.Web.ViewModels;
 using System.Data.Entity;

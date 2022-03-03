@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 247 Restaurant</title>
+    <link rel="stylesheet" href="~/assets/css/homecss.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    @*@Scripts.Render("~/bundles/modernizr")*@
+</head>
+<body>
+    <header>
+        <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+            <div class="position-sticky">
+                <div class="list-group list-group-flush mx-3 mt-4">
+                    <a href="@Url.Action("Index", "OrderShipper", new {area = "shipper"})" class="list-group-item list-group-item-action ripple">
+                        <span><i class="fas fa-layer-group"></i> Quản Lý Đơn Hàng</span>
+                    </a>
+                     <a href="@Url.Action("Index", "OrderShipper", new {area = "shipper"})" class="list-group-item list-group-item-action ripple">
+                        <span><i class="fas fa-layer-group"></i> Lịch Sử Giao Hàng</span>
+                    </a>
+                    @*<a href="@Url.Action("Index", "RolesAdmin", new {area="identity"})" class="list-group-item list-group-item-action ripple">
+                            <span><i class="fas fa-user-tag"></i> Quản Lý Role</span>
+                        </a>*@
+                </div>
+            </div>
+        </nav>
+        <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+            <div class="container-fluid">
+                <h1>@Html.ActionLink("247 Restaurant", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</h1>
+
+                <ul class="navbar-nav ms-auto d-flex flex-row">
+                    <li class="nav-item dropdown">
+                        <form id="logoutForm" class="navbar-right" action="@Url.Action("LogOff", "Account", new { area = "" })" , method="post">
+                            @Html.AntiForgeryToken()
+                            <button class="btn dropdown-toggle d-flex align-items-center" type="button"
+                                    id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @User.Identity.GetUserName()
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end"
+                                aria-labelledby="navbarDropdownMenuLink">
+                                <li>@Html.ActionLink("Trang Cá Nhân", "Index", "Manage", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li><a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Đăng Xuất</a></li>
+                            </ul>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main style="margin-top: 58px;">
+        <div class="container pt-4">
+            @RenderBody()
+        </div>
+        @Html.Partial("_Footer")
+    </main>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/assets/js/custom.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

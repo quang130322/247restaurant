@@ -26,5 +26,10 @@ namespace Res247.Services
         {
             return _unitOfWork.OrderRepository.GetQuery().Where(x => x.Status == 1).ToList();
         }
+
+        public IEnumerable<Order> GetShippingOrderOfShipper(string accId)
+        {
+            return _unitOfWork.OrderRepository.GetQuery().Where(x=>x.Status == 1 && x.Shipper.Account.Id == accId).ToList();
+        }
     }
 }

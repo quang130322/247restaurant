@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Order>
+
+@{
+    ViewBag.Title = "Đơn Hàng Đang Giao";
+}
+
+<h2 class="text-center">Đơn Hàng Đang Giao</h2>
+<h4>@TempData["Message"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <a href="@Url.Action("Index", "OrderShipper")" class="btn btn-outline-primary">Tất Cả Đơn Hàng</a>
+        <a href="@Url.Action("GetShippingOrder", "OrderShipper")" class="btn btn-outline-success">Đơn Hàng Đang Giao</a>
+    </div>
+    <div class="col-md-6">
+
+    </div>
+</div>
+
+@if (!Model.Any())
+{
+    <h3 class="text-center">Không tìm thấy đơn hàng nào.</h3>
+}
+else
+{
+    <table class="table table-condensed table-bordered">
+        <tr class="d-flex center-title">
+            <th class="col-md-2">
+                ID
+            </th>
+            <th class="col-md-4">
+                Địa Chỉ
+            </th>
+            <th class="col-md-2">
+                Ngày Đặt
+            </th>
+            <th class="col-md-2">
+                Trạng Thái
+            </th>
+            <th class="col-md-2">Quản Lý</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr class="d-flex center-title">
+                <td class="col-md-2">
+                    <a href="@Url.Action("Edit", new { id = item.Id })">
+                        @item.Id
+                    </a>
+                </td>
+                <td class="col-md-4">
+                    @item.OrderAddress
+                </td>
+                <td class="col-md-2">
+                    @item.OrderDate
+                </td>
+                <td class="col-md-2">
+                    @(item.Status == 0 ? "Mới" : item.Status == 1 ? "Đang Giao" : item.Status == 2 ? "Hoàn Thành" : "Hủy Đơn")
+                </td>
+                <td class="col-md-2">
+                    <a href="@Url.Action("Edit", "OrderShipper", new { id = item.Id })" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                </td>
+            </tr>
+        }
+    </table>
+}

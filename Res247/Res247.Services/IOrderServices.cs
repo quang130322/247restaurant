@@ -9,5 +9,6 @@ namespace Res247.Services
         IEnumerable<Order> GetNewest();
         IEnumerable<Order> GetShippingOrder();
         IEnumerable<Order> GetOrderHistory(string accId);
+        IEnumerable<Order> GetShippingOrderOfShipper(string accId);
     }
 }

@@ -72,6 +72,18 @@
     <Compile Include="Migrations\202203010929324_AddOrderAddressToOrder.designer.cs">
       <DependentUpon>202203010929324_AddOrderAddressToOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202203021457452_UpdateCovidInfoModel.cs" />
+    <Compile Include="Migrations\202203021457452_UpdateCovidInfoModel.designer.cs">
+      <DependentUpon>202203021457452_UpdateCovidInfoModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203030339302_AddCancelReasonToOrderModel.cs" />
+    <Compile Include="Migrations\202203030339302_AddCancelReasonToOrderModel.designer.cs">
+      <DependentUpon>202203030339302_AddCancelReasonToOrderModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203030346297_AddCancelReasonToOrderModel1.cs" />
+    <Compile Include="Migrations\202203030346297_AddCancelReasonToOrderModel1.designer.cs">
+      <DependentUpon>202203030346297_AddCancelReasonToOrderModel1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Res247Context.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +93,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Res247.Common\Res247.Common.csproj">
+      <Project>{4225B0E4-ED95-44BB-9430-A56ADEC5798E}</Project>
+      <Name>Res247.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Res247.Models\Res247.Models.csproj">
       <Project>{5dc36300-153a-42ca-9c01-87c629ff14c0}</Project>
       <Name>Res247.Models</Name>
@@ -92,6 +108,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202203010929324_AddOrderAddressToOrder.resx">
       <DependentUpon>202203010929324_AddOrderAddressToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203021457452_UpdateCovidInfoModel.resx">
+      <DependentUpon>202203021457452_UpdateCovidInfoModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203030339302_AddCancelReasonToOrderModel.resx">
+      <DependentUpon>202203030339302_AddCancelReasonToOrderModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203030346297_AddCancelReasonToOrderModel1.resx">
+      <DependentUpon>202203030346297_AddCancelReasonToOrderModel1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

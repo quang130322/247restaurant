@@ -16,7 +16,6 @@ namespace Res247.Web.ViewModels
 
         public string OrderAddress { get; set; }
 
-
         [MaxLength(500, ErrorMessage = "The {0} must less than {1} characters")]
         public string Comment { get; set; }
 
@@ -25,5 +24,14 @@ namespace Res247.Web.ViewModels
 
         [Required(ErrorMessage = "The {0} is required")]
         public int Vaccination { get; set; }
+
+        [Required(ErrorMessage = "The {0} is required")]
+        public bool TravelToOtherPlace { get; set; }
+
+        [Required(ErrorMessage = "The {0} is required")]
+        public bool HaveSymptoms { get; set; }
+
+        [Required(ErrorMessage = "The {0} is required")]
+        public bool MeetCovidPatients { get; set; }
     }
 }

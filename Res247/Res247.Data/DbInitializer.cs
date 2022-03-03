@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Res247.Models.Common;
 using Res247.Models.Security;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 
@@ -243,10 +244,36 @@ namespace Res247.Data
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }
 
+            var covidAdmin = new CovidInfo
+            {
+                HaveSymptoms = false,
+                MeetCovidPatients = false,
+                TravelToOtherPlace = false,
+                Vaccination = 3,
+                DateCreated = DateTime.Now,
+                HealthStatus = false,
+                AccountId = user.Id
+            };
+
+            db.CovidInfos.Add(covidAdmin);
+
             var shipAcc = new Account { UserName = "shipper@example.com", Email = "shipper@example.com", Name = "Shipper", Address = "Tay Ho", PhoneNumber = "123456789" };
-            userManager.Create(shipAcc, "123");
-            var ship = new Shipper { Account = shipAcc, Id = 1, Status = true };
+            userManager.Create(shipAcc, password);
+            var ship = new Shipper { Account = shipAcc, Status = true };
             db.Shippers.Add(ship);
+
+            var covidShipper = new CovidInfo
+            {
+                HaveSymptoms = false,
+                MeetCovidPatients = false,
+                TravelToOtherPlace = false,
+                Vaccination = 3,
+                DateCreated = DateTime.Now,
+                HealthStatus = false,
+                AccountId = shipAcc.Id
+            };
+
+            db.CovidInfos.Add(covidShipper);
 
 
             //Add user admin to Role Admin if not already added

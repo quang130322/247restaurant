@@ -1,7 +1,10 @@
-﻿using Res247.Data.Infrastructure.Repositories;
+﻿using Res247.Common;
+using Res247.Data.Infrastructure.Repositories;
 using Res247.Models.BaseEntities;
 using Res247.Models.Common;
 using Res247.Models.Security;
+using System;
+using System.Data.Entity.Validation;
 using System.Threading.Tasks;
 
 namespace Res247.Data.Infrastructure
@@ -31,8 +34,8 @@ namespace Res247.Data.Infrastructure
         private ICoreRepository<CovidInfo> _covidInfoRepository;
         public ICoreRepository<CovidInfo> CovidInfoRepository => _covidInfoRepository ?? new CoreRepository<CovidInfo>(_dbContext);
 
-        private ICoreRepository<Shipper> _shipperInfoRepository;
-        public ICoreRepository<Shipper> ShipperRepository => _shipperInfoRepository ?? new CoreRepository<Shipper>(_dbContext);
+        private ICoreRepository<Shipper> _shipperRepository;
+        public ICoreRepository<Shipper> ShipperRepository => _shipperRepository ?? new CoreRepository<Shipper>(_dbContext);
 
         #region Method
 
@@ -43,7 +46,15 @@ namespace Res247.Data.Infrastructure
 
         public int SaveChanges()
         {
-            return _dbContext.SaveChanges();
+            try
+            {
+                return _dbContext.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                var newException = new FormattedDbEntityValidationException(e);
+                throw newException;
+            }
         }
 
         public async Task<int> SaveChangesAsync()

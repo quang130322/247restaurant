@@ -26,6 +26,8 @@
     <_SelectedScaffolderCategoryPath>root/Common/MVC/Area</_SelectedScaffolderCategoryPath>
     <WebStackScaffolding_AreaDialogWidth>600</WebStackScaffolding_AreaDialogWidth>
     <ProjectView>ProjectFiles</ProjectView>
+    <Area_SelectedScaffolderID>MvcAreaScaffolder</Area_SelectedScaffolderID>
+    <Area_SelectedScaffolderCategoryPath>root/Common/MVC</Area_SelectedScaffolderCategoryPath>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
