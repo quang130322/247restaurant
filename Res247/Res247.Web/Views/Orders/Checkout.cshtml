@@ -40,6 +40,30 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        Trong vòng 14 ngày qua, bạn có đến khu vực, tỉnh, thành phố, quốc gia/vùng lãnh thổ nào
+                        <br />
+                        <div class="row">
+                            @Html.RadioButtonFor(m => m.TravelToOtherPlace, true, new { @class = "col-md-2" })Có
+                            @Html.RadioButtonFor(m => m.TravelToOtherPlace, false, new { @class = "col-md-2" })Không
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        Trong vòng 14 ngày qua, bạn có thấy xuất hiện ít nhất 1 trong các dấu hiệu: sốt, ho, khó thở, viêm phổi, đau họng, mệt mỏi, thay đổi vị giác không?
+                        <br />
+                        <div class="row">
+                            @Html.RadioButtonFor(m => m.HaveSymptoms, true, new { @class = "col-md-2" })Có
+                            @Html.RadioButtonFor(m => m.HaveSymptoms, false, new { @class = "col-md-2" })Không
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        Trong vòng 14 ngày qua, bạn có tiếp xúc với người bệnh hoặc nghi ngờ mắc bệnh Covid-19?
+                        <br />
+                        <div class="row">
+                            @Html.RadioButtonFor(m => m.MeetCovidPatients, true, new { @class = "col-md-2" })Có
+                            @Html.RadioButtonFor(m => m.MeetCovidPatients, false, new { @class = "col-md-2" })Không
+                        </div>
+                    </div>
+                    <div class="form-group">
                         Tình Trạng Sức Khỏe
                         <br />
                         <div class="row">

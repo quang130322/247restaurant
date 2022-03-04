@@ -24,8 +24,6 @@ namespace Res247.Models.Security
 
         public virtual ICollection<Order> Orders { get; set; }
 
-        public virtual Shipper Shipper { get; set; }    
-
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Account> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

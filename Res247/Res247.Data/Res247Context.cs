@@ -35,6 +35,7 @@ namespace Res247.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<CovidInfo> CovidInfos { get; set; }
         public DbSet<Shipper> Shippers { get; set; }
+        public DbSet<CovidShipper> CovidShippers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -42,7 +43,6 @@ namespace Res247.Data
             modelBuilder.Entity<IdentityRole>().HasKey<string>(i=>i.Id);
             modelBuilder.Entity<IdentityUserRole>().HasKey(i=> new {i.RoleId, i.UserId});
 
-            modelBuilder.Entity<Account>().HasOptional(a => a.Shipper).WithRequired(s => s.Account);
         }
     }
 }

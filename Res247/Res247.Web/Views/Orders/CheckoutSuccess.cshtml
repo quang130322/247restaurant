@@ -5,8 +5,9 @@
 <section class="signup">
     <div class="container">
         <div class="signup-content">
-            <div class="signup-form">
-                <h3 class="text-center">@ViewBag.CheckoutSuccess</h3>
+            <div class="signup-form text-center">
+                <h3>@ViewBag.CheckoutSuccess</h3>
+                <a href="@Url.Action("OrderHistory", "Orders", new { area = "" })" class="btn btn-outline-danger">Lịch Sử Đơn Hàng</a>
             </div>
         </div>
     </div>

@@ -1,0 +1,27 @@
+﻿
+@model ShipperViewModel
+
+<div class="form-group col-md-6">
+    <br />
+    Đơn Được Giao Bởi: <b>@Model.Name</b>
+</div>
+
+<div class="form-group col-md-6">
+    <br />
+    Đã tiêm: @Model.Vaccination Mũi
+</div>
+
+<div class="form-group col-md-6">
+    <br />
+    Tình Trạng Sức Khỏe: @(Model.HealthStatus == true ? "Dương Tính": "Âm Tính")
+</div>
+
+<div class="form-group col-md-6">
+    <br />
+    Triệu Chứng: @(Model.HaveSymptoms == true ? "Có": "Không")
+</div>
+
+<div class="form-group col-md-6">
+    <br />
+    Gặp Bệnh Nhân Covid: @(Model.MeetCovidPatients == true ? "Có": "Không")
+</div>

@@ -21,6 +21,10 @@ namespace Res247.Web.Controllers
         private readonly IOrderServices _orderServices;
         private readonly ICheckoutService _checkoutService;
         private readonly ICovidInfoServices _covidInfoServices;
+        private readonly IOrderDetailServices _orderDetailServices;
+        private readonly IFoodServices _foodServices;
+        private readonly IShipperService _shipperService;
+        private readonly ICovidShipperService _covidShipperService;
 
         private AccountManager _userManager;
         public AccountManager UserManager
@@ -37,11 +41,19 @@ namespace Res247.Web.Controllers
 
         public OrdersController(IOrderServices orderServices
             , ICheckoutService checkoutService
-            , ICovidInfoServices covidInfoServices)
+            , ICovidInfoServices covidInfoServices
+            , IOrderDetailServices orderDetailServices
+            , IFoodServices foodServices
+            , IShipperService shipperService
+            , ICovidShipperService covidShipperService)
         {
             _orderServices = orderServices;
             _checkoutService = checkoutService;
             _covidInfoServices = covidInfoServices;
+            _orderDetailServices = orderDetailServices;
+            _foodServices = foodServices;
+            _shipperService = shipperService;
+            _covidShipperService = covidShipperService;
         }
 
         public ActionResult Checkout()
@@ -58,7 +70,10 @@ namespace Res247.Web.Controllers
                     OrderAddress = user.Address,
                     PhoneNumber = user.PhoneNumber,
                     Vaccination = covid.Vaccination,
-                    HealthStatus = covid.HealthStatus
+                    HealthStatus = covid.HealthStatus,
+                    HaveSymptoms = covid.HaveSymptoms,
+                    MeetCovidPatients = covid.MeetCovidPatients,
+                    TravelToOtherPlace = covid.TravelToOtherPlace
                 };
 
                 return View(orderViewModel);
@@ -122,6 +137,9 @@ namespace Res247.Web.Controllers
             user.PhoneNumber = model.PhoneNumber;
             covid.HealthStatus = model.HealthStatus;
             covid.Vaccination = model.Vaccination;
+            covid.HaveSymptoms = model.HaveSymptoms;
+            covid.TravelToOtherPlace = model.TravelToOtherPlace;
+            covid.MeetCovidPatients = model.MeetCovidPatients;
 
             UserManager.Update(user);
             _covidInfoServices.Add(covid);
@@ -136,6 +154,80 @@ namespace Res247.Web.Controllers
             }
             var orders = _orderServices.GetOrderHistory(userId);
             return View(orders);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var order = _orderServices.GetById(id);
+            var user = UserManager.FindById(order.AccountId);
+
+            var orderDetailViewModel = new OrderDetailViewModel
+            {
+                Id = order.Id,
+                OrderAddress = order.OrderAddress,
+                Comment = order.Comment,
+                CusName = user.Name,
+                Status = order.Status,
+                OrderDate = order.OrderDate,
+                OrderArrivedAt = order.OrderArrivedAt,
+                PhoneNumber = user.PhoneNumber,
+                TotalPrice = order.TotalPrice,
+                CancelReason = order.CancelReason,
+                ShipperId = order.ShipperId
+            };
+            return View(orderDetailViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Details(OrderDetailViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var order = _orderServices.GetById(model.Id);
+
+                order.Status = -1;
+                order.CancelReason = model.CancelReason;
+
+                var result = _orderServices.Update(order);
+                if (result)
+                {
+                    TempData["Message"] = "Hủy đơn hàng thành công!";
+                }
+                else
+                {
+                    TempData["Message"] = "Hủy đơn hàng thất bại!";
+                }
+                return RedirectToAction("OrderHistory");
+            }
+            return View(model);
+        }
+
+        public ActionResult ShipperInfo(int shipperId)
+        {
+            var shipper = _shipperService.GetById(shipperId);
+            var covid = _covidShipperService.GetCovidShipperByShipperId(shipperId);
+            var shipperViewModel = new ShipperViewModel
+            {
+                HaveSymptoms = covid.HaveSymptoms,
+                HealthStatus = covid.HealthStatus,
+                MeetCovidPatients = covid.MeetCovidPatients,
+                TravelToOtherPlace = covid.TravelToOtherPlace,
+                Name = shipper.Name,
+                Vaccination = covid.Vaccination
+            };
+            return PartialView("_ShipperInfo", shipperViewModel);
+        }
+
+        public ActionResult GetOrderDetails(int orderId)
+        {
+            var list = _orderDetailServices.GetOrderDetailsByOrder(orderId);
+            return PartialView("_GetOrderDetails", list);
+        }
+
+        public string GetFoodName(int foodId)
+        {
+            var name = _foodServices.GetById(foodId).Name;
+            return name;
         }
 
         public ActionResult CheckoutSuccess()
