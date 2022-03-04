@@ -1,0 +1,84 @@
+﻿@model ShipperViewModel
+
+@{
+    ViewBag.Title = "Sửa";
+}
+
+<h2>Sửa</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-horizontal row">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group col-md-6">
+            Tên
+            <br />
+            <br />
+            @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class="form-group">
+            <br />
+            Trạng Thái:
+            <br />
+            <div class="row">
+                @Html.RadioButtonFor(m => m.Status, -1, new { @class = "col-md-2" })Không Hoạt Động
+                @Html.RadioButtonFor(m => m.Status, 0, new { @class = "col-md-2" })Hoạt Động
+            </div>
+        </div>
+        <div class="form-group">
+            <br />
+            Số Mũi Tiêm Covid
+            <br />
+            <div class="row">
+                @Html.RadioButtonFor(m => m.Vaccination, 0, new { @class = "col-md-2" })0
+                @Html.RadioButtonFor(m => m.Vaccination, 1, new { @class = "col-md-2" })1
+                @Html.RadioButtonFor(m => m.Vaccination, 2, new { @class = "col-md-2" })2
+                @Html.RadioButtonFor(m => m.Vaccination, 3, new { @class = "col-md-2" })2+
+            </div>
+        </div>
+        <div class="form-group">
+            <br />
+            Trong vòng 14 ngày qua, bạn có đến khu vực, tỉnh, thành phố, quốc gia/vùng lãnh thổ nào
+            <br />
+            <div class="row">
+                @Html.RadioButtonFor(m => m.TravelToOtherPlace, true, new { @class = "col-md-2" })Có
+                @Html.RadioButtonFor(m => m.TravelToOtherPlace, false, new { @class = "col-md-2" })Không
+            </div>
+        </div>
+        <div class="form-group">
+            <br />
+            Trong vòng 14 ngày qua, bạn có thấy xuất hiện ít nhất 1 trong các dấu hiệu: sốt, ho, khó thở, viêm phổi, đau họng, mệt mỏi, thay đổi vị giác không?
+            <br />
+            <div class="row">
+                @Html.RadioButtonFor(m => m.HaveSymptoms, true, new { @class = "col-md-2" })Có
+                @Html.RadioButtonFor(m => m.HaveSymptoms, false, new { @class = "col-md-2" })Không
+            </div>
+        </div>
+        <div class="form-group">
+            <br />
+            Trong vòng 14 ngày qua, bạn có tiếp xúc với người bệnh hoặc nghi ngờ mắc bệnh Covid-19?
+            <br />
+            <div class="row">
+                @Html.RadioButtonFor(m => m.MeetCovidPatients, true, new { @class = "col-md-2" })Có
+                @Html.RadioButtonFor(m => m.MeetCovidPatients, false, new { @class = "col-md-2" })Không
+            </div>
+        </div>
+        <div class="form-group">
+            <br />
+            Tình Trạng Sức Khỏe
+            <br />
+            <div class="row">
+                @Html.RadioButtonFor(m => m.HealthStatus, true, new { @class = "col-md-2" })Dương Tính
+                @Html.RadioButtonFor(m => m.HealthStatus, false, new { @class = "col-md-2" })Âm Tính
+            </div>
+        </div>
+        <div class="form-group form-button mt-4">
+            <input type="submit" name="signup" id="signup" class="btn btn-success" value="Sửa" />
+            @Html.ActionLink("Trở Về", "Index", null, new { @class = "btn btn-light ml-2" })
+        </div>
+    </div>
+}

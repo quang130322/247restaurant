@@ -61,6 +61,8 @@
                         Comment = c.String(maxLength: 500),
                         Status = c.Int(nullable: false),
                         IsPaid = c.Boolean(nullable: false),
+                        CancelReason = c.String(),
+                        OrderAddress = c.String(),
                         OrderArrivedAt = c.DateTime(),
                         AccountId = c.String(maxLength: 128),
                         ShipperId = c.Int(nullable: false),
@@ -114,6 +116,9 @@
                         Id = c.Int(nullable: false, identity: true),
                         Vaccination = c.Int(nullable: false),
                         HealthStatus = c.Boolean(nullable: false),
+                        TravelToOtherPlace = c.Boolean(nullable: false),
+                        HaveSymptoms = c.Boolean(nullable: false),
+                        MeetCovidPatients = c.Boolean(nullable: false),
                         DateCreated = c.DateTime(nullable: false),
                         AccountId = c.String(maxLength: 128),
                         IsDeleted = c.Boolean(nullable: false),
@@ -155,13 +160,29 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Status = c.Boolean(nullable: false),
+                        Name = c.String(),
+                        Status = c.Int(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
-                        Account_Id = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.CovidShippers",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Vaccination = c.Int(nullable: false),
+                        HealthStatus = c.Boolean(nullable: false),
+                        TravelToOtherPlace = c.Boolean(nullable: false),
+                        HaveSymptoms = c.Boolean(nullable: false),
+                        MeetCovidPatients = c.Boolean(nullable: false),
+                        DateCreated = c.DateTime(nullable: false),
+                        ShipperId = c.Int(nullable: false),
+                        IsDeleted = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Accounts", t => t.Account_Id)
-                .Index(t => t.Account_Id);
+                .ForeignKey("common.Shippers", t => t.ShipperId, cascadeDelete: true)
+                .Index(t => t.ShipperId);
             
             CreateTable(
                 "dbo.IdentityRoles",
@@ -179,15 +200,15 @@
             DropForeignKey("dbo.IdentityUserRoles", "IdentityRole_Id", "dbo.IdentityRoles");
             DropForeignKey("common.OrderDetails", "OrderId", "common.Orders");
             DropForeignKey("common.Orders", "ShipperId", "common.Shippers");
+            DropForeignKey("dbo.CovidShippers", "ShipperId", "common.Shippers");
             DropForeignKey("common.Orders", "AccountId", "dbo.Accounts");
-            DropForeignKey("common.Shippers", "Account_Id", "dbo.Accounts");
             DropForeignKey("dbo.IdentityUserRoles", "Account_Id", "dbo.Accounts");
             DropForeignKey("dbo.IdentityUserLogins", "Account_Id", "dbo.Accounts");
             DropForeignKey("common.CovidInfo", "AccountId", "dbo.Accounts");
             DropForeignKey("dbo.IdentityUserClaims", "Account_Id", "dbo.Accounts");
             DropForeignKey("common.OrderDetails", "FoodId", "common.Foods");
             DropForeignKey("common.Foods", "CategoryId", "common.Categories");
-            DropIndex("common.Shippers", new[] { "Account_Id" });
+            DropIndex("dbo.CovidShippers", new[] { "ShipperId" });
             DropIndex("dbo.IdentityUserRoles", new[] { "IdentityRole_Id" });
             DropIndex("dbo.IdentityUserRoles", new[] { "Account_Id" });
             DropIndex("dbo.IdentityUserLogins", new[] { "Account_Id" });
@@ -199,6 +220,7 @@
             DropIndex("common.OrderDetails", new[] { "FoodId" });
             DropIndex("common.Foods", new[] { "CategoryId" });
             DropTable("dbo.IdentityRoles");
+            DropTable("dbo.CovidShippers");
             DropTable("common.Shippers");
             DropTable("dbo.IdentityUserRoles");
             DropTable("dbo.IdentityUserLogins");

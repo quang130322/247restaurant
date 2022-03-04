@@ -64,13 +64,9 @@
     <Compile Include="Infrastructure\Repositories\CoreRepository.cs" />
     <Compile Include="Infrastructure\Repositories\ICoreRepository.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\202202250316475_InitialCreate.cs" />
-    <Compile Include="Migrations\202202250316475_InitialCreate.designer.cs">
-      <DependentUpon>202202250316475_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202203010929324_AddOrderAddressToOrder.cs" />
-    <Compile Include="Migrations\202203010929324_AddOrderAddressToOrder.designer.cs">
-      <DependentUpon>202203010929324_AddOrderAddressToOrder.cs</DependentUpon>
+    <Compile Include="Migrations\202203040312195_InitialCreate.cs" />
+    <Compile Include="Migrations\202203040312195_InitialCreate.designer.cs">
+      <DependentUpon>202203040312195_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Res247Context.cs" />
@@ -87,11 +83,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202202250316475_InitialCreate.resx">
-      <DependentUpon>202202250316475_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202203010929324_AddOrderAddressToOrder.resx">
-      <DependentUpon>202203010929324_AddOrderAddressToOrder.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202203040312195_InitialCreate.resx">
+      <DependentUpon>202203040312195_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -203,9 +203,11 @@
     <Compile Include="Areas\Admin\Controllers\CategoryManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\FoodManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ShipperManagementController.cs" />
     <Compile Include="Areas\Admin\ViewModels\CategoryViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\FoodViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\OrderViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ShipperViewModel.cs" />
     <Compile Include="Areas\Identity\Controllers\RolesAdminController.cs" />
     <Compile Include="Areas\Identity\Controllers\UserAdminController.cs" />
     <Compile Include="Areas\Identity\IdentityAreaRegistration.cs" />
@@ -228,7 +230,9 @@
     <Compile Include="ViewModels\CovidInfoViewModel.cs" />
     <Compile Include="ViewModels\FoodViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
+    <Compile Include="ViewModels\OrderDetailViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
+    <Compile Include="ViewModels\ShipperViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\homecss.css" />
@@ -424,6 +428,9 @@
     <Content Include="Areas\Admin\Views\OrderManagement\GetOrderDetails.cshtml" />
     <Content Include="Areas\Admin\Views\OrderManagement\NewOrder.cshtml" />
     <Content Include="Areas\Admin\Views\OrderManagement\GetShippingOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\ShipperManagement\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ShipperManagement\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ShipperManagement\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -477,6 +484,9 @@
     <Content Include="Views\Orders\Checkout.cshtml" />
     <Content Include="Views\Orders\CheckoutSuccess.cshtml" />
     <Content Include="Views\Orders\OrderHistory.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\_GetOrderDetails.cshtml" />
+    <Content Include="Views\Orders\_ShipperInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

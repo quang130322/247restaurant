@@ -19,14 +19,20 @@ namespace Res247.Web.Areas.Admin.Controllers
         private readonly IOrderServices _orderServices;
         private readonly IFoodServices _foodServices;
         private readonly IOrderDetailServices _orderDetailServices;
+        private readonly IShipperService _shipperService;
+        private readonly ICovidInfoServices _covidInfoServices;
 
-        public OrderManagementController(IOrderServices orderServices, 
+        public OrderManagementController(IOrderServices orderServices,
             IOrderDetailServices orderDetailServices,
-            IFoodServices foodServices)
+            IFoodServices foodServices,
+            IShipperService shipperService,
+            ICovidInfoServices covidInfoServices)
         {
             _orderServices = orderServices;
             _orderDetailServices = orderDetailServices;
             _foodServices = foodServices;
+            _shipperService = shipperService;
+            _covidInfoServices = covidInfoServices;
         }
 
         private AccountManager _userManager;
@@ -83,7 +89,7 @@ namespace Res247.Web.Areas.Admin.Controllers
         public ActionResult GetOrderDetails(int orderId)
         {
             var list = _orderDetailServices.GetOrderDetailsByOrder(orderId);
-            return PartialView("GetOrderDetails",list);
+            return PartialView("GetOrderDetails", list);
         }
 
         public string GetFoodName(int foodId)
@@ -92,10 +98,19 @@ namespace Res247.Web.Areas.Admin.Controllers
             return name;
         }
 
+        public string GetShipperName(int shipperId)
+        {
+            var name = _shipperService.GetById(shipperId).Name;
+            return name;
+        }
+
+
         // GET: Admin/OrderManagement/Edit/5
         public ActionResult Edit(int? id)
         {
             var order = _orderServices.GetById((int)id);
+            var cusCovid = _covidInfoServices.GetCovidInfoByAccountId(order.AccountId);
+
             var orderViewModel = new OrderViewModel
             {
                 Id = order.Id,
@@ -106,9 +121,13 @@ namespace Res247.Web.Areas.Admin.Controllers
                 IsPaid = order.IsPaid,
                 Status = order.Status,
                 TotalPrice = order.TotalPrice,
-                CusName = UserManager.FindById(order.AccountId).Name
+                CusName = UserManager.FindById(order.AccountId).Name,
+                HealthStatus = cusCovid.HealthStatus,
+                Vaccination = cusCovid.Vaccination,
+                CancelReason = order.CancelReason,
+                ShipperId = order.ShipperId
             };
-
+            ViewBag.ShipperId = new SelectList(_shipperService.GetAllActive(), "Id", "Name", orderViewModel.ShipperId);
             return View(orderViewModel);
         }
 
@@ -122,32 +141,46 @@ namespace Res247.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var order = _orderServices.GetById(model.Id);
-                if(order == null)
+                if (order == null)
                 {
                     return HttpNotFound();
                 }
-
-                order.Status = model.Status;
-                order.OrderAddress = model.OrderAddress;
-
-                if(order.Status > 1)
+                
+                if(model.Status == 0)
                 {
+                    order.Status = 1;
+                    var shipper = _shipperService.GetById(model.ShipperId);
+                    shipper.Status = 1;
+                    _shipperService.Update(shipper);
+                }
+                else if (model.Status == 1)
+                {
+                    order.Status = 2;
                     order.OrderArrivedAt = DateTime.Now;
                     order.IsPaid = true;
+                    var shipper = _shipperService.GetById(model.ShipperId);
+                    shipper.Status = 0;
+                    _shipperService.Update(shipper);
                 }
+
+                order.OrderAddress = model.OrderAddress;
+                order.CancelReason = model.CancelReason;
+                order.ShipperId = model.ShipperId;
 
                 var result = _orderServices.Update(order);
                 if (result)
                 {
                     TempData["Message"] = "Cập nhật thành công.";
+
+                    return RedirectToAction("Index");
                 }
                 else
                 {
                     TempData["Message"] = "Cập nhật thất bại.";
                 }
 
-                return RedirectToAction("Index");
             }
+            ViewBag.ShipperId = new SelectList(_shipperService.GetAllActive(), "Id", "Name");
             return View(model);
         }
 

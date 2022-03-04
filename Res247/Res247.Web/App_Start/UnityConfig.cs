@@ -64,6 +64,8 @@ namespace Res247.Web
             container.RegisterType<ICheckoutService, CheckoutService>();
             container.RegisterType<IOrderDetailServices, OrderDetailServices>();
             container.RegisterType<ICovidInfoServices, CovidInfoServices>();
+            container.RegisterType<ICovidShipperService, CovidShipperService>();
+            container.RegisterType<IShipperService, ShipperService>();
             container.RegisterType<AccountController>(new InjectionConstructor());
             container.RegisterType<ManageController>(new InjectionConstructor());
             container.RegisterType<RolesAdminController>(new InjectionConstructor());

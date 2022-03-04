@@ -10,74 +10,114 @@
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Id)
-<div class="form-horizontal row">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group col-md-6">
-        Tên Khách Hàng
-        <br />
-        <br />
-        @Html.EditorFor(model => model.CusName, new { htmlAttributes = new { @class = "form-control", @readonly="readonly" } })
-    </div>
-    <div class="form-group col-md-6">
-        Địa chỉ
-        <br />
-        <br />
-        @Html.EditorFor(model => model.OrderAddress, new { htmlAttributes = new { @class = "form-control" } })
-    </div>
-    <div class="form-group col-md-6">
-        <br />
-        Ngày Order
-        <br />
-        <br />
-        @Html.EditorFor(model => model.OrderDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-    </div>
-
-    <div class="form-group col-md-6">
-        <br />
-        Ngày Nhận
-        <br />
-        <br />
-        @Html.EditorFor(model => model.OrderArrivedAt, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-    </div>
-
-    <div class="form-group">
-        @Html.Action("GetOrderDetails", "OrderManagement", new { orderId = Model.Id })
-    </div>
-
-    <div class="form-group col-md-6">
-        <div class="col-md-5">
+    <div class="form-horizontal row">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group col-md-6">
+            Tên Khách Hàng
             <br />
-            Tổng Giá
             <br />
-            @Html.EditorFor(model => model.TotalPrice, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.EditorFor(model => model.CusName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
         </div>
-    </div>
-
-    <div class="form-group col-md-6">
-        <div class="checkbox">
+        <div class="form-group col-md-6">
+            Địa chỉ
             <br />
-            Thanh Toán
-            @Html.EditorFor(model => model.IsPaid)
+            <br />
+            @Html.EditorFor(model => model.OrderAddress, new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly"} })
         </div>
-    </div>
-
-    <div class="form-group">
-        <br />
-        Trạng Thái
-        <br />
-        <br />
-        <div class="row">
-            @Html.RadioButtonFor(m => m.Status, -1, new { @class = "col-md-2" })Hủy Đơn
-            @Html.RadioButtonFor(m => m.Status, 0, new { @class = "col-md-2" })Mới
-            @Html.RadioButtonFor(m => m.Status, 1, new { @class = "col-md-2" })Đang Giao
-            @Html.RadioButtonFor(m => m.Status, 2, new { @class = "col-md-2" })Hoàn Thành
+        <div class="form-group col-md-6">
+            <br />
+            Ngày Order
+            <br />
+            <br />
+            @Html.EditorFor(model => model.OrderDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
         </div>
-    </div>
 
-    <div class="form-group form-button mt-4">
-        <input type="submit" name="signup" id="signup" class="btn btn-success" value="Sửa" />
-        @Html.ActionLink("Trở Về", "Index", null, new { @class = "btn btn-light ml-2" })
+        <div class="form-group col-md-6">
+            <br />
+            Ngày Nhận
+            <br />
+            <br />
+            @Html.EditorFor(model => model.OrderArrivedAt, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+
+        <div class="form-group col-md-6">
+            <br />
+                 Đã tiêm: @Model.Vaccination Mũi
+        </div>
+
+        <div class="form-group col-md-6">
+            <br />
+            Tình Trạng Sức Khỏe: <b>@(Model.HealthStatus == true ? "Dương Tính": "Âm Tính")</b>
+        </div>
+
+        <div class="form-group">
+            @Html.Action("GetOrderDetails", "OrderManagement", new { orderId = Model.Id })
+        </div>
+
+        <div class="form-group col-md-6">
+            <div class="col-md-5">
+                <br />
+                Tổng Giá
+                <br />
+                @Html.EditorFor(model => model.TotalPrice, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <div class="checkbox">
+                <br />
+                Thanh Toán
+                @Html.EditorFor(model => model.IsPaid)
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <br />
+            @Html.HiddenFor(m=>m.Status)
+            Trạng Thái: <b>@(Model.Status == 0 ? "Mới" : Model.Status == 1 ? "Đang Giao" : Model.Status == 2 ? "Hoàn Thành" : "Hủy Đơn")</b>
+        </div>
+
+        <div class="form-group col-md-6">
+            <span class="input-group-text resize-tb">Lí Do Hủy Đơn</span>
+            @Html.TextAreaFor(m => m.CancelReason, new { @class = "form-control", @placeholder = "Không được bỏ trống khi hủy đơn" })
+        </div>
+        @if (Model.Status == 0)
+        {
+            <div class="form-group col-md-6">
+            Giao Cho Shipper:
+            <div>
+                @Html.DropDownList("ShipperId", null, htmlAttributes: new { @class = "select-single", style = "width:100%" })
+                @Html.ValidationMessageFor(model => model.ShipperId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group form-button mt-4">
+            <input type="submit" name="signup" id="signup" class="btn btn-success" value="Sửa" />
+            @Html.ActionLink("Trở Về", "Index", null, new { @class = "btn btn-light ml-2" })
+        </div>
+        }
+        else if (Model.Status == 1)
+        {
+            @Html.HiddenFor(m => m.ShipperId);
+         <div class="form-group col-md-6">
+            Giao Cho Shipper: <b>@Html.Action("GetShipperName", "OrderManagement", new { shipperId = Model.ShipperId })</b>
+             </div>
+             <div class="form-group form-button mt-4">
+            <input type="submit" name="signup" id="signup" class="btn btn-success" value="Hoàn Thành" />
+            @Html.ActionLink("Trở Về", "Index", null, new { @class = "btn btn-light ml-2" })
+        </div>
+                }
+                else
+                {
+             <div class="form-group form-button mt-4">
+            @Html.ActionLink("Trở Về", "Index", null, new { @class = "btn btn-light ml-2" })
+        </div>
+                }
+
+        
     </div>
-</div>
+}
+
+@section scripts {
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 }

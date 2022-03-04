@@ -26,7 +26,15 @@ namespace Res247.Web.Areas.Admin.ViewModels
         [Required(ErrorMessage = "The {0} is required")]
         public int Status { get; set; }
 
+        public string CancelReason { get; set; }
+
         public bool IsPaid { get; set; }
+
+        public int ShipperId { get; set; }
+
+        public bool HealthStatus { get; set; }
+
+        public int Vaccination { get; set; }
 
         public DateTime? OrderArrivedAt { get; set; }
     }

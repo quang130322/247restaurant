@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Res247.Models.Common;
 using Res247.Models.Security;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 
@@ -200,6 +201,28 @@ namespace Res247.Data
             };
 
             context.Categories.AddRange(categories);
+
+            var shipper = new Shipper
+            {
+                Id = 1,
+                Name = "Quang",
+                Status = 0
+            };
+
+            context.Shippers.Add(shipper);
+
+            var covidS = new CovidShipper
+            {
+                Id = 1,
+                DateCreated = DateTime.Now,
+                HaveSymptoms = false,
+                HealthStatus = false,
+                MeetCovidPatients = false,
+                TravelToOtherPlace = true,
+                Vaccination = 3,
+                ShipperId = shipper.Id
+            };
+            context.CovidShippers.Add(covidS);
             context.SaveChanges();
         }
 
@@ -220,13 +243,6 @@ namespace Res247.Data
                 var roleResult = roleManager.Create(role);
             }
 
-            var shipper = roleManager.FindByName("Shipper");
-            if (shipper == null)
-            {
-                shipper = new IdentityRole("Shipper");
-                var roleResult = roleManager.Create(shipper);
-            }
-
             var customer = roleManager.FindByName("Customer");
             if (customer == null)
             {
@@ -242,11 +258,6 @@ namespace Res247.Data
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }
-
-            var shipAcc = new Account { UserName = "shipper@example.com", Email = "shipper@example.com", Name = "Shipper", Address = "Tay Ho", PhoneNumber = "123456789" };
-            userManager.Create(shipAcc, "123");
-            var ship = new Shipper { Account = shipAcc, Id = 1, Status = true };
-            db.Shippers.Add(ship);
 
 
             //Add user admin to Role Admin if not already added

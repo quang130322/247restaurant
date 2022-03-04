@@ -7,13 +7,13 @@ namespace Res247.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AddOrderAddressToOrder : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddOrderAddressToOrder));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "202203010929324_AddOrderAddressToOrder"; }
+            get { return "202203040312195_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
