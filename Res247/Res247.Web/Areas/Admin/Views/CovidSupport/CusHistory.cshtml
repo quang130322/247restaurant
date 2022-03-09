@@ -1,18 +1,16 @@
 ﻿@model PagedList.IPagedList<Order>
 @{
-    ViewBag.Title = "Lịch Sử Đơn Hàng";
+    ViewBag.Title = "Lịch Sử Đặt Hàng";
 }
-
-@Html.Partial("_HeaderProfile")
 
 @if (!Model.Any())
 {
-    <h3 class="text-center">Bạn chưa đặt đơn hàng nào.</h3>
-    <a href="@Url.Action("Index", "Home")" class="text-center btn btn-outline-info">Đặt Hàng Ngay</a>
+    <h3 class="text-center">Khách hàng chưa đặt đơn hàng nào.</h3>
+    <a href="@Url.Action("Index", "CovidSupport")" class="text-center btn btn-outline-info">Trở Về</a>
 }
 else
 {
-    <h2 class="text-center">Lịch Sử Đơn Hàng</h2>
+    <h2 class="text-center">Lịch Sử Đặt Hàng</h2>
     <center>
         <table class="table table-condensed">
             <tr class="d-flex center-title">
@@ -29,7 +27,7 @@ else
                     <td class="col-md-4">@item.OrderAddress</td>
                     <td class="col-md-2">@item.TotalPrice</td>
                     <td class="col-md-2">@(item.Status == 0 ? "Mới" : item.Status == 1 ? "Đang Giao" : item.Status == 2 ? "Hoàn Thành": "Hủy Đơn")</td>
-                    <td class="col-md-2"><a href="@Url.Action("Details", "Orders", new {id = item.Id})" class="btn btn-outline-secondary">Chi Tiết</a></td>
+                    <td class="col-md-2"><a href="@Url.Action("Edit", "OrderManagement", new {id = item.Id})" class="btn btn-outline-secondary">Chi Tiết</a></td>
                 </tr>
             }
         </table>
@@ -43,10 +41,10 @@ else
                 ViewBag.PageRange = 3;
             }
             <li class="page-item">
-                <a href="@Url.Action("OrderHistory", "Orders", new { pageIndex = 1, currentFilter = ViewData["CurrentFilter"] })"
+                <a href="@Url.Action("CusHistory", "CovidSupport", new { pageIndex = 1, currentFilter = ViewData["CurrentFilter"] })"
                    class="btn page-link @prevDisabled"><<</a>
             <li class="page-item">
-                <a href="@Url.Action("OrderHistory", "Orders", new { pageIndex = (Model.PageNumber - 1 <= 0 ? 1 : Model.PageNumber - 1), currentFilter = ViewData["CurrentFilter"] })"
+                <a href="@Url.Action("CusHistory", "CovidSupport", new { pageIndex = (Model.PageNumber - 1 <= 0 ? 1 : Model.PageNumber - 1), currentFilter = ViewData["CurrentFilter"] })"
                    class="btn page-link @prevDisabled"><</a>
             </li>
             @for (int i = 1; i <= Model.PageCount; i++)
@@ -55,15 +53,15 @@ else
                 {
                     <li class="page-item">
                         <a class="@(i == Model.PageNumber ? "Current" : "") page-link"
-                           href="@Url.Action("OrderHistory", "Orders", new { pageIndex = i, currentFilter = ViewData["CurrentFilter"] })">@i</a>
+                           href="@Url.Action("CusHistory", "CovidSupport", new { pageIndex = i, currentFilter = ViewData["CurrentFilter"] })">@i</a>
                     </li>
                 }
             }
             <li class="page-item">
-                <a href="@Url.Action("OrderHistory", "Orders", new { pageIndex = (Model.PageNumber + 1 > Model.PageCount ? Model.PageCount : Model.PageNumber + 1), currentFilter = ViewData["CurrentFilter"] })"
+                <a href="@Url.Action("CusHistory", "CovidSupport", new { pageIndex = (Model.PageNumber + 1 > Model.PageCount ? Model.PageCount : Model.PageNumber + 1), currentFilter = ViewData["CurrentFilter"] })"
                    class="btn page-link @nextDisabled">></a>
             <li class="page-item">
-                <a href="@Url.Action("OrderHistory", "Orders", new { pageIndex = (Model.PageCount), currentFilter = ViewData["CurrentFilter"] })"
+                <a href="@Url.Action("CusHistory", "CovidSupport", new { pageIndex = (Model.PageCount), currentFilter = ViewData["CurrentFilter"] })"
                    class="btn page-link @nextDisabled">>></a>
         </ul>
     </nav>

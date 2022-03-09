@@ -1,0 +1,68 @@
+﻿@model PagedList.IPagedList<CovidInfo>
+@{
+    ViewBag.Title = "Khách Hàng Bị Covid";
+}
+
+@if (!Model.Any())
+{
+    <h3 class="text-center">Không có khách hàng nào bị covid</h3>
+    <a href="@Url.Action("Index", "CovidSupport")" class="text-center btn btn-outline-info">Trở Về</a>
+}
+else
+{
+    <h2 class="text-center">Danh Sách Khách Hàng Bị Covid Trong 14 Ngày</h2>
+    <center>
+        <table class="table table-condensed">
+            <tr class="d-flex center-title">
+                <th class="col-md-2">Ngày Tạo</th>
+                <th class="col-md-4">Tình Trạng</th>
+                <th class="col-md-2">Số Mũi</th>
+                <th class="col-md-2">Khách Hàng</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr class="d-flex center-title">
+                    <td class="col-md-2">@item.DateCreated</td>
+                    <td class="col-md-4">@(item.HealthStatus == true ? "Dương Tính":"Âm Tính")</td>
+                    <td class="col-md-2">@item.Vaccination</td>
+                    <td class="col-md-2">@Html.Action("GetCustomerNameById", "CovidSupport", new { id = item.AccountId })</td>
+                    <td class="col-md-2"><a href="@Url.Action("CusHistory", "CovidSupport", new {id = item.AccountId})" class="btn btn-outline-secondary">Chi Tiết</a></td>
+                </tr>
+            }
+        </table>
+    </center>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                ViewBag.PageRange = 3;
+            }
+            <li class="page-item">
+                <a href="@Url.Action("CustomerSupport", "CovidSupport", new { pageIndex = 1, currentFilter = ViewData["CurrentFilter"] })"
+                   class="btn page-link @prevDisabled"><<</a>
+            <li class="page-item">
+                <a href="@Url.Action("CustomerSupport", "CovidSupport", new { pageIndex = (Model.PageNumber - 1 <= 0 ? 1 : Model.PageNumber - 1), currentFilter = ViewData["CurrentFilter"] })"
+                   class="btn page-link @prevDisabled"><</a>
+            </li>
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                if (i >= Model.PageNumber - ViewBag.PageRange && i <= Model.PageNumber + ViewBag.PageRange)
+                {
+                    <li class="page-item">
+                        <a class="@(i == Model.PageNumber ? "Current" : "") page-link"
+                           href="@Url.Action("CustomerSupport", "CovidSupport", new { pageIndex = i, currentFilter = ViewData["CurrentFilter"] })">@i</a>
+                    </li>
+                }
+            }
+            <li class="page-item">
+                <a href="@Url.Action("CustomerSupport", "CovidSupport", new { pageIndex = (Model.PageNumber + 1 > Model.PageCount ? Model.PageCount : Model.PageNumber + 1), currentFilter = ViewData["CurrentFilter"] })"
+                   class="btn page-link @nextDisabled">></a>
+            <li class="page-item">
+                <a href="@Url.Action("CustomerSupport", "CovidSupport", new { pageIndex = (Model.PageCount), currentFilter = ViewData["CurrentFilter"] })"
+                   class="btn page-link @nextDisabled">>></a>
+        </ul>
+    </nav>
+}

@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Quản Lý Shipper";
 }
-
+<h2 class="text-center">Quản Lý Shipper</h2>
 <h4>@TempData["Message"]</h4>
 <hr />
 <div class="row">
@@ -54,6 +54,7 @@ else
                 </td>
                 <td class="col-md-4">
                     <a href="@Url.Action("Edit", "ShipperManagement", new { id = item.Id })" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                    <a href="@Url.Action("History", "ShipperManagement", new {id = item.Id})" class="btn btn-primary"><i class="fas fa-history"></i></a>
                 </td>
             </tr>
         }

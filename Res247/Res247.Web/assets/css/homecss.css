@@ -8,6 +8,13 @@
     }
 }
 
+.btn-card{
+    display:block !important;
+    width:18rem;
+    height:18rem;
+    padding: 60px 28px !important;
+}
+
 .text-center{
     text-align:center;
 }

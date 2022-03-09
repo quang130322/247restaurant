@@ -201,6 +201,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CovidSupportController.cs" />
     <Compile Include="Areas\Admin\Controllers\FoodManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderManagementController.cs" />
     <Compile Include="Areas\Admin\Controllers\ShipperManagementController.cs" />
@@ -431,6 +432,11 @@
     <Content Include="Areas\Admin\Views\ShipperManagement\Create.cshtml" />
     <Content Include="Areas\Admin\Views\ShipperManagement\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ShipperManagement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CovidSupport\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ShipperManagement\History.cshtml" />
+    <Content Include="Areas\Admin\Views\CovidSupport\CustomerSupport.cshtml" />
+    <Content Include="Areas\Admin\Views\CovidSupport\ShipperSupport.cshtml" />
+    <Content Include="Areas\Admin\Views\CovidSupport\CusHistory.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

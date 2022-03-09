@@ -1,4 +1,5 @@
-﻿using Res247.Models.Common;
+﻿using PagedList;
+using Res247.Models.Common;
 using Res247.Services;
 using Res247.Web.Areas.Admin.ViewModels;
 using System;
@@ -10,15 +11,20 @@ using System.Web.Mvc;
 
 namespace Res247.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class ShipperManagementController : Controller
     {
         private readonly IShipperService _shipperService;
         private readonly ICovidShipperService _covidShipperService;
+        private readonly IOrderServices _orderServices;
 
-        public ShipperManagementController(IShipperService shipperService, ICovidShipperService covidShipperService)
+        public ShipperManagementController(IShipperService shipperService, 
+            ICovidShipperService covidShipperService,
+            IOrderServices orderServices)
         {
             _shipperService = shipperService;
             _covidShipperService = covidShipperService;
+            _orderServices = orderServices;
         }
 
         // GET: Admin/ShipperManagement
@@ -157,8 +163,6 @@ namespace Res247.Web.Areas.Admin.Controllers
                 shipper.Status = model.Status;
                 shipper.Name = model.Name;
 
-                var shipResult = _shipperService.Update(shipper);
-
                 var covid = new CovidShipper
                 {
                     DateCreated = DateTime.Now,
@@ -169,6 +173,17 @@ namespace Res247.Web.Areas.Admin.Controllers
                     Vaccination = model.Vaccination,
                     ShipperId = shipper.Id
                 };
+
+                if(covid.HealthStatus == true)
+                {
+                    shipper.Status = -1;
+                }
+                else
+                {
+                    shipper.Status = 0;
+                }
+
+                var shipResult = _shipperService.Update(shipper);
 
                 var covidResult = _covidShipperService.Add(covid);
 
@@ -185,6 +200,21 @@ namespace Res247.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             return View(model);
+        }
+
+        public ActionResult History(int id,int? pageIndex = 1, int pageSize = 10)
+        {
+            ViewData["CurrentPageSize"] = pageSize;
+
+            var shipper = _shipperService.GetById(id);
+            if (shipper == null)
+            {
+                return HttpNotFound();
+            }
+            var orders = _orderServices.GetShippingHistory(shipper.Id);
+            int pageNum = pageIndex ?? 1;
+
+            return View(orders.ToPagedList(pageNum, pageSize));
         }
     }
 }
