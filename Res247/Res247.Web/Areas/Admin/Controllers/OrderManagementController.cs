@@ -69,7 +69,7 @@ namespace Res247.Web.Areas.Admin.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                filter = c => c.OrderDate.ToString().Contains(searchString);
+                filter = c => c.OrderAddress.Contains(searchString);
             }
 
             Func<IQueryable<Order>, IOrderedQueryable<Order>> orderBy = null;
@@ -145,23 +145,28 @@ namespace Res247.Web.Areas.Admin.Controllers
                 {
                     return HttpNotFound();
                 }
-                
-                if(model.Status == 0)
+
+                var shipper = _shipperService.GetById(model.ShipperId);
+
+                if (model.Status == 0)
                 {
                     order.Status = 1;
-                    var shipper = _shipperService.GetById(model.ShipperId);
                     shipper.Status = 1;
-                    _shipperService.Update(shipper);
                 }
                 else if (model.Status == 1)
                 {
                     order.Status = 2;
                     order.OrderArrivedAt = DateTime.Now;
                     order.IsPaid = true;
-                    var shipper = _shipperService.GetById(model.ShipperId);
                     shipper.Status = 0;
-                    _shipperService.Update(shipper);
                 }
+
+                if (!string.IsNullOrEmpty(model.CancelReason))
+                {
+                    order.Status = -1;
+                    shipper.Status = 0;
+                }
+                _shipperService.Update(shipper);
 
                 order.OrderAddress = model.OrderAddress;
                 order.CancelReason = model.CancelReason;

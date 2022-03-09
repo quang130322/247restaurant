@@ -1,6 +1,8 @@
 ﻿using Res247.Data.Infrastructure;
 using Res247.Models.Common;
 using Res247.Services.BaseServices;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Res247.Services
@@ -13,7 +15,18 @@ namespace Res247.Services
 
         public CovidShipper GetCovidShipperByShipperId(int id)
         {
-            return _unitOfWork.CovidShipperRepository.GetQuery().FirstOrDefault(x=>x.ShipperId == id);
+            return _unitOfWork.CovidShipperRepository.GetQuery().Where(x=>x.ShipperId == id)
+                                                                        .OrderByDescending(o=>o.DateCreated)
+                                                                        .FirstOrDefault();
+        }
+
+        public IEnumerable<CovidShipper> GetPositiveShipper()
+        {
+            DateTime previousDay = DateTime.Now.AddDays(-14);
+
+            return _unitOfWork.CovidShipperRepository.GetQuery().Where(x => x.HealthStatus == true
+                                                                    && x.DateCreated >= previousDay)
+                                                                    .OrderByDescending(c => c.DateCreated).ToList();
         }
     }
 }

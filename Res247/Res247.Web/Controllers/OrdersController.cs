@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using PagedList;
 using Res247.Data;
 using Res247.Models.Common;
 using Res247.Services;
@@ -94,7 +95,8 @@ namespace Res247.Web.Controllers
 
             decimal TotalPrice = 0;
 
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
                 var orderDetails = new List<OrderDetail>();
                 foreach (var item in cartItems)
                 {
@@ -119,7 +121,7 @@ namespace Res247.Web.Controllers
                 };
 
                 _checkoutService.Checkout(order, orderDetails);
-
+                UpdateUserInfomation(orderViewModel);
                 cartItems.Clear();
                 return RedirectToAction("CheckoutSuccess");
             }
@@ -135,25 +137,42 @@ namespace Res247.Web.Controllers
             user.Name = model.CusName;
             user.Address = model.OrderAddress;
             user.PhoneNumber = model.PhoneNumber;
-            covid.HealthStatus = model.HealthStatus;
-            covid.Vaccination = model.Vaccination;
-            covid.HaveSymptoms = model.HaveSymptoms;
-            covid.TravelToOtherPlace = model.TravelToOtherPlace;
-            covid.MeetCovidPatients = model.MeetCovidPatients;
+            if (model.HealthStatus != covid.HealthStatus ||
+                model.HaveSymptoms != covid.HaveSymptoms ||
+                model.MeetCovidPatients != covid.MeetCovidPatients ||
+                model.TravelToOtherPlace != covid.TravelToOtherPlace ||
+                model.Vaccination != covid.Vaccination)
+            {
+                var covidNew = new CovidInfo
+                {
+                    HealthStatus = model.HealthStatus,
+                    HaveSymptoms = model.HaveSymptoms,
+                    MeetCovidPatients = model.MeetCovidPatients,
+                    TravelToOtherPlace = model.TravelToOtherPlace,
+                    Vaccination = model.Vaccination,
+                    DateCreated = DateTime.Now,
+                    AccountId = userId
+                };
+
+                _covidInfoServices.Add(covidNew);
+            }
 
             UserManager.Update(user);
-            _covidInfoServices.Add(covid);
         }
 
-        public ActionResult OrderHistory()
+        public ActionResult OrderHistory(int? pageIndex = 1, int pageSize = 10)
         {
+            ViewData["CurrentPageSize"] = pageSize;
+
             var userId = User.Identity.GetUserId();
             if (string.IsNullOrEmpty(userId))
             {
                 return HttpNotFound();
             }
             var orders = _orderServices.GetOrderHistory(userId);
-            return View(orders);
+            int pageNum = pageIndex ?? 1;
+
+            return View(orders.ToPagedList(pageNum, pageSize));
         }
 
         public ActionResult Details(int id)

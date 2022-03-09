@@ -22,9 +22,21 @@ namespace Res247.Services
             return _unitOfWork.OrderRepository.GetQuery().Where(x=>x.AccountId == accId).OrderByDescending(d=>d.OrderDate).ToList();
         }
 
+        public IEnumerable<Order> GetShippedOrderHistory(string accId)
+        {
+            return _unitOfWork.OrderRepository.GetQuery().Where(x => x.AccountId == accId && x.Status == 2 || x.Status == 1).OrderByDescending(d => d.OrderDate).ToList();
+        }
+
+        public IEnumerable<Order> GetShippingHistory(int shipperId)
+        {
+            return _unitOfWork.OrderRepository.GetQuery().Where(x=>x.ShipperId == shipperId && x.Status == 2 || x.Status == 1).OrderByDescending(d=>d.OrderDate).ToList();
+        }
+
         public IEnumerable<Order> GetShippingOrder()
         {
             return _unitOfWork.OrderRepository.GetQuery().Where(x => x.Status == 1).ToList();
         }
+
+
     }
 }
