@@ -4,10 +4,12 @@ using Res247.Web.Areas.Admin.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Res247.Web.Areas.Admin.Controllers
@@ -87,10 +89,19 @@ namespace Res247.Web.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create(FoodViewModel foodViewModel)
+        public ActionResult Create(FoodViewModel foodViewModel, HttpPostedFileBase uploadImage)
         {
             if (ModelState.IsValid)
             {
+                string fileName = "";
+                if (uploadImage != null)
+                {
+                    fileName = Path.GetFileName(uploadImage.FileName);
+                    string folderPath = Path.Combine(Server.MapPath("~/assets/images"), uploadImage.FileName);
+                    uploadImage.SaveAs(folderPath);
+                }
+                foodViewModel.Image = fileName;
+
                 var food = new Food
                 {
                     Name = foodViewModel.Name,
@@ -151,10 +162,23 @@ namespace Res247.Web.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit(FoodViewModel foodViewModel)
+        public ActionResult Edit(FoodViewModel foodViewModel, HttpPostedFileBase uploadImage)
         {
             if (ModelState.IsValid)
             {
+                string fileName = "";
+                if (uploadImage != null && uploadImage.ContentLength > 0)
+                {
+                    fileName = Path.GetFileName(uploadImage.FileName);
+                    string folderPath = Path.Combine(Server.MapPath("~/assets/images"), uploadImage.FileName);
+                    uploadImage.SaveAs(folderPath);
+                }
+                
+                if (!string.IsNullOrEmpty(fileName))
+                {
+                    foodViewModel.Image = fileName;
+                }
+
                 var food = _foodServices.GetById(foodViewModel.Id);
                 if (food == null)
                 {

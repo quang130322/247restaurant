@@ -10,6 +10,6 @@ namespace Res247.Services
 {
     public interface IOrderDetailServices : IBaseService<OrderDetail>
     {
-
+        IEnumerable<OrderDetail> GetOrderDetailsByOrder(int orderId);
     }
 }

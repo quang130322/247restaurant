@@ -17,17 +17,30 @@ namespace Res247.Web.Controllers
         {
             _foodServices = foodServices;
         }
+
         // GET: Cart/Index
         public ActionResult Index()
         {
-            List<CartItemViewModel> cart = (List<CartItemViewModel>)Session["cart"];
-            if (cart == null)
+            var cart = Session["cart"] as List<CartItemViewModel> ?? new List<CartItemViewModel>();
+
+            if (cart.Count == 0 || Session["cart"] == null)
             {
-                cart = new List<CartItemViewModel>();
+                ViewBag.Message = "Chưa có sản phẩm nào trong giỏ hàng.";
+                return View();
             }
+
+            decimal totalPrice = 0m;
+
+            foreach (var item in cart)
+            {
+                totalPrice += item.Price * item.Quantity;
+            }
+
+            ViewBag.TotalPrice = totalPrice;
+
             return View(cart);
         }
-        //GET: Cart/AddToCart/id
+        //GET: Cart/AddToCart/foodId
         public ActionResult AddToCart(int foodId)
         {
             var food = _foodServices.GetById(foodId);
@@ -46,27 +59,44 @@ namespace Res247.Web.Controllers
                 {
                     cartItem.Quantity++;
                     Session["cart"] = cart;
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Home");
                 }
             }
-            FoodViewModel foodViewModel = new FoodViewModel()
-            {
-                Id = food.Id,
-                Name = food.Name,
-                Description = food.Description,
-                Image = food.Image,
-                Price = food.Price
-            };
             CartItemViewModel item = new CartItemViewModel()
             {
-                Food = foodViewModel,
-                Quantity = 1
+                Food = food,
+                Quantity = 1,
+                Price = food.Price
             };
             cart.Add(item);
+
+            Session["cart"] = cart;
+            return RedirectToAction("Index", "Home");
+        }
+        //GET: Cart/Increment/itemIndex
+        public ActionResult Increment(int itemIndex)
+        {
+            List<CartItemViewModel> cart = (List<CartItemViewModel>)Session["cart"];
+            cart.ElementAt(itemIndex).Quantity++;
             Session["cart"] = cart;
             return RedirectToAction("Index");
         }
-
+        //GET: Cart/Decrement/itemIndex
+        public ActionResult Decrement(int itemIndex)
+        {
+            List<CartItemViewModel> cart = (List<CartItemViewModel>)Session["cart"];
+            if(cart.ElementAt(itemIndex).Quantity == 1)
+            {
+                return RemoveItem(itemIndex);
+            }
+            else
+            {
+                cart.ElementAt(itemIndex).Quantity--;
+            }
+            Session["cart"] = cart;
+            return RedirectToAction("Index");
+        }
+        //GET: Cart/RemoveItem/itemIndex
         public ActionResult RemoveItem(int itemIndex)
         {
             List<CartItemViewModel> cart = (List<CartItemViewModel>)Session["cart"];

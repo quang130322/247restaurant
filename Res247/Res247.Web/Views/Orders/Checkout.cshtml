@@ -1,0 +1,83 @@
+﻿@model OrderViewModel
+
+@{
+    ViewBag.Title = "Thanh Toán";
+}
+
+<section class="signup">
+    <div class="container">
+        <div class="signup-content">
+            <div class="signup-form">
+                <h3>Thông tin đặt hàng</h3>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-user"></i></label>
+                        @Html.TextBoxFor(m => m.CusName, new { @id = "name" })
+                    </div>
+                    <div class="form-group">
+                        <label for="phone"><i class="fas fa-phone-square"></i></label>
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @placeholder = "Số Điện Thoại" })
+                    </div>
+                    <div class="form-group">
+                        <label for="address"><i class="fas fa-map-marked"></i></label>
+                        @Html.TextBoxFor(m => m.OrderAddress, new { @placeholder = "Địa Chỉ" })
+                    </div>
+                    <div class="form-group">
+                        <span class="input-group-text resize-tb">Ghi Chú</span>
+                        @Html.TextAreaFor(m => m.Comment, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        Số Mũi Tiêm Covid
+                        <br />
+                        <div class="row">
+                            @Html.RadioButtonFor(m => m.Vaccination, 0, new { @class = "col-md-2" })0
+                            @Html.RadioButtonFor(m => m.Vaccination, 1, new { @class = "col-md-2" })1
+                            @Html.RadioButtonFor(m => m.Vaccination, 2, new { @class = "col-md-2" })2
+                            @Html.RadioButtonFor(m => m.Vaccination, 3, new { @class = "col-md-2" })2+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        Trong vòng 14 ngày qua, bạn có đến khu vực, tỉnh, thành phố, quốc gia/vùng lãnh thổ nào
+                        <br />
+                        <div class="row">
+                            @Html.RadioButtonFor(m => m.TravelToOtherPlace, true, new { @class = "col-md-2" })Có
+                            @Html.RadioButtonFor(m => m.TravelToOtherPlace, false, new { @class = "col-md-2" })Không
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        Trong vòng 14 ngày qua, bạn có thấy xuất hiện ít nhất 1 trong các dấu hiệu: sốt, ho, khó thở, viêm phổi, đau họng, mệt mỏi, thay đổi vị giác không?
+                        <br />
+                        <div class="row">
+                            @Html.RadioButtonFor(m => m.HaveSymptoms, true, new { @class = "col-md-2" })Có
+                            @Html.RadioButtonFor(m => m.HaveSymptoms, false, new { @class = "col-md-2" })Không
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        Trong vòng 14 ngày qua, bạn có tiếp xúc với người bệnh hoặc nghi ngờ mắc bệnh Covid-19?
+                        <br />
+                        <div class="row">
+                            @Html.RadioButtonFor(m => m.MeetCovidPatients, true, new { @class = "col-md-2" })Có
+                            @Html.RadioButtonFor(m => m.MeetCovidPatients, false, new { @class = "col-md-2" })Không
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        Tình Trạng Sức Khỏe
+                        <br />
+                        <div class="row">
+                            @Html.RadioButtonFor(m => m.HealthStatus, true, new { @class = "col-md-2" })Dương Tính
+                            @Html.RadioButtonFor(m => m.HealthStatus, false, new { @class = "col-md-2" })Âm Tính
+                        </div>
+                    </div>
+                    <div class="form-group form-button">
+                        <input type="submit" class="btn btn-outline-danger resize-btn" value="Đặt Hàng" />
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-outline-primary">Mua Thêm</a>
+                        <a href="@Url.Action("Index", "Cart")" class="btn btn-outline-warning">Hủy</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

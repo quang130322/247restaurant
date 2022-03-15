@@ -201,9 +201,14 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CovidSupportController.cs" />
     <Compile Include="Areas\Admin\Controllers\FoodManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderManagementController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ShipperManagementController.cs" />
     <Compile Include="Areas\Admin\ViewModels\CategoryViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\FoodViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\OrderViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ShipperViewModel.cs" />
     <Compile Include="Areas\Identity\Controllers\RolesAdminController.cs" />
     <Compile Include="Areas\Identity\Controllers\UserAdminController.cs" />
     <Compile Include="Areas\Identity\IdentityAreaRegistration.cs" />
@@ -215,6 +220,7 @@
     <Compile Include="Controllers\FoodsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -225,6 +231,9 @@
     <Compile Include="ViewModels\CovidInfoViewModel.cs" />
     <Compile Include="ViewModels\FoodViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
+    <Compile Include="ViewModels\OrderDetailViewModel.cs" />
+    <Compile Include="ViewModels\OrderViewModel.cs" />
+    <Compile Include="ViewModels\ShipperViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\homecss.css" />
@@ -248,8 +257,24 @@
     <Content Include="assets\fonts\poppins\roboto-condensed-v16-latin-700italic.svg" />
     <Content Include="assets\fonts\poppins\roboto-condensed-v16-latin-italic.svg" />
     <Content Include="assets\fonts\poppins\roboto-condensed-v16-latin-regular.svg" />
+    <Content Include="assets\images\CanhGaBoToi.jpg" />
+    <Content Include="assets\images\ChanGaRangMuoi.jpg" />
+    <Content Include="assets\images\Coca.jpg" />
+    <Content Include="assets\images\Ga-Chien-Sot-Ngot-Phomai.jpg" />
+    <Content Include="assets\images\GaChienSotNgotPhomai.jpg" />
+    <Content Include="assets\images\GaPopCornLacPhomai.jpg" />
+    <Content Include="assets\images\GimBapCuon.jpg" />
+    <Content Include="assets\images\HongTraTranChauTrang.jpg" />
+    <Content Include="assets\images\KimBapChien.jpg" />
+    <Content Include="assets\images\MyDen.jpg" />
+    <Content Include="assets\images\MyGaTokCayDacBiet.jpg" />
+    <Content Include="assets\images\MyLuonNgong.jpg" />
+    <Content Include="assets\images\MyYSotBoBamPhomai.jpg" />
+    <Content Include="assets\images\PhoXaoBo.jpg" />
     <Content Include="assets\images\signin-image.jpg" />
     <Content Include="assets\images\signup-image.jpg" />
+    <Content Include="assets\images\ThitXienNuong.jpg" />
+    <Content Include="assets\images\TraThai.jpg" />
     <Content Include="assets\js\custom.js" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\vendor\jquery\jquery-ui.min.js" />
@@ -399,6 +424,19 @@
     <Content Include="assets\scss\layouts\main.scss" />
     <Content Include="assets\scss\layouts\responsive.scss" />
     <Content Include="assets\scss\style.scss" />
+    <Content Include="Areas\Admin\Views\OrderManagement\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderManagement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderManagement\GetOrderDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderManagement\NewOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\OrderManagement\GetShippingOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\ShipperManagement\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ShipperManagement\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ShipperManagement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CovidSupport\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ShipperManagement\History.cshtml" />
+    <Content Include="Areas\Admin\Views\CovidSupport\CustomerSupport.cshtml" />
+    <Content Include="Areas\Admin\Views\CovidSupport\ShipperSupport.cshtml" />
+    <Content Include="Areas\Admin\Views\CovidSupport\CusHistory.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -449,6 +487,12 @@
     <Content Include="Views\CovidInfoes\Create.cshtml" />
     <Content Include="Views\CovidInfoes\GetCovidInfo.cshtml" />
     <Content Include="Views\Shared\_HeaderProfile.cshtml" />
+    <Content Include="Views\Orders\Checkout.cshtml" />
+    <Content Include="Views\Orders\CheckoutSuccess.cshtml" />
+    <Content Include="Views\Orders\OrderHistory.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\_GetOrderDetails.cshtml" />
+    <Content Include="Views\Orders\_ShipperInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

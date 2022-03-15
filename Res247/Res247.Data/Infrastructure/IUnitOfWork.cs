@@ -28,6 +28,9 @@ namespace Res247.Data.Infrastructure
 
         ICoreRepository<CovidInfo> CovidInfoRepository { get; }
 
+        ICoreRepository<Shipper> ShipperRepository { get; }
+        ICoreRepository<CovidShipper> CovidShipperRepository { get; }
+
         #endregion
 
     }

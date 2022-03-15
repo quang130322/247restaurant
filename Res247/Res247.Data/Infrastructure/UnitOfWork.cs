@@ -30,6 +30,12 @@ namespace Res247.Data.Infrastructure
 
         private ICoreRepository<CovidInfo> _covidInfoRepository;
         public ICoreRepository<CovidInfo> CovidInfoRepository => _covidInfoRepository ?? new CoreRepository<CovidInfo>(_dbContext);
+
+        private ICoreRepository<Shipper> _shipperRepository;
+        public ICoreRepository<Shipper> ShipperRepository => _shipperRepository ?? new CoreRepository<Shipper>(_dbContext);
+        private ICoreRepository<CovidShipper> _covidShipperRepository;
+        public ICoreRepository<CovidShipper> CovidShipperRepository => _covidShipperRepository ?? new CoreRepository<CovidShipper>(_dbContext);
+
         #region Method
 
         public void Dispose()

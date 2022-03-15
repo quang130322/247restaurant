@@ -4,22 +4,48 @@
 }
 
 <h2>Giỏ Hàng</h2>
+@if (ViewBag.Message != null)
+{
+    <div class="text-center">
 
-<table class="table">
-    <tr>
-        <td>Sản Phẩm</td>
-        <td>Đơn Giá</td>
-        <td>Số Lượng</td>
-        <td>Hành Động</td>
-    </tr>
+        <h3>@ViewBag.Message</h3>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-outline-info text-center">Đặt Hàng Ngay</a>
+    </div>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <td>Sản Phẩm</td>
+            <td>Đơn Giá</td>
+            <td>Số Lượng</td>
+            <td>Giá</td>
+            <td>Hành Động</td>
+        </tr>
 
-    @for (int i = 0; i < Model.Count(); i++)
-    {
-<tr>
-    <td>@Model.ElementAt(i).Food.Name</td>
-    <td>@Model.ElementAt(i).Food.Price</td>
-    <td>@Model.ElementAt(i).Quantity</td>
-    <td><a href="@Url.Action("RemoveItem", "Cart", new {itemIndex = i})" class="btn btn-outline-danger">Xóa</a></td>
-</tr>
-    }
-</table>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <tr>
+                <td>@Model.ElementAt(i).Food.Name</td>
+                <td>@Model.ElementAt(i).Food.Price</td>
+                <td>
+                    <a href="@Url.Action("Decrement", "Cart", new {itemIndex = i})" class="btn">-</a>
+                    @Model.ElementAt(i).Quantity
+                    <a href="@Url.Action("Increment", "Cart", new {itemIndex = i})" class="btn">+</a>
+                </td>
+                <td>@(Model.ElementAt(i).Quantity * Model.ElementAt(i).Price)</td>
+                <td><a href="@Url.Action("RemoveItem", "Cart", new {itemIndex = i})" class="btn btn-outline-danger">Xóa</a></td>
+            </tr>
+        }
+        @if (ViewBag.TotalPrice > 0)
+        {
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Tổng Giá: @ViewBag.TotalPrice</td>
+                <td><a href="@Url.Action("Checkout", "Orders")" class="btn btn-danger">Thanh Toán</a></td>
+            </tr>
+        }
+    </table>
+}

@@ -23,8 +23,6 @@ namespace Res247.Web.Controllers
             _covidInfoServices = covidInfoServices;
         }
 
-
-
         // GET: CovidInfoes/Create
         public ActionResult Create()
         {
@@ -48,6 +46,9 @@ namespace Res247.Web.Controllers
                         DateCreated = DateTime.Now,
                         HealthStatus = covidInfoViewModel.HealthStatus,
                         Vaccination = covidInfoViewModel.Vaccination,
+                        HaveSymptoms = covidInfoViewModel.HaveSymptoms,
+                        MeetCovidPatients = covidInfoViewModel.MeetCovidPatients,
+                        TravelToOtherPlace = covidInfoViewModel.TravelToOtherPlace,
                         AccountId = userId
                     };
 
@@ -70,7 +71,10 @@ namespace Res247.Web.Controllers
             var model = new CovidInfoViewModel
             {
                 HealthStatus = covidInfo.HealthStatus,
-                Vaccination = covidInfo.Vaccination
+                Vaccination = covidInfo.Vaccination,
+                MeetCovidPatients = covidInfo.MeetCovidPatients,
+                TravelToOtherPlace = covidInfo.TravelToOtherPlace,
+                HaveSymptoms = covidInfo.HaveSymptoms
             };
 
             return View(model);
@@ -89,6 +93,9 @@ namespace Res247.Web.Controllers
                     DateCreated = DateTime.Now,
                     HealthStatus = model.HealthStatus,
                     Vaccination = model.Vaccination,
+                    HaveSymptoms = model.HaveSymptoms,
+                    MeetCovidPatients = model.MeetCovidPatients,
+                    TravelToOtherPlace = model.TravelToOtherPlace,
                     AccountId = userId
                 };
 

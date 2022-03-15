@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Hỗ Trợ Covid";
+}
+
+<h2 class="text-center">Hỗ Trợ Covid</h2>
+
+<div class="row" style="padding-top: 150px">
+    <div class="col-md-4">
+        <div class="card" style="width: 18rem;height: 10rem;">
+            <a href="@Url.Action("Index", "OrderManagement")" class="btn btn-outline-danger btn-card">Tìm Theo Địa Chỉ</a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card" style="width: 18rem;height: 10rem;">
+            <a href="@Url.Action("CustomerSupport", "CovidSupport")" class="btn btn-outline-warning btn-card">Khách Hàng Bị Covid</a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card" style="width: 18rem;height: 10rem;">
+            <a href="@Url.Action("ShipperSupport", "CovidSupport")" class="btn btn-outline-success btn-card">Shipper Bị Covid</a>
+        </div>
+    </div>
+</div>

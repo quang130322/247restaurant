@@ -62,16 +62,22 @@
     <Compile Include="BaseServices\BaseServices.cs" />
     <Compile Include="BaseServices\IBaseServices.cs" />
     <Compile Include="CategoryServices.cs" />
+    <Compile Include="CheckoutService.cs" />
     <Compile Include="CovidInfoServices.cs" />
+    <Compile Include="CovidShipperService.cs" />
     <Compile Include="FoodServices.cs" />
     <Compile Include="ICategoryService.cs" />
+    <Compile Include="ICheckoutService.cs" />
     <Compile Include="ICovidInfoServices.cs" />
+    <Compile Include="ICovidShipperService.cs" />
     <Compile Include="IFoodServices.cs" />
     <Compile Include="IOrderDetailServices.cs" />
     <Compile Include="IOrderServices.cs" />
+    <Compile Include="IShipperService.cs" />
     <Compile Include="OrderDetailServices.cs" />
     <Compile Include="OrderServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShipperService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

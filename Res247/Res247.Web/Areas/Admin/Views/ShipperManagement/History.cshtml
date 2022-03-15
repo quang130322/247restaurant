@@ -1,0 +1,68 @@
+﻿@model PagedList.IPagedList<Order>
+@{
+    ViewBag.Title = "Lịch Sử Giao Hàng";
+}
+
+@if (!Model.Any())
+{
+    <h3 class="text-center">Shipper chưa giao đơn hàng nào.</h3>
+    <a href="@Url.Action("Index", "ShipperManagement")" class="text-center btn btn-outline-info">Trở Về</a>
+}
+else
+{
+    <h2 class="text-center">Lịch Sử Đơn Hàng</h2>
+    <center>
+        <table class="table table-condensed">
+            <tr class="d-flex center-title">
+                <th class="col-md-2">Ngày Đặt</th>
+                <th class="col-md-4">Địa Chỉ</th>
+                <th class="col-md-2">Tổng Đơn</th>
+                <th class="col-md-2">Trạng Thái</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr class="d-flex center-title">
+                    <td class="col-md-2">@item.OrderDate</td>
+                    <td class="col-md-4">@item.OrderAddress</td>
+                    <td class="col-md-2">@item.TotalPrice</td>
+                    <td class="col-md-2">@(item.Status == 0 ? "Mới" : item.Status == 1 ? "Đang Giao" : item.Status == 2 ? "Hoàn Thành": "Hủy Đơn")</td>
+                    <td class="col-md-2"><a href="@Url.Action("Edit", "OrderManagement", new {id = item.Id})" class="btn btn-outline-secondary">Chi Tiết</a></td>
+                </tr>
+            }
+        </table>
+    </center>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                ViewBag.PageRange = 3;
+            }
+            <li class="page-item">
+                <a href="@Url.Action("History", "ShipperManagement", new { pageIndex = 1, currentFilter = ViewData["CurrentFilter"] })"
+                   class="btn page-link @prevDisabled"><<</a>
+            <li class="page-item">
+                <a href="@Url.Action("History", "ShipperManagement", new { pageIndex = (Model.PageNumber - 1 <= 0 ? 1 : Model.PageNumber - 1), currentFilter = ViewData["CurrentFilter"] })"
+                   class="btn page-link @prevDisabled"><</a>
+            </li>
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                if (i >= Model.PageNumber - ViewBag.PageRange && i <= Model.PageNumber + ViewBag.PageRange)
+                {
+                    <li class="page-item">
+                        <a class="@(i == Model.PageNumber ? "Current" : "") page-link"
+                           href="@Url.Action("History", "ShipperManagement", new { pageIndex = i, currentFilter = ViewData["CurrentFilter"] })">@i</a>
+                    </li>
+                }
+            }
+            <li class="page-item">
+                <a href="@Url.Action("History", "ShipperManagement", new { pageIndex = (Model.PageNumber + 1 > Model.PageCount ? Model.PageCount : Model.PageNumber + 1), currentFilter = ViewData["CurrentFilter"] })"
+                   class="btn page-link @nextDisabled">></a>
+            <li class="page-item">
+                <a href="@Url.Action("History", "ShipperManagement", new { pageIndex = (Model.PageCount), currentFilter = ViewData["CurrentFilter"] })"
+                   class="btn page-link @nextDisabled">>></a>
+        </ul>
+    </nav>
+}

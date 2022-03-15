@@ -24,8 +24,9 @@
         </div>
 
         <div class="form-group col-md-6 mt-3">
-            @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ảnh" } })
-            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Image)
+            <img src="~/assets/images/@Model.Image"class="img-home" alt="">
+            <input type="file" class="form-control" name="uploadImage" />
         </div>
 
         <div class="form-group col-md-6 mt-3">

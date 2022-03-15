@@ -15,5 +15,14 @@ namespace Res247.Web.ViewModels
 
         [Required(ErrorMessage = "The {0} is required")]
         public int Vaccination { get; set; }
+
+        [Required(ErrorMessage = "The {0} is required")]
+        public bool TravelToOtherPlace { get; set; }
+
+        [Required(ErrorMessage = "The {0} is required")]
+        public bool HaveSymptoms { get; set; }
+
+        [Required(ErrorMessage = "The {0} is required")]
+        public bool MeetCovidPatients { get; set; }
     }
 }

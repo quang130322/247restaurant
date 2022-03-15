@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormattedDbEntityValidationException.cs" />
     <Compile Include="Paginated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

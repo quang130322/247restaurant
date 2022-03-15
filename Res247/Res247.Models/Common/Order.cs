@@ -24,12 +24,21 @@ namespace Res247.Models.Common
 
         public bool IsPaid { get; set; }
 
+        public string CancelReason { get; set; }
+
+        public string OrderAddress { get; set; }
+
         public DateTime? OrderArrivedAt { get; set; }
 
         [ForeignKey("Account")]
         public string AccountId { get; set; }
 
         public Account Account { get; set; }
+
+        [ForeignKey("Shipper")]
+        public int ShipperId { get; set; }
+
+        public Shipper Shipper { get; set; }
 
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
