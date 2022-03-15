@@ -48,44 +48,6 @@ namespace Res247.Web.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/OrderManagement
-        public async Task<ActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageIndex = 1, int pageSize = 10)
-        {
-            ViewData["CurrentPageSize"] = pageSize;
-            ViewData["CurrentSort"] = sortOrder;
-
-            if (searchString != null)
-            {
-                pageIndex = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewData["CurrentFilter"] = searchString;
-
-            Expression<Func<Order, bool>> filter = null;
-
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                filter = c => c.OrderAddress.Contains(searchString);
-            }
-
-            Func<IQueryable<Order>, IOrderedQueryable<Order>> orderBy = null;
-
-            switch (sortOrder)
-            {
-                default:
-                    orderBy = n => n.OrderByDescending(p => p.Id);
-                    break;
-            }
-
-            var orders = await _orderServices.GetAsync(filter: filter, orderBy: orderBy, pageIndex: pageIndex ?? 1, pageSize: pageSize);
-
-            return View(orders);
-        }
-
         public ActionResult GetOrderDetails(int orderId)
         {
             var list = _orderDetailServices.GetOrderDetailsByOrder(orderId);

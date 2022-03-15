@@ -201,20 +201,5 @@ namespace Res247.Web.Areas.Admin.Controllers
             }
             return View(model);
         }
-
-        public ActionResult History(int id,int? pageIndex = 1, int pageSize = 10)
-        {
-            ViewData["CurrentPageSize"] = pageSize;
-
-            var shipper = _shipperService.GetById(id);
-            if (shipper == null)
-            {
-                return HttpNotFound();
-            }
-            var orders = _orderServices.GetShippingHistory(shipper.Id);
-            int pageNum = pageIndex ?? 1;
-
-            return View(orders.ToPagedList(pageNum, pageSize));
-        }
     }
 }
